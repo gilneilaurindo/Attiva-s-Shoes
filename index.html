@@ -6,7 +6,7 @@
     <title>Attiva’s Shoes | Especialista em Calçados Femininos 2026</title>
     
     <!-- Favicon Personalizado -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2280%22>🛍️</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23b67b7e%22 d=%22M80,30h-10c0-11-9-20-20-20s-20,9-20,20H20c-2.8,0-5,2.2-5,5v50c0,5.5,4.5,10,10,10h50c5.5,0,10-4.5,10-10V35C85,32.2,82.8,30,80,30z M50,18c6.6,0,12,5.4,12,12H38C38,23.4,43.4,18,50,18z%22/></svg>">
 
     <!-- CONFIGURAÇÕES DE RASTREIO -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WFQRV65PC9"></script>
@@ -16,17 +16,27 @@
       gtag('js', new Date());
       gtag('config', 'G-WFQRV65PC9');
     </script>
-    <!-- --- FIM DAS CONFIGURAÇÕES DE RASTREIO --- -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'ID-DO-PIXEL');
+      fbq('track', 'PageView');
+    </script>
 
-    <!-- SEO & Social Media -->
+    <!-- SEO & Social -->
     <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçados femininos premium. Entrega rápida e suporte especializado 24h. Coleção 2026.">
     <meta name="theme-color" content="#b67b7e">
     <meta property="og:title" content="Attiva’s Shoes | Boutique Premium 2026">
-    <meta property="og:image" content="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg">
+    <meta property="og:image" content="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/sociais.jpg">
 
-    <!-- AOS.js CSS -->
+    <!-- Bibliotecas -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -43,10 +53,13 @@
                         brand: { 
                             50: '#fdf8f7',
                             100: '#f9e6e7',
-                            500: '#b67b7e', // Rosé Identidade Oficial
+                            500: '#b67b7e',
                             600: '#a36a6d',
                             900: '#4a3233'
                         }
+                    },
+                    boxShadow: {
+                        'premium': '0 20px 50px -12px rgba(182, 123, 126, 0.25)',
                     }
                 }
             }
@@ -54,7 +67,10 @@
     </script>
 
     <style>
-        /* Preloader */
+        /* Melhorias de Leitura e Espaço */
+        html { scroll-behavior: smooth; }
+        body { line-height: 1.6; letter-spacing: 0.01em; }
+
         #preloader {
             position: fixed; inset: 0; background: #fff;
             display: flex; flex-direction: column; justify-content: center;
@@ -63,7 +79,6 @@
         .loader-logo { width: 140px; animation: softPulse 2s infinite ease-in-out; }
         @keyframes softPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* Shimmer Effect */
         .shimmer { position: relative; overflow: hidden; }
         .shimmer::after {
             content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
@@ -72,33 +87,28 @@
         }
         @keyframes shimmerEffect { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
 
-        /* Highlight Box */
         .highlight-box {
-            background-color: #b67b7e; color: white; padding: 2px 12px;
+            background-color: #b67b7e; color: white; padding: 0.1em 0.6em;
             display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone;
         }
 
-        /* Scrollbar */
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #fdf8f7; }
         ::-webkit-scrollbar-thumb { background: #b67b7e; border-radius: 10px; }
 
-        /* WhatsApp Floating */
         .wa-float {
-            position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white;
+            position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white;
             width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 28px; z-index: 100; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-            transition: 0.3s ease;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .wa-float:hover { transform: scale(1.1) rotate(5deg); }
+        .wa-float:hover { transform: scale(1.1) rotate(10deg); }
 
-        /* Slider Boutique */
         .slider-container { position: relative; width: 100%; height: 400px; overflow: hidden; border-radius: 2rem; cursor: pointer; }
-        @media (min-width: 768px) { .slider-container { height: 500px; } }
+        @media (min-width: 768px) { .slider-container { height: 550px; } }
         .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; pointer-events: none; }
         .slide.active { opacity: 1; pointer-events: auto; }
 
-        /* Basket Shake */
         @keyframes basketShake {
             0%, 100% { transform: scale(1); }
             25% { transform: scale(1.2) rotate(10deg); }
@@ -115,198 +125,195 @@
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
-    <!-- Preloader -->
+    <!-- Preloader de Boas-vindas -->
     <div id="preloader">
         <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo" alt="Attiva's Shoes">
-        <div class="mt-8 w-40 h-[1px] bg-slate-100 relative overflow-hidden rounded-full">
+        <div class="mt-10 w-40 h-[1.5px] bg-slate-100 relative overflow-hidden rounded-full">
             <div class="absolute inset-0 bg-brand-500 w-0 animate-[load_2s_ease-in-out_forwards]"></div>
         </div>
+        <p class="mt-4 text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">Inovação 2026</p>
     </div>
     <style>@keyframes load { to { width: 100%; } }</style>
 
-    <!-- Top Bar -->
-    <div class="bg-brand-500 text-white text-[9px] md:text-[10px] font-bold py-2.5 text-center uppercase tracking-[0.2em] shimmer z-[60] px-4">
-        <i class="fas fa-sparkles mr-2"></i> Coleção 2026 • São Miguel/RN • Especialista em calçados femininos
+    <!-- Barra Informativa -->
+    <div class="bg-brand-500 text-white text-[9px] md:text-[11px] font-bold py-3 text-center uppercase tracking-[0.25em] shimmer z-[60] px-6">
+        <i class="fas fa-sparkles mr-2"></i> Coleção 2026 • São Miguel/RN • Entrega no Centro e Sítios
     </div>
 
-    <!-- Navegação Responsiva -->
-    <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-20 md:h-24 flex items-center">
-        <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
+    <!-- Navegação Limpa e Espaçosa -->
+    <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-20 md:h-28 flex items-center">
+        <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer hover:opacity-80 transition" onclick="app.showPage('home')">
-                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-10 md:h-16 object-contain" alt="Logo">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-10 md:h-20 object-contain" alt="Logo">
             </div>
             
-            <div class="flex items-center gap-3 md:gap-8">
-                <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <div class="flex items-center gap-4 md:gap-12">
+                <div class="hidden lg:flex gap-10 text-[11px] font-bold uppercase tracking-[0.2em] text-slate-400">
                     <a href="#products" onclick="app.scrollToSection('products')" class="hover:text-brand-500 transition">Coleção</a>
                     <a href="#about" onclick="app.scrollToSection('about')" class="hover:text-brand-500 transition">Boutique</a>
                 </div>
-                <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-4 md:px-6 py-2 md:py-3 rounded-full text-[9px] md:text-[10px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-lg shimmer">
-                    Loja
-                </button>
-                <div class="relative cursor-pointer p-2 group" onclick="app.toggleCart()" id="cart-icon-container">
-                    <i class="fas fa-shopping-bag text-xl md:text-2xl text-slate-700 group-hover:text-brand-500 transition"></i>
-                    <span id="cart-count" class="absolute top-0 right-0 bg-brand-500 text-white text-[8px] md:text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
+                <div class="flex items-center gap-4 md:gap-8">
+                    <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-5 md:px-8 py-2 md:py-4 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-lg shimmer">
+                        Ver Loja
+                    </button>
+                    <div class="relative cursor-pointer p-2 group" onclick="app.toggleCart()" id="cart-icon-container">
+                        <i class="fas fa-shopping-bag text-2xl md:text-3xl text-slate-700 group-hover:text-brand-500 transition"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white shadow-sm">0</span>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <main>
-        <!-- HOME PAGE -->
         <div id="page-home" class="fade-in">
             
-            <!-- Hero Section (Otimizada e Menor) -->
-            <section class="max-w-7xl mx-auto px-4 py-4 md:py-6" data-aos="fade-in">
-                <div class="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-brand-900 h-[320px] md:h-[480px] flex items-center shadow-2xl">
-                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Banner Attiva's Shoes">
+            <!-- Hero Section Fluida -->
+            <section class="max-w-7xl mx-auto px-4 py-4 md:py-8" data-aos="fade-in">
+                <div class="relative rounded-[2.5rem] md:rounded-[4rem] overflow-hidden bg-brand-900 h-[350px] md:h-[550px] flex items-center shadow-premium">
+                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/sociais.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Coleção 2026">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-transparent to-transparent"></div>
                     
-                    <div class="relative z-10 p-6 md:p-16 text-white w-full">
-                        <span class="text-[9px] font-bold uppercase tracking-[0.3em] bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full mb-4 inline-block shimmer border border-white/10">Coleção 2026</span>
-                        <h1 class="font-serif text-3xl md:text-7xl mb-6 leading-tight italic" data-aos="fade-up" data-aos-delay="200">Beleza que te inspira.</h1>
-                        <div class="flex flex-col sm:flex-row gap-3 md:gap-4" data-aos="fade-up" data-aos-delay="400">
-                            <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-8 py-3.5 rounded-full font-bold uppercase text-[9px] md:text-[10px] tracking-widest hover:bg-brand-600 transition shadow-xl shimmer w-fit">
-                                <i class="fas fa-shopping-cart mr-2"></i> Explorar Loja
-                            </button>
-                        </div>
+                    <div class="relative z-10 p-8 md:p-24 text-white w-full">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.5em] bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 inline-block shimmer border border-white/10" data-aos="fade-right">Trend 2026</span>
+                        <h1 class="font-serif text-4xl md:text-8xl mb-8 leading-tight italic" data-aos="fade-up" data-aos-delay="200">A elegância<br>muda tudo.</h1>
+                        <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-10 py-5 rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-brand-600 transition shadow-2xl shimmer w-fit" data-aos="fade-up" data-aos-delay="400">
+                            Explorar Boutique
+                        </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Canais de Redes Sociais -->
-            <section class="max-w-7xl mx-auto px-4 py-6 md:py-10">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="bg-white p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-brand-50 flex items-center gap-4 md:gap-6 group hover:shadow-xl transition-all duration-500" data-aos="fade-up">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-inner shrink-0">
+            <!-- Canais de Conversão Direta -->
+            <section class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="bg-white p-10 rounded-[3rem] border border-brand-50 flex items-center gap-8 group hover:shadow-premium transition-all duration-700" data-aos="fade-up">
+                        <div class="w-16 h-16 bg-brand-50 text-brand-500 rounded-[1.5rem] flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-inner shrink-0">
                             <i class="fab fa-instagram"></i>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5 truncate">Instagram</p>
-                            <p class="font-serif italic font-bold text-lg md:text-xl truncate">@attivasshoes</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Instagram</p>
+                            <p class="font-serif italic font-bold text-xl md:text-2xl truncate text-slate-800">@attivasshoes</p>
                         </div>
                     </a>
-                    <a href="https://wa.me/5584921626352" target="_blank" class="bg-green-50 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2rem] border border-green-100 flex items-center gap-4 md:gap-6 group hover:shadow-xl transition-all duration-500 shimmer" data-aos="fade-up" data-aos-delay="100">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-green-500 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-sm shrink-0">
+                    <a href="https://wa.me/5584921626352" target="_blank" class="bg-green-50 p-10 rounded-[3rem] border border-green-100 flex items-center gap-8 group hover:shadow-premium transition-all duration-700 shimmer" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-16 h-16 bg-white text-green-500 rounded-[1.5rem] flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-sm shrink-0">
                             <i class="fab fa-whatsapp"></i>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-[9px] font-bold text-green-600 uppercase tracking-widest mb-0.5 truncate">Suporte 24h</p>
-                            <p class="font-bold text-lg md:text-xl text-green-700 truncate">(84) 92162-6352</p>
+                            <p class="text-[10px] font-bold text-green-600 uppercase tracking-[0.2em] mb-2">Suporte VIP</p>
+                            <p class="font-bold text-xl md:text-2xl text-green-700 truncate tracking-tighter">(84) 92162-6352</p>
                         </div>
                     </a>
-                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="hidden md:flex bg-white p-8 rounded-[2rem] border border-brand-50 items-center gap-6 group hover:shadow-xl transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
-                        <div class="w-16 h-16 bg-brand-50 text-brand-500 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-inner shrink-0">
+                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="bg-white p-10 rounded-[3rem] border border-brand-50 flex items-center gap-8 group hover:shadow-premium transition-all duration-500" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-16 h-16 bg-brand-50 text-brand-500 rounded-[1.5rem] flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-inner shrink-0">
                             <i class="fab fa-facebook-f"></i>
                         </div>
                         <div class="min-w-0">
-                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 truncate">Facebook</p>
-                            <p class="font-serif italic font-bold text-xl truncate">/attivasshoes</p>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Comunidade</p>
+                            <p class="font-serif italic font-bold text-xl md:text-2xl truncate text-slate-800">/attivasshoes</p>
                         </div>
                     </a>
                 </div>
             </section>
 
-            <!-- QUEM SOMOS -->
-            <section id="about" class="max-w-7xl mx-auto px-4 py-12 md:py-20">
-                <div class="bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-20 border border-brand-100 flex flex-col lg:flex-row gap-10 md:gap-16 items-center shadow-soft overflow-hidden" data-aos="fade-up">
+            <!-- QUEM SOMOS (Fiel à referência com mais Whitespace) -->
+            <section id="about" class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+                <div class="bg-white rounded-[4rem] p-10 md:p-24 border border-brand-100 flex flex-col lg:flex-row gap-16 md:gap-24 items-center shadow-premium overflow-hidden" data-aos="fade-up">
                     <div class="lg:w-1/2 w-full">
-                        <div class="mb-4 md:mb-6">
-                            <span class="bg-brand-500 text-white text-[9px] md:text-[10px] font-bold px-4 py-1.5 rounded uppercase tracking-[0.2em] shimmer">Boutique Exclusiva</span>
+                        <div class="mb-8">
+                            <span class="bg-brand-500 text-white text-[10px] font-bold px-5 py-2 rounded-lg uppercase tracking-[0.3em] shimmer">Nossa História</span>
                         </div>
-                        <h2 class="text-3xl md:text-5xl font-bold text-slate-900 mb-8 md:mb-10 leading-[1.3]">
+                        <h2 class="text-4xl md:text-6xl font-bold text-slate-900 mb-10 md:mb-16 leading-[1.2]">
                             <span class="highlight-box italic shimmer">Attiva’s Shoes: Conectando</span><br>
-                            <span class="highlight-box mt-2 italic shimmer">Você ao Melhor.</span>
+                            <span class="highlight-box mt-3 italic shimmer">Você ao Melhor.</span>
                         </h2>
-                        <p class="text-slate-500 text-base md:text-lg leading-relaxed mb-8 md:mb-12 font-light">
-                            Referência em calçado feminino e acessórios de luxo em São Miguel/RN. Elegância redefinida em 2026.
+                        <p class="text-slate-500 text-lg md:text-xl leading-relaxed mb-12 md:mb-20 font-light">
+                            Referência premium em calçado feminino em São Miguel/RN. Nossa boutique é o reflexo da sofisticação e curadoria que você merece em 2026.
                         </p>
-                        <div class="grid grid-cols-2 gap-4 md:gap-8">
-                            <div class="bg-brand-50 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-brand-100">
-                                <p class="text-3xl md:text-5xl font-bold text-brand-500 tracking-tighter">50k+</p>
-                                <p class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase mt-2">Clientes Felizes</p>
+                        <div class="grid grid-cols-2 gap-8 md:gap-12">
+                            <div class="bg-brand-50 p-10 rounded-[3rem] border border-brand-100 text-center group hover:bg-white transition duration-500">
+                                <p class="text-4xl md:text-6xl font-bold text-brand-500 tracking-tighter group-hover:scale-110 transition">50k+</p>
+                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase mt-4 tracking-widest">Clientes Felizes</p>
                             </div>
-                            <div class="bg-brand-50 p-6 md:p-8 rounded-[1.5rem] md:rounded-[2.5rem] border border-brand-100">
-                                <div class="flex items-center gap-2 md:gap-3">
-                                    <p class="text-3xl md:text-5xl font-bold text-brand-500 tracking-tighter">24h</p>
-                                    <div class="w-2 h-2 bg-green-500 rounded-full animate-ping"></div>
+                            <div class="bg-brand-50 p-10 rounded-[3rem] border border-brand-100 text-center group hover:bg-white transition duration-500">
+                                <div class="flex items-center justify-center gap-3">
+                                    <p class="text-4xl md:text-6xl font-bold text-brand-500 tracking-tighter group-hover:scale-110 transition">24h</p>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
                                 </div>
-                                <p class="text-[8px] md:text-[9px] font-bold text-slate-400 uppercase mt-2">Atendimento ON</p>
+                                <p class="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase mt-4 tracking-widest">Suporte Boutique</p>
                             </div>
                         </div>
                     </div>
-                    <!-- Carrossel Boutique Interativo -->
-                    <div class="lg:w-1/2 w-full relative">
-                        <div class="slider-container shadow-2xl group border-2 md:border-4 border-brand-50" onclick="app.nextSlide()">
-                            <div class="slide active"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover" loading="lazy"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover" loading="lazy"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="w-full h-full object-cover" loading="lazy"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover" loading="lazy"></div>
+                    <div class="lg:w-1/2 w-full">
+                        <div class="slider-container shadow-premium group border-4 border-brand-50" onclick="app.nextSlide()">
+                            <div class="slide active"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover"></div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Vitrine Virtual -->
-            <section id="products" class="max-w-7xl mx-auto px-4 py-12 md:py-16">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-16 gap-6" data-aos="fade-up">
+            <!-- Vitrine Virtual com Gaps Maiores -->
+            <section id="products" class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 gap-10" data-aos="fade-up">
                     <div class="text-center md:text-left">
-                        <h2 class="font-serif text-3xl md:text-6xl text-slate-900 italic leading-tight uppercase tracking-tighter">Vitrine Boutique</h2>
-                        <p class="text-slate-400 text-[10px] md:text-sm mt-2 uppercase tracking-widest font-medium"><i class="fas fa-hand-pointer mr-2 animate-bounce"></i>Toque na imagem para adicionar à sacola</p>
+                        <h2 class="font-serif text-4xl md:text-7xl text-slate-900 italic leading-tight uppercase tracking-tighter">Coleção Boutique</h2>
+                        <p class="text-slate-400 text-[10px] md:text-sm mt-4 uppercase tracking-[0.3em] font-medium"><i class="fas fa-hand-pointer mr-3 animate-bounce"></i>Toque na imagem para adicionar</p>
                     </div>
-                    <div class="w-full md:w-auto flex gap-2 overflow-x-auto no-scrollbar pb-2 px-1">
-                        <button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-2xl transition shadow-md shrink-0">Tudo</button>
-                        <button onclick="app.filter('Salto')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500 shrink-0">Saltos</button>
-                        <button onclick="app.filter('Sandália')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500 shrink-0">Sandálias</button>
-                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500 shrink-0">Bolsas</button>
+                    <div class="w-full md:w-auto flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                        <button onclick="app.filter('all')" class="filter-btn active text-[10px] font-bold uppercase tracking-widest bg-white text-brand-500 px-8 py-4 rounded-2xl transition shadow-md shrink-0">Tudo</button>
+                        <button onclick="app.filter('Salto')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Saltos</button>
+                        <button onclick="app.filter('Sandália')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Sandálias</button>
+                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Bolsas</button>
                     </div>
                 </div>
-                
-                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-12">
-                    <!-- Dinâmico -->
-                </div>
+                <!-- Grid de Produtos com Gap aumentado para não parecer "linhas próximas" -->
+                <div id="product-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-24"></div>
             </section>
 
             <!-- DEPOIMENTOS -->
-            <section id="testimonials" class="bg-brand-900 py-20 md:py-32 rounded-t-[3.5rem] md:rounded-t-[5rem] overflow-hidden relative text-white" data-aos="fade-up">
-                <div class="max-w-7xl mx-auto px-4 relative z-10 text-white">
-                    <div class="text-center mb-16 md:mb-24">
-                        <h2 class="font-serif text-3xl md:text-6xl italic tracking-tighter mb-4">Quem usa, brilha.</h2>
-                        <div class="h-1 w-16 md:w-20 bg-brand-500 mx-auto rounded-full shimmer"></div>
-                        <p class="text-brand-100/50 mt-6 md:mt-8 uppercase text-[9px] md:text-[10px] tracking-[0.3em] font-bold px-2">Vozes de São Miguel/RN</p>
+            <section id="testimonials" class="bg-brand-900 py-24 md:py-40 rounded-t-[5rem] overflow-hidden relative" data-aos="fade-up">
+                <div class="max-w-7xl mx-auto px-6 relative z-10 text-white">
+                    <div class="text-center mb-24 md:mb-32">
+                        <h2 class="font-serif text-4xl md:text-7xl italic tracking-tighter mb-6 leading-none">Quem usa, brilha.</h2>
+                        <div class="h-1 w-24 bg-brand-500 mx-auto rounded-full shimmer"></div>
+                        <p class="text-brand-100/50 mt-10 uppercase text-xs tracking-[0.4em] font-bold">Feedback de São Miguel/RN</p>
                     </div>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-                        <div class="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up">
-                            <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8 text-white">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150" class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
-                                <div class="min-w-0"><p class="font-bold uppercase text-[10px] md:text-xs tracking-wider truncate">Mariana Silva</p><p class="text-[8px] md:text-[9px] text-brand-500 font-bold uppercase mt-0.5">Centro São Miguel</p></div>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16">
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up">
+                            <div class="flex items-center gap-6 mb-10 text-white">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Mariana Silva</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">Centro São Miguel</p></div>
                             </div>
-                            <p class="text-brand-50 italic text-base md:text-lg mb-8 md:mb-10 leading-relaxed font-light">"O conforto do calçado Rosé é absoluto. Parece que estou nas nuvens."</p>
-                            <div class="rounded-[2rem] overflow-hidden h-48 md:h-56 shadow-2xl relative text-slate-800">
-                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" loading="lazy">
+                            <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"O conforto do calçado Rosé é absoluto. Parece que estou nas nuvens."</p>
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
-                        <div class="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="100">
-                            <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8 text-white">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150" class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
-                                <div class="min-w-0"><p class="font-bold uppercase text-[10px] md:text-xs tracking-wider truncate">Clara Freitas</p><p class="text-[8px] md:text-[9px] text-brand-500 font-bold uppercase mt-0.5">São Miguel / RN</p></div>
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="100">
+                            <div class="flex items-center gap-6 mb-10 text-white">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Clara Freitas</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">São Miguel / RN</p></div>
                             </div>
-                            <p class="text-brand-50 italic text-base md:text-lg mb-8 md:mb-10 leading-relaxed font-light">"Entrega super rápida! O suporte me ajudou muito. Com certeza virei cliente fiel."</p>
-                            <div class="rounded-[2rem] overflow-hidden h-48 md:h-56 shadow-2xl relative text-slate-800">
+                            <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"Entrega super rápida! O atendimento 24h me ajudou muito."</p>
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
                                 <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
-                        <div class="bg-white/5 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] md:rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="200">
-                            <div class="flex items-center gap-4 md:gap-5 mb-6 md:mb-8 text-white">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150" class="w-12 h-12 md:w-16 md:h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
-                                <div class="min-w-0"><p class="font-bold uppercase text-[10px] md:text-xs tracking-wider truncate">Beatriz Melo</p><p class="text-[8px] md:text-[9px] text-brand-500 font-bold uppercase mt-0.5">São Miguel / RN</p></div>
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="200">
+                            <div class="flex items-center gap-6 mb-10 text-white">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Beatriz Melo</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">São Miguel / RN</p></div>
                             </div>
-                            <p class="text-brand-50 italic text-base md:text-lg mb-8 md:mb-10 leading-relaxed font-light">"Qualidade internacional. A nova coleção Rosé é simplesmente incrível!"</p>
-                            <div class="rounded-[2rem] overflow-hidden h-48 md:h-56 shadow-2xl relative text-slate-800">
-                                <img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
+                            <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"Qualidade de boutique de luxo. A nova coleção Rosé é incrível!"</p>
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
+                                <img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
@@ -314,131 +321,132 @@
                 </div>
             </section>
 
-            <!-- Localização GPS -->
-            <section class="max-w-7xl mx-auto px-4 py-16 md:py-24 text-slate-800" data-aos="fade-up">
-                <div class="bg-white rounded-[2.5rem] md:rounded-[4rem] p-8 md:p-16 shadow-premium border border-slate-50 flex flex-col md:flex-row gap-12 md:gap-16 items-center">
-                    <div class="md:w-1/3 text-slate-800">
-                        <span class="text-brand-500 font-bold text-[10px] tracking-widest uppercase mb-4 block shimmer">Localização GPS</span>
-                        <h3 class="text-3xl md:text-4xl font-bold mb-8 text-slate-900 uppercase tracking-tighter leading-none">Visite a nossa Boutique Física</h3>
-                        <a href="https://maps.app.goo.gl/79Mwrr4hhap8oajt5" target="_blank" class="flex items-center gap-6 p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-brand-500 transition group shadow-sm">
-                            <div class="w-10 h-10 md:w-12 md:h-12 bg-brand-500 text-white rounded-2xl flex items-center justify-center text-lg md:text-xl transition shadow-md"><i class="fas fa-location-arrow"></i></div>
-                            <div>
-                                <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Traçar Percurso</p>
-                                <span class="text-sm font-semibold text-slate-600 uppercase">Google Maps</span>
+            <!-- Localização -->
+            <section class="max-w-7xl mx-auto px-6 py-24 md:py-40 text-slate-800" data-aos="fade-up">
+                <div class="bg-white rounded-[4rem] p-10 md:p-24 shadow-premium border border-slate-50 flex flex-col lg:flex-row gap-16 md:gap-24 items-center">
+                    <div class="lg:w-1/3 text-center lg:text-left">
+                        <span class="text-brand-500 font-bold text-[10px] tracking-widest uppercase mb-6 block shimmer">Localização</span>
+                        <h3 class="text-4xl md:text-6xl font-bold mb-10 text-slate-900 uppercase tracking-tighter leading-none">Boutique no Coração de São Miguel</h3>
+                        <a href="https://maps.app.goo.gl/79Mwrr4hhap8oajt5" target="_blank" class="inline-flex items-center gap-6 p-8 rounded-[2.5rem] bg-slate-50 border border-slate-100 hover:border-brand-500 transition group shadow-soft">
+                            <div class="w-14 h-14 bg-brand-500 text-white rounded-2xl flex items-center justify-center text-2xl group-hover:rotate-12 transition"><i class="fas fa-location-arrow"></i></div>
+                            <div class="text-left">
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Ver Rota GPS</p>
+                                <span class="text-base font-semibold text-slate-600 uppercase">Google Maps</span>
                             </div>
                         </a>
                     </div>
-                    <div class="md:w-2/3 w-full h-[350px] md:h-[450px] rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden border border-slate-100 shadow-inner">
+                    <div class="lg:w-2/3 w-full h-[400px] md:h-[550px] rounded-[4rem] overflow-hidden border border-slate-100 shadow-inner">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31746.68889070438!2d-38.39136011400494!3d-6.205934415449791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a43585d6805177%3A0xc008b8b39444197c!2zU8OjbyBNaWd1ZWwsIFJOLCA1OTkwMC0wMDA!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- PÁGINA CHECKOUT -->
-        <div id="page-checkout" class="hidden max-w-6xl mx-auto px-4 py-12 fade-in text-slate-800">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-start">
-                <div class="space-y-8 md:space-y-10">
-                    <button onclick="app.showPage('home')" class="text-slate-400 font-bold text-[10px] uppercase tracking-widest hover:text-brand-500 transition flex items-center gap-3">
-                        <i class="fas fa-arrow-left"></i> Voltar à Boutique
+        <!-- CHECKOUT -->
+        <div id="page-checkout" class="hidden max-w-6xl mx-auto px-6 py-16 md:py-24 fade-in text-slate-800">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-start text-slate-800">
+                <div class="space-y-12">
+                    <button onclick="app.showPage('home')" class="text-slate-400 font-bold text-xs uppercase tracking-widest hover:text-brand-500 transition flex items-center gap-4">
+                        <i class="fas fa-arrow-left"></i> Continuar Escolhendo
                     </button>
-                    <div class="bg-white p-8 md:p-14 rounded-[3rem] md:rounded-[4rem] border border-brand-100 shadow-sm">
-                        <h3 class="font-serif text-2xl md:text-3xl mb-8 md:mb-12 italic tracking-tighter">Os Seus Dados.</h3>
-                        <form id="checkout-form" class="space-y-6 md:space-y-8">
+                    <div class="bg-white p-10 md:p-20 rounded-[4rem] border border-brand-100 shadow-soft">
+                        <h3 class="font-serif text-3xl md:text-5xl mb-12 md:mb-16 italic tracking-tighter">Os Seus Dados.</h3>
+                        <form id="checkout-form" class="space-y-8 md:space-y-12">
                             <div class="relative">
-                                <i class="fas fa-user absolute top-1/2 -translate-y-1/2 left-5 text-brand-500/30"></i>
-                                <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm" required>
+                                <i class="fas fa-user absolute top-1/2 -translate-y-1/2 left-6 text-brand-500/20"></i>
+                                <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base text-slate-800" required>
                             </div>
                             <div class="relative">
-                                <i class="fas fa-truck absolute top-1/2 -translate-y-1/2 left-5 text-brand-500/30"></i>
-                                <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm cursor-pointer appearance-none">
+                                <i class="fas fa-truck absolute top-1/2 -translate-y-1/2 left-6 text-brand-500/20"></i>
+                                <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base cursor-pointer appearance-none text-slate-800">
                                     <option value="4">Entrega Centro São Miguel (R$ 4,00)</option>
                                     <option value="10">Entrega Sítio Região (R$ 10,00)</option>
                                     <option value="0">Retirar na Boutique (Grátis)</option>
                                 </select>
                             </div>
                             <div class="relative">
-                                <i class="fas fa-map-marker-alt absolute top-8 left-5 text-brand-500/30"></i>
-                                <textarea id="cust-address" placeholder="Morada ou Referência" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm h-32 md:h-40" required></textarea>
+                                <i class="fas fa-map-marker-alt absolute top-10 left-6 text-brand-500/20"></i>
+                                <textarea id="cust-address" placeholder="Morada Completa ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base h-48 text-slate-800" required></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="bg-brand-900 text-white p-8 md:p-16 rounded-[3rem] md:rounded-[5rem] shadow-2xl sticky top-28 shimmer">
-                    <h3 class="font-serif text-3xl md:text-4xl mb-8 md:mb-12 italic text-brand-50">Resumo.</h3>
-                    <div id="summary-items" class="space-y-5 mb-10 md:mb-12 max-h-48 md:max-h-60 overflow-y-auto pr-3 custom-scrollbar text-white"></div>
-                    <div class="space-y-4 border-t border-white/10 pt-10 md:pt-12 mb-10 md:mb-12">
-                        <div class="flex justify-between text-brand-100/40 text-[10px] md:text-xs uppercase tracking-widest"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
-                        <div class="flex justify-between text-brand-100/40 text-[10px] md:text-xs uppercase tracking-widest"><span>Taxa Envio</span><span id="sum-delivery">R$ 4,00</span></div>
-                        <div class="flex justify-between text-3xl md:text-4xl font-serif italic pt-4 md:pt-6 tracking-tighter text-white"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
+                <div class="bg-brand-900 text-white p-12 md:p-20 rounded-[4rem] md:rounded-[5rem] shadow-2xl sticky top-32 shimmer">
+                    <h3 class="font-serif text-4xl md:text-5xl mb-12 italic text-brand-50">Resumo.</h3>
+                    <div id="summary-items" class="space-y-6 mb-12 max-h-60 overflow-y-auto pr-4 custom-scrollbar text-white"></div>
+                    <div class="space-y-6 border-t border-white/10 pt-12 mb-12">
+                        <div class="flex justify-between text-brand-100/40 text-xs uppercase tracking-widest"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
+                        <div class="flex justify-between text-brand-100/40 text-xs uppercase tracking-widest"><span>Taxa de Envio</span><span id="sum-delivery">R$ 4,00</span></div>
+                        <div class="flex justify-between text-4xl md:text-5xl font-serif italic pt-8 tracking-tighter text-white"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
                     </div>
-                    <button onclick="app.sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 md:py-6 rounded-3xl transition shadow-xl active:scale-95 uppercase tracking-widest text-[10px] md:text-xs flex items-center justify-center gap-4 shimmer">
-                        <i class="fab fa-whatsapp text-xl"></i> Enviar Pedido no Zap
+                    <button onclick="app.sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-6 rounded-3xl transition shadow-xl active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-5 shimmer">
+                        <i class="fab fa-whatsapp text-3xl"></i> Finalizar Pedido no Zap
                     </button>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- WhatsApp Floating -->
-    <a href="https://wa.me/5584921626352" target="_blank" class="wa-float shimmer" title="Falar com Especialista">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
     <!-- Sidebar Carrinho -->
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[1000] transform translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] flex flex-col text-slate-800">
-        <div class="p-8 md:p-10 border-b border-brand-50 flex justify-between items-center bg-brand-50/50">
-            <h3 class="font-serif text-2xl md:text-3xl italic tracking-tighter">A Minha Sacola.</h3>
-            <button onclick="app.toggleCart()" class="text-3xl p-2">&times;</button>
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[500px] bg-white shadow-2xl z-[1000] transform translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] flex flex-col text-slate-800">
+        <div class="p-10 border-b border-brand-50 flex justify-between items-center bg-brand-50/50">
+            <h3 class="font-serif text-3xl italic tracking-tighter uppercase">Minha Sacola.</h3>
+            <button onclick="app.toggleCart()" class="text-4xl p-2 hover:text-brand-500 transition">&times;</button>
         </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-8 md:p-10 space-y-8 md:space-y-10 custom-scrollbar"></div>
-        <div class="p-8 md:p-10 bg-white border-t border-brand-100 rounded-t-[3.5rem] md:rounded-t-[4rem] shadow-inner">
-            <div class="flex justify-between items-center mb-8 md:mb-10 font-bold text-2xl md:text-3xl tracking-tighter">
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 md:p-12 space-y-10 md:space-y-12 custom-scrollbar"></div>
+        <div class="p-10 bg-white border-t border-brand-100 rounded-t-[4rem] shadow-inner">
+            <div class="flex justify-between items-center mb-12 font-bold text-3xl md:text-4xl tracking-tighter">
                 <span class="text-slate-400 uppercase text-xs tracking-widest">Subtotal</span>
                 <span id="cart-total-val" class="text-brand-500 italic font-serif">R$ 0,00</span>
             </div>
-            <button onclick="app.showPage('checkout')" id="checkout-btn" class="w-full bg-brand-500 text-white font-bold py-5 md:py-6 rounded-3xl shadow-xl disabled:opacity-50 transition active:scale-95 text-[10px] uppercase tracking-widest shimmer" disabled>Finalizar Pedido</button>
+            <button onclick="app.showPage('checkout')" id="checkout-btn" class="w-full bg-brand-500 text-white font-bold py-6 rounded-3xl shadow-xl disabled:opacity-50 transition active:scale-95 text-xs uppercase tracking-widest shimmer" disabled>Finalizar Pedido</button>
         </div>
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-brand-900/30 backdrop-blur-md z-[900] hidden opacity-0 transition-opacity duration-700" onclick="app.toggleCart()"></div>
 
-    <!-- Rodapé Boutique -->
-    <footer class="bg-white border-t border-brand-50 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
-            <div class="col-span-1">
-                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-12 mb-8 mx-auto md:mx-0 object-contain">
-                <p class="text-slate-400 text-sm font-light leading-relaxed">Referência em calçado e acessórios premium em São Miguel/RN. Elegância redefinida em 2026.</p>
-                <div class="flex justify-center md:justify-start gap-4 mt-8">
-                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="w-10 h-10 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="w-10 h-10 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-instagram"></i></a>
+    <!-- WhatsApp Floating VIP -->
+    <a href="https://wa.me/5584921626352" target="_blank" class="wa-float shimmer" title="Falar com Especialista">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Rodapé Premium -->
+    <footer class="bg-white border-t border-brand-50 pt-32 pb-16">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-20 text-center md:text-left">
+            <div class="col-span-1 md:col-span-1">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-16 mb-12 mx-auto md:mx-0 object-contain">
+                <p class="text-slate-400 text-base font-light leading-relaxed mb-10">Especialistas em calçados femininos de luxo em São Miguel/RN. Elegância em cada detalhe desde 2026.</p>
+                <div class="flex justify-center md:justify-start gap-6">
+                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-facebook-f text-xl"></i></a>
+                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-instagram text-xl"></i></a>
                 </div>
             </div>
             <div>
-                <h4 class="font-bold text-slate-900 mb-8 uppercase text-[9px] md:text-[10px] tracking-[0.3em]">Atendimento</h4>
-                <ul class="text-sm text-slate-500 space-y-5 font-light">
-                    <li><a href="https://wa.me/5584921626352" target="_blank" class="hover:text-brand-500 transition font-bold text-brand-500 italic">(84) 9 92162-6352</a></li>
-                    <li><i class="fas fa-shield-heart mr-2 text-brand-500"></i> Suporte VIP 24h</li>
+                <h4 class="font-bold text-slate-900 mb-10 uppercase text-xs tracking-[0.3em]">Atendimento</h4>
+                <ul class="text-sm text-slate-500 space-y-6 font-light">
+                    <li><a href="https://wa.me/5584921626352" target="_blank" class="hover:text-brand-500 transition font-bold text-brand-500 italic text-xl tracking-tight">(84) 9 92162-6352</a></li>
+                    <li><i class="fas fa-shield-heart mr-2 text-brand-500"></i> Suporte Especialista 24h</li>
                 </ul>
             </div>
-            <div class="col-span-1 md:col-span-2 text-center md:text-left text-slate-800">
-                 <h4 class="font-bold text-slate-900 mb-8 uppercase text-[10px] tracking-[0.3em]">Pagamento Seguro</h4>
-                 <div class="flex flex-wrap gap-6 opacity-40 justify-center md:justify-start grayscale hover:grayscale-0 transition duration-700">
-                    <i class="fab fa-cc-visa text-5xl"></i>
-                    <i class="fab fa-cc-mastercard text-5xl"></i>
-                    <i class="fas fa-barcode text-4xl"></i>
-                    <i class="fas fa-qrcode text-4xl"></i>
+            <div class="col-span-1 md:col-span-2 text-center md:text-left">
+                 <h4 class="font-bold text-slate-900 mb-10 uppercase text-xs tracking-[0.3em]">Pagamento Seguro</h4>
+                 <div class="flex flex-wrap gap-10 justify-center md:justify-start opacity-40 grayscale hover:grayscale-0 transition duration-700">
+                    <i class="fab fa-cc-visa text-6xl"></i>
+                    <i class="fab fa-cc-mastercard text-6xl"></i>
+                    <i class="fas fa-barcode text-5xl"></i>
+                    <i class="fas fa-qrcode text-5xl"></i>
                  </div>
+                 <p class="mt-12 text-[10px] text-slate-300 font-bold uppercase tracking-[0.4em]">Site Blindado 2026</p>
             </div>
         </div>
-        <div class="text-center text-[9px] text-slate-300 pt-10 uppercase tracking-[0.4em] font-bold border-t border-slate-50 mt-10">
+        <div class="text-center text-[10px] text-slate-300 pt-16 uppercase tracking-[0.4em] font-bold border-t border-slate-50 mt-16">
             &copy; 2026 Attiva’s Shoes • São Miguel / RN
         </div>
     </footer>
 
-    <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-premium rounded-[3rem] p-5 flex items-center gap-5 transform translate-y-48 transition-transform duration-500 z-[2000] shimmer text-slate-800 w-[90%] max-w-sm">
-        <div class="w-12 h-12 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center shadow-inner shrink-0"><i class="fas fa-check text-lg"></i></div>
-        <span class="font-bold text-[10px] uppercase tracking-[0.3em] text-slate-700">Na sua sacola!</span>
+    <!-- Notificação Instantânea -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-premium rounded-[3rem] p-6 flex items-center gap-6 transform translate-y-48 transition-transform duration-500 z-[2000] shimmer text-slate-800 w-[90%] max-w-sm">
+        <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center shadow-inner shrink-0"><i class="fas fa-check text-xl"></i></div>
+        <span class="font-bold text-[11px] uppercase tracking-[0.3em] text-slate-700">Na sua sacola!</span>
     </div>
 
     <!-- AOS JS -->
@@ -474,7 +482,7 @@
                 this.render();
             },
 
-            startSlider() { this.autoSlide = setInterval(() => this.nextSlide(), 4000); },
+            startSlider() { this.autoSlide = setInterval(() => this.nextSlide(), 4500); },
 
             nextSlide() {
                 const slides = document.querySelectorAll('.slide');
@@ -483,29 +491,29 @@
                 this.slideIdx = (this.slideIdx + 1) % slides.length;
                 slides[this.slideIdx].classList.add('active');
                 clearInterval(this.autoSlide);
-                this.autoSlide = setInterval(() => this.nextSlide(), 4000);
+                this.autoSlide = setInterval(() => this.nextSlide(), 4500);
             },
 
             render() {
                 const grid = document.getElementById('product-grid');
                 const filtered = this.currentCat === 'all' ? products : products.filter(p => p.category === this.currentCat);
                 grid.innerHTML = filtered.map((p, i) => `
-                    <div class="reveal bg-white rounded-[2rem] md:rounded-[3rem] border border-brand-50 shadow-sm hover:shadow-xl transition-all duration-700 group overflow-hidden flex flex-col h-full hover:-translate-y-2" data-aos="fade-up" data-aos-delay="${i * 50}">
-                        <div class="product-card-img relative overflow-hidden h-48 md:h-96 bg-brand-50" onclick="app.add(${p.id})">
+                    <div class="reveal bg-white rounded-[2rem] md:rounded-[3rem] border border-brand-50 shadow-sm hover:shadow-xl transition-all duration-500 group overflow-hidden flex flex-col h-full hover:-translate-y-3" data-aos="fade-up" data-aos-delay="${i * 50}">
+                        <div class="product-card-img relative overflow-hidden h-64 md:h-[450px] bg-brand-50" onclick="app.add(${p.id})">
                             <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000" loading="lazy">
                             <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
-                                <div class="bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[8px] md:text-[10px] font-bold text-brand-500 shadow-2xl uppercase tracking-widest scale-90 group-hover:scale-100 transition-transform text-nowrap">
-                                    Adicionar
+                                <div class="bg-white/95 backdrop-blur px-6 py-3 rounded-full text-[10px] font-bold text-brand-500 shadow-2xl uppercase tracking-widest scale-90 group-hover:scale-100 transition-transform text-nowrap">
+                                    Adicionar à Sacola
                                 </div>
                             </div>
-                            <div class="absolute top-4 right-4 bg-white/95 backdrop-blur-sm text-[7px] md:text-[8px] font-bold px-3 py-1 rounded-full text-brand-500 border border-brand-100 uppercase tracking-widest shimmer shadow-sm">${p.category}</div>
+                            <div class="absolute top-5 right-5 bg-white/95 backdrop-blur-sm text-[8px] font-bold px-4 py-2 rounded-full text-brand-500 border border-brand-100 uppercase tracking-widest shimmer shadow-sm">${p.category}</div>
                         </div>
-                        <div class="p-4 md:p-10 flex flex-col flex-1">
-                            <h3 class="font-medium text-slate-800 mb-2 leading-tight flex-1 uppercase text-[10px] md:text-[11px] group-hover:text-brand-500 transition tracking-tighter">${p.name}</h3>
-                            <div class="flex items-center justify-between mt-4 md:mt-8 pt-4 md:pt-6 border-t border-brand-50">
-                                <span class="font-serif italic text-lg md:text-2xl text-slate-900 tracking-tighter">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
-                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-10 h-10 md:w-14 md:h-14 rounded-2xl flex items-center justify-center hover:bg-brand-600 transition active:scale-90 shadow-lg shadow-brand-500/20 shimmer">
-                                    <i class="fas fa-plus text-xs md:text-base"></i>
+                        <div class="p-6 md:p-12 flex flex-col flex-1 text-slate-800">
+                            <h3 class="font-medium text-slate-800 mb-3 md:mb-5 leading-tight flex-1 uppercase text-[11px] md:text-[13px] group-hover:text-brand-500 transition tracking-tight">${p.name}</h3>
+                            <div class="flex items-center justify-between mt-6 md:mt-10 pt-6 md:pt-10 border-t border-brand-50">
+                                <span class="font-serif italic text-2xl md:text-3xl text-slate-900 tracking-tighter">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
+                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-12 h-12 md:w-16 md:h-16 rounded-3xl flex items-center justify-center hover:bg-brand-600 transition active:scale-90 shadow-lg shadow-brand-500/20 shimmer">
+                                    <i class="fas fa-plus text-lg"></i>
                                 </button>
                             </div>
                         </div>
@@ -546,17 +554,17 @@
                 document.getElementById('cart-total-val').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
                 document.getElementById('checkout-btn').disabled = count === 0;
                 const list = document.getElementById('cart-items');
-                if(this.cart.length === 0) list.innerHTML = `<div class="text-center py-20 text-slate-200 uppercase text-[9px] tracking-[0.4em] font-bold">A sacola está vazia</div>`;
+                if(this.cart.length === 0) list.innerHTML = `<div class="text-center py-20 text-slate-200 uppercase text-[10px] tracking-[0.4em] font-bold">A sacola está vazia</div>`;
                 else list.innerHTML = this.cart.map((item, idx) => `
-                        <div class="flex gap-4 md:gap-6 items-center bg-brand-50 p-6 rounded-[2rem] border border-brand-100 hover:border-brand-500 transition duration-500 text-slate-800">
-                            <img src="${item.img}" class="w-20 h-20 object-cover rounded-2xl border-2 border-white shadow-sm bg-white" loading="lazy">
+                        <div class="flex gap-6 md:gap-10 items-center bg-brand-50 p-8 rounded-[2.5rem] border border-brand-100 hover:border-brand-500 transition duration-500 text-slate-800">
+                            <img src="${item.img}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-3xl border-2 border-white shadow-sm bg-white" loading="lazy">
                             <div class="flex-1">
-                                <h4 class="font-bold text-slate-900 mb-1 leading-tight text-[10px] uppercase">${item.name}</h4>
-                                <p class="text-brand-50 font-serif italic text-sm">R$ ${item.price.toFixed(2)}</p>
-                                <div class="flex items-center gap-4 mt-4">
-                                    <button onclick="app.qty(${idx}, -1)" class="w-8 h-8 rounded-2xl border border-brand-200 flex items-center justify-center text-slate-400 transition bg-white"><i class="fas fa-minus text-[8px]"></i></button>
-                                    <span class="font-bold text-slate-700 text-xs">${item.qty}</span>
-                                    <button onclick="app.qty(${idx}, 1)" class="w-8 h-8 rounded-2xl border border-brand-200 flex items-center justify-center text-brand-500 transition bg-white"><i class="fas fa-plus text-[8px]"></i></button>
+                                <h4 class="font-bold text-slate-900 mb-2 leading-tight text-[11px] md:text-[13px] uppercase">${item.name}</h4>
+                                <p class="text-brand-50 font-serif italic text-lg">R$ ${item.price.toFixed(2)}</p>
+                                <div class="flex items-center gap-6 mt-6">
+                                    <button onclick="app.qty(${idx}, -1)" class="w-10 h-10 rounded-2xl border border-brand-200 flex items-center justify-center text-slate-400 transition bg-white hover:border-brand-500"><i class="fas fa-minus text-[10px]"></i></button>
+                                    <span class="font-bold text-slate-700 text-sm">${item.qty}</span>
+                                    <button onclick="app.qty(${idx}, 1)" class="w-10 h-10 rounded-2xl border border-brand-200 flex items-center justify-center text-brand-500 transition bg-white hover:border-brand-500"><i class="fas fa-plus text-[10px]"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -582,7 +590,7 @@
                 window.scrollTo({top: 0, behavior: 'smooth'});
             },
 
-            scrollToSection(id) { const target = document.getElementById(id); if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); },
+            scrollToSection(id) { const target = document.getElementById(id); if (target) window.scrollTo({ top: target.offsetTop - 120, behavior: 'smooth' }); },
 
             updateDelivery() { this.updateSummary(); },
 
@@ -593,8 +601,8 @@
                 document.getElementById('sum-delivery').innerText = `R$ ${del.toFixed(2).replace('.', ',')}`;
                 document.getElementById('sum-total').innerText = `R$ ${(sub + del).toFixed(2).replace('.', ',')}`;
                 document.getElementById('summary-items').innerHTML = this.cart.map(i => `
-                    <div class="flex justify-between text-[10px] text-white/50 uppercase tracking-widest">
-                        <span class="truncate pr-4">${i.qty}x ${i.name}</span>
+                    <div class="flex justify-between text-[11px] text-white/50 uppercase tracking-[0.2em] mb-4">
+                        <span class="truncate pr-6">${i.qty}x ${i.name}</span>
                         <span class="font-bold text-white shrink-0">R$ ${(i.price * i.qty).toFixed(2)}</span>
                     </div>
                 `).join('');
@@ -607,10 +615,14 @@
                 const a = document.getElementById('cust-address').value;
                 const dSelect = document.getElementById('delivery-type');
                 const dText = dSelect.options[dSelect.selectedIndex].text;
-                if(!n || !a) return alert("Por favor, preencha todos os campos.");
+                if(!n || !a) return alert("Por favor, preencha o seu nome e endereço.");
+
+                if(typeof fbq === 'function') fbq('track', 'Purchase', { value: document.getElementById('sum-total').innerText, currency: 'BRL' });
+
                 let msg = `*👠 NOVO PEDIDO - ATTIVA’S SHOES*%0A%0A*Cliente:* ${n.toUpperCase()}%0A*Entrega:* ${dText}%0A*Local:* ${a}%0A%0A*ITENS:*%0A`;
                 this.cart.forEach(i => msg += `• ${i.qty}x ${i.name.toUpperCase()} (R$ ${i.price.toFixed(2)})%0A`);
-                msg += `%0A*TOTAL FINAL: ${document.getElementById('sum-total').innerText}*`;
+                msg += `%0A*TOTAL FINAL: ${document.getElementById('sum-total').innerText}*%0A%0A_Aguardamos confirmação da boutique..._`;
+                
                 window.open(`https://wa.me/5584921626352?text=${msg}`);
             }
         };
