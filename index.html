@@ -67,9 +67,12 @@
     </script>
 
     <style>
-        /* Melhorias de Leitura e Espaço */
         html { scroll-behavior: smooth; }
         body { line-height: 1.6; letter-spacing: 0.01em; }
+
+        /* Otimização de renderização para secções longas */
+        section { content-visibility: auto; contain-intrinsic-size: 1px 500px; }
+        #hero, nav { content-visibility: visible; }
 
         #preloader {
             position: fixed; inset: 0; background: #fff;
@@ -109,23 +112,19 @@
         .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1s ease-in-out; pointer-events: none; }
         .slide.active { opacity: 1; pointer-events: auto; }
 
-        @keyframes basketShake {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.2) rotate(10deg); }
-            50% { transform: scale(1.2) rotate(-10deg); }
-        }
-        .shake-it { animation: basketShake 0.5s ease-in-out; }
-
         .product-card-img { cursor: cell; transition: all 0.5s ease; }
         .product-card-img:hover img { transform: scale(1.08); filter: brightness(0.9); }
         
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
-    <!-- Preloader de Boas-vindas -->
+    <!-- Preloader -->
     <div id="preloader">
         <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo" alt="Attiva's Shoes">
         <div class="mt-10 w-40 h-[1.5px] bg-slate-100 relative overflow-hidden rounded-full">
@@ -140,7 +139,7 @@
         <i class="fas fa-sparkles mr-2"></i> Coleção 2026 • São Miguel/RN • Entrega no Centro e Sítios
     </div>
 
-    <!-- Navegação Limpa e Espaçosa -->
+    <!-- Navegação -->
     <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-20 md:h-28 flex items-center">
         <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer hover:opacity-80 transition" onclick="app.showPage('home')">
@@ -168,10 +167,13 @@
     <main>
         <div id="page-home" class="fade-in">
             
-            <!-- Hero Section Fluida -->
-            <section class="max-w-7xl mx-auto px-4 py-4 md:py-8" data-aos="fade-in">
+            <!-- Hero Section (Banner Otimizado) -->
+            <section id="hero" class="max-w-7xl mx-auto px-4 py-4 md:py-8" data-aos="fade-in">
                 <div class="relative rounded-[2.5rem] md:rounded-[4rem] overflow-hidden bg-brand-900 h-[350px] md:h-[550px] flex items-center shadow-premium">
-                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Coleção 2026">
+                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-80" 
+                         alt="Coleção 2026"
+                         fetchpriority="high">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-transparent to-transparent"></div>
                     
                     <div class="relative z-10 p-8 md:p-24 text-white w-full">
@@ -182,6 +184,23 @@
                         </button>
                     </div>
                 </div>
+            </section>
+
+            <!-- Vitrine Virtual -->
+            <section id="products" class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 gap-10" data-aos="fade-up">
+                    <div class="text-center md:text-left">
+                        <h2 class="font-serif text-4xl md:text-7xl text-slate-900 italic leading-tight uppercase tracking-tighter">Coleção Boutique</h2>
+                        <p class="text-slate-400 text-[10px] md:text-sm mt-4 uppercase tracking-[0.3em] font-medium"><i class="fas fa-hand-pointer mr-3 animate-bounce"></i>Toque na imagem para adicionar</p>
+                    </div>
+                    <div class="w-full md:w-auto flex gap-3 overflow-x-auto no-scrollbar pb-2">
+                        <button onclick="app.filter('all')" class="filter-btn active text-[10px] font-bold uppercase tracking-widest bg-white text-brand-500 px-8 py-4 rounded-2xl transition shadow-md shrink-0">Tudo</button>
+                        <button onclick="app.filter('Salto')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Saltos</button>
+                        <button onclick="app.filter('Sandália')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Sandálias</button>
+                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Bolsas</button>
+                    </div>
+                </div>
+                <div id="product-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-24"></div>
             </section>
 
             <!-- Canais de Conversão Direta -->
@@ -217,7 +236,7 @@
                 </div>
             </section>
 
-            <!-- QUEM SOMOS (Fiel à referência com mais Whitespace) -->
+            <!-- QUEM SOMOS -->
             <section id="about" class="max-w-7xl mx-auto px-6 py-12 md:py-24">
                 <div class="bg-white rounded-[4rem] p-10 md:p-24 border border-brand-100 flex flex-col lg:flex-row gap-16 md:gap-24 items-center shadow-premium overflow-hidden" data-aos="fade-up">
                     <div class="lg:w-1/2 w-full">
@@ -247,31 +266,13 @@
                     </div>
                     <div class="lg:w-1/2 w-full">
                         <div class="slider-container shadow-premium group border-4 border-brand-50" onclick="app.nextSlide()">
-                            <div class="slide active"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="w-full h-full object-cover"></div>
-                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide active"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover" loading="lazy" decoding="async"></div>
                         </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Vitrine Virtual com Gaps Maiores -->
-            <section id="products" class="max-w-7xl mx-auto px-6 py-16 md:py-24">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-16 md:mb-24 gap-10" data-aos="fade-up">
-                    <div class="text-center md:text-left">
-                        <h2 class="font-serif text-4xl md:text-7xl text-slate-900 italic leading-tight uppercase tracking-tighter">Coleção Boutique</h2>
-                        <p class="text-slate-400 text-[10px] md:text-sm mt-4 uppercase tracking-[0.3em] font-medium"><i class="fas fa-hand-pointer mr-3 animate-bounce"></i>Toque na imagem para adicionar</p>
-                    </div>
-                    <div class="w-full md:w-auto flex gap-3 overflow-x-auto no-scrollbar pb-2">
-                        <button onclick="app.filter('all')" class="filter-btn active text-[10px] font-bold uppercase tracking-widest bg-white text-brand-500 px-8 py-4 rounded-2xl transition shadow-md shrink-0">Tudo</button>
-                        <button onclick="app.filter('Salto')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Saltos</button>
-                        <button onclick="app.filter('Sandália')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Sandálias</button>
-                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[10px] font-bold uppercase tracking-widest text-slate-500 px-8 py-4 rounded-2xl transition hover:text-brand-500 shrink-0">Bolsas</button>
-                    </div>
-                </div>
-                <!-- Grid de Produtos com Gap aumentado para não parecer "linhas próximas" -->
-                <div id="product-grid" class="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16 md:gap-x-12 md:gap-y-24"></div>
             </section>
 
             <!-- DEPOIMENTOS -->
@@ -286,34 +287,34 @@
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 md:gap-16">
                         <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up">
                             <div class="flex items-center gap-6 mb-10 text-white">
-                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150&q=75" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy" decoding="async">
                                 <div><p class="font-bold uppercase text-xs tracking-wider">Mariana Silva</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">Centro São Miguel</p></div>
                             </div>
                             <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"O conforto do calçado Rosé é absoluto. Parece que estou nas nuvens."</p>
-                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
-                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative">
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=75" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy" decoding="async">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
                         <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="100">
                             <div class="flex items-center gap-6 mb-10 text-white">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150&q=75" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy" decoding="async">
                                 <div><p class="font-bold uppercase text-xs tracking-wider">Clara Freitas</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">São Miguel / RN</p></div>
                             </div>
                             <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"Entrega super rápida! O atendimento 24h me ajudou muito."</p>
-                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
-                                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative">
+                                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy" decoding="async">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
                         <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[4rem] border border-white/5 group hover:border-brand-500 transition-all duration-700" data-aos="fade-up" data-aos-delay="200">
                             <div class="flex items-center gap-6 mb-10 text-white">
-                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=75" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5" loading="lazy" decoding="async">
                                 <div><p class="font-bold uppercase text-xs tracking-wider">Beatriz Melo</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">São Miguel / RN</p></div>
                             </div>
                             <p class="text-brand-50 italic text-lg mb-12 leading-relaxed font-light">"Qualidade de boutique de luxo. A nova coleção Rosé é incrível!"</p>
-                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative text-slate-800">
-                                <img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy">
+                            <div class="rounded-[3rem] overflow-hidden h-56 md:h-72 shadow-2xl relative">
+                                <img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=600&q=75" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000" loading="lazy" decoding="async">
                                 <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
@@ -350,11 +351,11 @@
                         <i class="fas fa-arrow-left"></i> Continuar Escolhendo
                     </button>
                     <div class="bg-white p-10 md:p-20 rounded-[4rem] border border-brand-100 shadow-soft">
-                        <h3 class="font-serif text-3xl md:text-5xl mb-12 md:mb-16 italic tracking-tighter">Os Seus Dados.</h3>
+                        <h3 class="font-serif text-3xl md:text-5xl mb-12 md:mb-16 italic tracking-tighter">Formulário de Pedido.</h3>
                         <form id="checkout-form" class="space-y-8 md:space-y-12">
                             <div class="relative">
                                 <i class="fas fa-user absolute top-1/2 -translate-y-1/2 left-6 text-brand-500/20"></i>
-                                <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base text-slate-800" required>
+                                <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base text-slate-800" required>
                             </div>
                             <div class="relative">
                                 <i class="fas fa-truck absolute top-1/2 -translate-y-1/2 left-6 text-brand-500/20"></i>
@@ -366,13 +367,13 @@
                             </div>
                             <div class="relative">
                                 <i class="fas fa-map-marker-alt absolute top-10 left-6 text-brand-500/20"></i>
-                                <textarea id="cust-address" placeholder="Morada Completa ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base h-48 text-slate-800" required></textarea>
+                                <textarea id="cust-address" placeholder="Seu Endereço Completo ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-6 pl-14 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-base h-48 text-slate-800" required></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="bg-brand-900 text-white p-12 md:p-20 rounded-[4rem] md:rounded-[5rem] shadow-2xl sticky top-32 shimmer">
-                    <h3 class="font-serif text-4xl md:text-5xl mb-12 italic text-brand-50">Resumo.</h3>
+                    <h3 class="font-serif text-4xl md:text-5xl mb-12 italic text-brand-50">Resumo do Pedido.</h3>
                     <div id="summary-items" class="space-y-6 mb-12 max-h-60 overflow-y-auto pr-4 custom-scrollbar text-white"></div>
                     <div class="space-y-6 border-t border-white/10 pt-12 mb-12">
                         <div class="flex justify-between text-brand-100/40 text-xs uppercase tracking-widest"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
@@ -380,8 +381,9 @@
                         <div class="flex justify-between text-4xl md:text-5xl font-serif italic pt-8 tracking-tighter text-white"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
                     </div>
                     <button onclick="app.sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-6 rounded-3xl transition shadow-xl active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-5 shimmer">
-                        <i class="fab fa-whatsapp text-3xl"></i> Finalizar Pedido no Zap
+                        <i class="fab fa-whatsapp text-3xl"></i> Enviar Formulário via WhatsApp
                     </button>
+                    <p class="text-center text-[10px] text-white/30 uppercase tracking-[0.2em] mt-8">Número Oficial: 84 92162-6352</p>
                 </div>
             </div>
         </div>
@@ -404,16 +406,16 @@
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-brand-900/30 backdrop-blur-md z-[900] hidden opacity-0 transition-opacity duration-700" onclick="app.toggleCart()"></div>
 
-    <!-- WhatsApp Floating VIP -->
+    <!-- WhatsApp Floating -->
     <a href="https://wa.me/5584921626352" target="_blank" class="wa-float shimmer" title="Falar com Especialista">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Rodapé Premium -->
+    <!-- Rodapé -->
     <footer class="bg-white border-t border-brand-50 pt-32 pb-16">
         <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-20 text-center md:text-left">
             <div class="col-span-1 md:col-span-1">
-                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-16 mb-12 mx-auto md:mx-0 object-contain">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-16 mb-12 mx-auto md:mx-0 object-contain" loading="lazy" decoding="async">
                 <p class="text-slate-400 text-base font-light leading-relaxed mb-10">Especialistas em calçados femininos de luxo em São Miguel/RN. Elegância em cada detalhe desde 2026.</p>
                 <div class="flex justify-center md:justify-start gap-6">
                     <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="w-12 h-12 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-facebook-f text-xl"></i></a>
@@ -443,23 +445,23 @@
         </div>
     </footer>
 
-    <!-- Notificação Instantânea -->
+    <!-- Notificação -->
     <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-premium rounded-[3rem] p-6 flex items-center gap-6 transform translate-y-48 transition-transform duration-500 z-[2000] shimmer text-slate-800 w-[90%] max-w-sm">
         <div class="w-14 h-14 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center shadow-inner shrink-0"><i class="fas fa-check text-xl"></i></div>
         <span class="font-bold text-[11px] uppercase tracking-[0.3em] text-slate-700">Na sua sacola!</span>
     </div>
 
-    <!-- AOS JS -->
+    <!-- JS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         const products = [
-            { id: 1, name: "Scarpin Attiva Rosé Gold 2026", price: 279.90, category: "Salto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" },
-            { id: 2, name: "Sandália Summer Luxe 2026", price: 198.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=600&q=80" },
-            { id: 3, name: "Bolsa Tote Rosé Attiva", price: 425.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" },
-            { id: 4, name: "Rasteirinha Shine Gold Premium", price: 95.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=600&q=80" },
-            { id: 5, name: "Bolsa de Mão Velvet Noir", price: 389.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=80" },
+            { id: 1, name: "Scarpin Attiva Rosé Gold 2026", price: 279.90, category: "Salto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=75" },
+            { id: 2, name: "Sandália Summer Luxe 2026", price: 198.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=600&q=75" },
+            { id: 3, name: "Bolsa Tote Rosé Attiva", price: 425.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=75" },
+            { id: 4, name: "Rasteirinha Shine Gold Premium", price: 95.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=600&q=75" },
+            { id: 5, name: "Bolsa de Mão Velvet Noir", price: 389.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=75" },
             { id: 6, name: "Noir Classic Velvet Elite", price: 245.00, category: "Salto", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" },
-            { id: 7, name: "Bolsa Crossbody Rosé 2026", price: 215.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80" },
+            { id: 7, name: "Bolsa Crossbody Rosé 2026", price: 215.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=75" },
             { id: 8, name: "Urban Velvet Feminino Soft", price: 210.00, category: "Esporte", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" },
         ];
 
@@ -477,7 +479,7 @@
                         setTimeout(() => loader.style.visibility = 'hidden', 600);
                         AOS.init({ duration: 800, once: true });
                         this.startSlider();
-                    }, 1500);
+                    }, 800);
                 };
                 this.render();
             },
@@ -500,7 +502,7 @@
                 grid.innerHTML = filtered.map((p, i) => `
                     <div class="reveal bg-white rounded-[2rem] md:rounded-[3rem] border border-brand-50 shadow-sm hover:shadow-xl transition-all duration-500 group overflow-hidden flex flex-col h-full hover:-translate-y-3" data-aos="fade-up" data-aos-delay="${i * 50}">
                         <div class="product-card-img relative overflow-hidden h-64 md:h-[450px] bg-brand-50" onclick="app.add(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000" loading="lazy">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000" loading="lazy" decoding="async">
                             <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
                                 <div class="bg-white/95 backdrop-blur px-6 py-3 rounded-full text-[10px] font-bold text-brand-500 shadow-2xl uppercase tracking-widest scale-90 group-hover:scale-100 transition-transform text-nowrap">
                                     Adicionar à Sacola
@@ -540,7 +542,6 @@
                 if (exist) exist.qty++; else this.cart.push({ ...p, qty: 1 });
                 this.updateUI();
                 this.showToast();
-                if(typeof gtag === 'function') gtag('event', 'add_to_cart', { items: [{ item_name: p.name, price: p.price }] });
                 const icon = document.getElementById('cart-icon-container');
                 icon.classList.add('shake-it');
                 setTimeout(() => icon.classList.remove('shake-it'), 500);
@@ -557,7 +558,7 @@
                 if(this.cart.length === 0) list.innerHTML = `<div class="text-center py-20 text-slate-200 uppercase text-[10px] tracking-[0.4em] font-bold">A sacola está vazia</div>`;
                 else list.innerHTML = this.cart.map((item, idx) => `
                         <div class="flex gap-6 md:gap-10 items-center bg-brand-50 p-8 rounded-[2.5rem] border border-brand-100 hover:border-brand-500 transition duration-500 text-slate-800">
-                            <img src="${item.img}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-3xl border-2 border-white shadow-sm bg-white" loading="lazy">
+                            <img src="${item.img}" class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-3xl border-2 border-white shadow-sm bg-white" loading="lazy" decoding="async">
                             <div class="flex-1">
                                 <h4 class="font-bold text-slate-900 mb-2 leading-tight text-[11px] md:text-[13px] uppercase">${item.name}</h4>
                                 <p class="text-brand-50 font-serif italic text-lg">R$ ${item.price.toFixed(2)}</p>
@@ -615,15 +616,28 @@
                 const a = document.getElementById('cust-address').value;
                 const dSelect = document.getElementById('delivery-type');
                 const dText = dSelect.options[dSelect.selectedIndex].text;
-                if(!n || !a) return alert("Por favor, preencha o seu nome e endereço.");
-
-                if(typeof fbq === 'function') fbq('track', 'Purchase', { value: document.getElementById('sum-total').innerText, currency: 'BRL' });
-
-                let msg = `*👠 NOVO PEDIDO - ATTIVA’S SHOES*%0A%0A*Cliente:* ${n.toUpperCase()}%0A*Entrega:* ${dText}%0A*Local:* ${a}%0A%0A*ITENS:*%0A`;
-                this.cart.forEach(i => msg += `• ${i.qty}x ${i.name.toUpperCase()} (R$ ${i.price.toFixed(2)})%0A`);
-                msg += `%0A*TOTAL FINAL: ${document.getElementById('sum-total').innerText}*%0A%0A_Aguardamos confirmação da boutique..._`;
                 
-                window.open(`https://wa.me/5584921626352?text=${msg}`);
+                if(!n || !a) {
+                    alert("Por favor, preencha o seu nome e endereço no formulário.");
+                    return;
+                }
+
+                let msg = `*📋 FORMULÁRIO DE PEDIDO - ATTIVA’S SHOES*%0A%0A`;
+                msg += `*DADOS DO CLIENTE:*%0A`;
+                msg += `• *Nome:* ${n.toUpperCase()}%0A`;
+                msg += `• *Entrega:* ${dText}%0A`;
+                msg += `• *Endereço/Ref:* ${a}%0A%0A`;
+                
+                msg += `*ITENS ESCOLHIDOS:*%0A`;
+                this.cart.forEach(i => {
+                    msg += `• ${i.qty}x ${i.name.toUpperCase()} - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}%0A`;
+                });
+                
+                msg += `%0A*VALOR TOTAL: ${document.getElementById('sum-total').innerText}*%0A%0A`;
+                msg += `_Enviado via Attiva's Boutique Online 2026_`;
+                
+                const whatsappNumber = "5584921626352";
+                window.open(`https://wa.me/${whatsappNumber}?text=${msg}`);
             }
         };
         app.init();
