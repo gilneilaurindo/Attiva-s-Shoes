@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Attiva’s Shoes | Especialista em Calçados Femininos</title>
+    
+    <!-- SEO Local e Meta Tags -->
+    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçados femininos premium. Entrega rápida no centro e sítios.">
+    <meta name="keywords" content="Calçados femininos, São Miguel RN, sandálias, salto alto, moda feminina">
+    <meta name="author" content="Attiva’s Shoes">
+    <meta property="og:title" content="Attiva’s Shoes | O melhor passo para o seu estilo">
+    <meta property="og:description" content="Especialista em calçados femininos em São Miguel/RN. Confira nossa nova coleção!">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80">
+    <meta name="theme-color" content="#1e40af">
+
+    <!-- Schema.org para Google (SEO Local) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Attiva’s Shoes",
+      "description": "Especialista em calçados femininos em São Miguel/RN",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "São Miguel",
+        "addressRegion": "RN",
+        "addressCountry": "BR"
+      },
+      "priceRange": "$$",
+      "telephone": "+5584999999999"
+    }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
+                    colors: {
+                        brand: { 50: '#eff6ff', 500: '#1e40af', 600: '#1d4ed8', 900: '#1e3a8a' }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Progress Bar no Topo */
+        #scroll-progress {
+            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
+            background: linear-gradient(90deg, #1e40af, #60a5fa);
+            z-index: 100; transition: width 0.1s;
+        }
+
+        /* Preloader Profissional */
+        #preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; z-index: 9999;
+        }
+        .loader-bar {
+            width: 200px; height: 2px; background: #eee;
+            margin-top: 20px; position: relative; overflow: hidden;
+            border-radius: 10px;
+        }
+        .loader-progress {
+            width: 0%; height: 100%; background: #1e40af;
+            animation: load 2s ease-in-out forwards;
+        }
+        @keyframes load { to { width: 100%; } }
+
+        /* Scroll Reveal - Classes de Animação */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Efeito de Vidro e Glow */
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .btn-glow:hover { box-shadow: 0 0 20px rgba(30, 64, 175, 0.4); }
+
+        /* WhatsApp Floating Pulsing */
+        .whatsapp-btn {
+            position: fixed; bottom: 25px; right: 25px;
+            background: #25d366; color: white; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 30px; z-index: 50;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        @keyframes pulse-whatsapp {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+
+    <!-- Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Preloader / Intro -->
+    <div id="preloader">
+        <div class="text-brand-500 text-5xl mb-4 animate-bounce">
+            <i class="fas fa-shoe-prints"></i>
+        </div>
+        <h2 class="text-brand-500 font-bold text-2xl tracking-tighter uppercase">Attiva’s Shoes</h2>
+        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+
+    <!-- Barra de Info Local -->
+    <div class="bg-brand-500 text-white text-[10px] md:text-xs py-2 text-center font-bold tracking-widest uppercase relative z-50">
+        <span class="animate-pulse"><i class="fas fa-truck-moving mr-2"></i> ENTREGAMOS EM TODA SÃO MIGUEL/RN</span>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 h-20 flex items-center transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="app.showPage('home')">
+                <div class="w-12 h-12 bg-brand-500 text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition duration-300">
+                    <i class="fas fa-shoe-prints"></i>
+                </div>
+                <div>
+                    <span class="font-bold text-xl leading-none block text-brand-500">ATTIVA’S</span>
+                    <span class="text-[10px] font-bold tracking-[0.3em] text-gray-400 uppercase">Shoes • Feminino</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-6">
+                <button onclick="app.scrollToSection('about')" class="hidden md:block text-sm font-bold text-gray-500 hover:text-brand-500 transition">Sobre</button>
+                <div class="relative cursor-pointer p-2 hover:bg-gray-100 rounded-xl transition" onclick="app.toggleCart()">
+                    <i class="fas fa-shopping-bag text-gray-700 text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow">
+        
+        <!-- PÁGINA HOME -->
+        <div id="page-home">
+            <!-- Hero Section -->
+            <section class="max-w-7xl mx-auto px-4 py-8">
+                <div class="relative rounded-[3rem] overflow-hidden bg-brand-900 h-[500px] md:h-[600px] flex items-center shadow-3xl reveal">
+                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="relative z-20 p-8 md:p-20 text-white max-w-3xl">
+                        <span class="bg-brand-500 text-[10px] font-bold px-4 py-2 rounded-full mb-6 inline-block uppercase tracking-widest">Coleção Premium 2024</span>
+                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Sinta o poder em cada <span class="text-blue-400">passo.</span></h1>
+                        <p class="text-gray-300 text-lg mb-8 max-w-md">Especialista em calçados femininos que unem o conforto ortopédico ao design de luxo.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="app.scrollToSection('products')" class="btn-glow bg-white text-brand-500 px-10 py-4 rounded-2xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
+                                Comprar Agora <i class="fas fa-chevron-right text-xs"></i>
+                            </button>
+                            <button onclick="app.scrollToSection('about')" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-4 rounded-2xl font-bold hover:bg-white/20 transition">
+                                Ver Quem Somos
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Preços de Entrega Local -->
+            <section class="max-w-7xl mx-auto px-4 py-12">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500">
+                        <div class="w-16 h-16 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-map-pin"></i></div>
+                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Centro São Miguel</p><p class="font-bold text-2xl text-gray-800">R$ 4,00</p></div>
+                    </div>
+                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500" style="transition-delay: 100ms">
+                        <div class="w-16 h-16 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-tree"></i></div>
+                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Sítios Região</p><p class="font-bold text-2xl text-gray-800">R$ 10,00</p></div>
+                    </div>
+                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500" style="transition-delay: 200ms">
+                        <div class="w-16 h-16 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-store"></i></div>
+                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Retirada Física</p><p class="font-bold text-2xl text-green-600">Grátis</p></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grade de Produtos -->
+            <section id="products" class="max-w-7xl mx-auto px-4 py-16">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 reveal">
+                    <div>
+                        <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Vitrine Attiva's</span>
+                        <h2 class="text-4xl font-bold text-gray-900 mt-2">Nossos Calçados</h2>
+                    </div>
+                    <div class="flex gap-3 bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
+                        <button onclick="app.filter('all')" class="filter-btn active bg-brand-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold transition">Todas</button>
+                        <button onclick="app.filter('Salto')" class="filter-btn text-gray-500 px-6 py-2.5 rounded-xl text-xs font-bold transition hover:bg-gray-50">Saltos</button>
+                        <button onclick="app.filter('Sandália')" class="filter-btn text-gray-500 px-6 py-2.5 rounded-xl text-xs font-bold transition hover:bg-gray-50">Sandálias</button>
+                    </div>
+                </div>
+                
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Dinâmico JS -->
+                </div>
+            </section>
+
+            <!-- SEÇÃO QUEM SOMOS (Design Agência) -->
+            <section id="about" class="max-w-7xl mx-auto px-4 py-20 reveal">
+                <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl border border-gray-50 flex flex-col lg:flex-row gap-16 items-center">
+                    <div class="lg:w-1/2">
+                        <span class="bg-brand-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-lg mb-6 inline-block uppercase tracking-[0.2em]">Quem Somos</span>
+                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
+                            <span class="bg-brand-500 text-white px-3 inline-block transform -rotate-1">Sua Loja Online: Conectando</span>
+                            <br>
+                            <span class="bg-brand-500 text-white px-3 inline-block mt-2">Você ao Melhor.</span>
+                        </h2>
+                        <p class="text-gray-500 text-lg leading-relaxed mb-10">
+                            Fundada com a missão de democratizar o acesso a produtos premium, a <strong class="text-brand-500">Attiva’s Shoes</strong> se destaca pela curadoria rigorosa e pelo atendimento humanizado. Não somos apenas um e-commerce; somos seus parceiros em São Miguel/RN.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 group hover:border-brand-500 transition">
+                                <p class="text-4xl font-bold text-brand-500 mb-2 group-hover:scale-110 transition inline-block">50k+</p>
+                                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Clientes Satisfeitos</p>
+                            </div>
+                            <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 group hover:border-brand-500 transition">
+                                <p class="text-4xl font-bold text-brand-500 mb-2 group-hover:scale-110 transition inline-block">24h</p>
+                                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Suporte Especializado</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2 w-full relative group">
+                        <div class="absolute -inset-4 bg-brand-500/10 rounded-[3rem] blur-2xl group-hover:bg-brand-500/20 transition"></div>
+                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?auto=format&fit=crop&w=800&q=80" alt="Equipe Attiva's Shoes" class="rounded-[3rem] shadow-2xl relative z-10 w-full h-[500px] object-cover">
+                    </div>
+                </div>
+            </section>
+
+            <!-- Localização e Mapa -->
+            <section class="max-w-7xl mx-auto px-4 py-20 reveal">
+                <div class="bg-gray-900 rounded-[3rem] p-8 md:p-12 overflow-hidden relative shadow-3xl text-white">
+                    <div class="flex flex-col md:flex-row gap-12 items-center relative z-10">
+                        <div class="md:w-1/3">
+                            <h3 class="text-3xl font-bold mb-6">Nossa Loja em São Miguel</h3>
+                            <p class="text-gray-400 mb-8 leading-relaxed">Venha nos visitar! Estamos localizados estrategicamente para atender toda a região de São Miguel e arredores.</p>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4"><i class="fas fa-map-marker-alt text-brand-500 text-xl"></i> Rua Principal, Centro - São Miguel/RN</div>
+                                <div class="flex items-center gap-4"><i class="fas fa-phone-alt text-brand-500 text-xl"></i> (84) 9 9999-9999</div>
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 w-full h-80 rounded-[2rem] overflow-hidden border border-white/10">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15873.344445353521!2d-38.37136011400494!3d-6.205934415449791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a43585d6805177%3A0xc008b8b39444197c!2zU8OjbyBNaWd1ZWwsIFJOLCA1OTkwMC0wMDA!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-500 rounded-full blur-[120px] opacity-20"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PÁGINA CHECKOUT -->
+        <div id="page-checkout" class="hidden max-w-5xl mx-auto px-4 py-12 fade-in">
+            <button onclick="app.showPage('home')" class="mb-10 text-gray-400 hover:text-brand-500 font-bold flex items-center gap-2 transition group">
+                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition"></i> Voltar para a Loja
+            </button>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="space-y-8">
+                    <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
+                        <h3 class="font-bold text-2xl mb-8 flex items-center gap-4"><i class="fas fa-truck text-brand-500"></i> Onde entregamos?</h3>
+                        <form id="checkout-form" class="space-y-6">
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Seu Nome</label>
+                                <input type="text" id="cust-name" placeholder="Como deseja ser chamada?" class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2" required>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Tipo de Entrega em São Miguel</label>
+                                <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2 cursor-pointer">
+                                    <option value="4">Centro São Miguel (R$ 4,00)</option>
+                                    <option value="10">Sítios da Região (R$ 10,00)</option>
+                                    <option value="0">Retirar na Loja (Grátis)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Endereço / Referência</label>
+                                <textarea id="cust-address" placeholder="Ex: Rua Tal, próx. ao mercadinho..." class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2 h-32" required></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-brand-900 text-white p-10 rounded-[3rem] shadow-3xl sticky top-24">
+                        <h3 class="font-bold text-2xl mb-8">Resumo do Pedido</h3>
+                        <div id="summary-items" class="space-y-4 mb-8 max-h-48 overflow-y-auto pr-3 custom-scrollbar">
+                            <!-- JS -->
+                        </div>
+                        <div class="space-y-4 border-t border-white/10 pt-8 mb-8">
+                            <div class="flex justify-between text-white/50"><span>Subtotal:</span><span id="sum-subtotal">R$ 0,00</span></div>
+                            <div class="flex justify-between text-white/50"><span>Frete Local:</span><span id="sum-delivery">R$ 4,00</span></div>
+                            <div class="flex justify-between text-3xl font-bold pt-4"><span>Total:</span><span id="sum-total">R$ 0,00</span></div>
+                        </div>
+                        <button onclick="app.sendToWhatsApp()" class="btn-glow w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 rounded-2xl transition flex items-center justify-center gap-4 shadow-xl active:scale-95 text-lg">
+                            <i class="fab fa-whatsapp text-2xl"></i> ENVIAR PEDIDO AGORA
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <div class="col-span-1 md:col-span-1">
+                <div class="flex items-center gap-2 mb-6">
+                    <div class="w-10 h-10 bg-brand-500 text-white rounded-xl flex items-center justify-center font-bold">A</div>
+                    <span class="font-bold text-xl text-brand-500 uppercase tracking-tighter">Attiva’s Shoes</span>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed">Conectando você ao melhor do estilo e conforto em calçados femininos premium em São Miguel/RN.</p>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Categorias</h4>
+                <ul class="text-sm text-gray-500 space-y-3">
+                    <li><a href="#" class="hover:text-brand-500 transition">Salto Alto</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Sandálias</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Sapatilhas</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Rasteirinhas</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Suporte</h4>
+                <ul class="text-sm text-gray-500 space-y-3">
+                    <li><a href="#" class="hover:text-brand-500 transition">Prazos de Entrega</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Trocas e Devoluções</a></li>
+                    <li><a href="#" class="hover:text-brand-500 transition">Política de Privacidade</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-gray-900 mb-6">Pagamento</h4>
+                <div class="flex flex-wrap gap-2 opacity-50">
+                    <i class="fab fa-cc-visa text-3xl"></i>
+                    <i class="fab fa-cc-mastercard text-3xl"></i>
+                    <i class="fas fa-pix text-2xl"></i>
+                    <i class="fas fa-barcode text-2xl"></i>
+                </div>
+            </div>
+        </div>
+        <div class="text-center text-xs text-gray-400 border-t border-gray-100 pt-10">
+            &copy; 2024 Attiva’s Shoes. Todos os direitos reservados. Orgulhosamente de São Miguel, RN.
+        </div>
+    </footer>
+
+    <!-- Sidebar Carrinho -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+        <div class="p-8 border-b flex justify-between items-center bg-gray-50">
+            <h3 class="font-bold text-2xl">Minha Sacola</h3>
+            <button onclick="app.toggleCart()" class="w-12 h-12 rounded-full hover:bg-gray-200 flex items-center justify-center text-3xl transition duration-300">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar">
+            <!-- JS -->
+        </div>
+        <div class="p-8 bg-white border-t-2 border-gray-100 rounded-t-[3rem] shadow-inner">
+            <div class="flex justify-between items-center mb-8 font-bold text-2xl">
+                <span class="text-gray-400">Total parcial:</span>
+                <span id="cart-total-val" class="text-brand-500">R$ 0,00</span>
+            </div>
+            <button onclick="app.showPage('checkout')" id="checkout-btn" class="btn-glow w-full bg-brand-500 text-white font-bold py-5 rounded-2xl shadow-xl disabled:opacity-50 transition active:scale-95 text-lg" disabled>Fechar Pedido</button>
+        </div>
+    </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
+
+    <!-- WhatsApp Floating -->
+    <a href="https://wa.me/5584999999999" target="_blank" class="whatsapp-btn" title="Fale com a gente!">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-gray-100 shadow-2xl rounded-[2rem] p-5 flex items-center gap-4 transform translate-y-40 transition-transform duration-500 z-[100] w-11/12 max-w-sm">
+        <div class="w-12 h-12 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center shrink-0 shadow-inner"><i class="fas fa-shopping-bag text-lg"></i></div>
+        <div>
+            <p class="font-bold text-gray-900">Na sacola!</p>
+            <p class="text-xs text-gray-400">Calçado adicionado com sucesso.</p>
+        </div>
+    </div>
+
+    <!-- Analytics Placeholder -->
+    <script>
+        // Google Analytics 4 (Fictício)
+        // window.dataLayer = window.dataLayer || [];
+        // function gtag(){dataLayer.push(arguments);}
+        // gtag('js', new Date());
+        // gtag('config', 'G-XXXXXXX');
+    </script>
+
+    <script>
+        const products = [
+            { id: 1, name: "Sandália Ortopédica Comfort Blue", price: 139.90, category: "Sandália", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
+            { id: 2, name: "Scarpin Attiva Nobuck Noir", price: 229.00, category: "Salto", img: "https://images.unsplash.com/photo-1535043902720-9ac15eff829b?auto=format&fit=crop&w=400&q=80" },
+            { id: 3, name: "Salto Agulha Glamour Red", price: 259.90, category: "Salto", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=400&q=80" },
+            { id: 4, name: "Sandália Verão Boho Style", price: 98.50, category: "Sandália", img: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=400&q=80" },
+            { id: 5, name: "Casual Soft Walk Feminino", price: 169.90, category: "Sapatilha", img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80" },
+            { id: 6, name: "Rasteira Attiva Gold", price: 89.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=400&q=80" },
+            { id: 7, name: "Sapatilha Floral Vintage", price: 119.00, category: "Sapatilha", img: "https://images.unsplash.com/photo-1512374382149-433a42799d36?auto=format&fit=crop&w=400&q=80" },
+            { id: 8, name: "Sandália Plataforma Sun", price: 189.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=400&q=80" },
+        ];
+
+        const app = {
+            cart: [],
+            currentCategory: 'all',
+
+            init() {
+                // Preloader Logic
+                window.onload = () => {
+                    setTimeout(() => {
+                        const loader = document.getElementById('preloader');
+                        loader.style.opacity = '0';
+                        setTimeout(() => loader.style.display = 'none', 600);
+                        this.initScrollReveal();
+                    }, 2000);
+                };
+                
+                // Progress Bar Logic
+                window.onscroll = () => {
+                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                    const scrolled = (winScroll / height) * 100;
+                    document.getElementById("scroll-progress").style.width = scrolled + "%";
+                    
+                    const navbar = document.getElementById('navbar');
+                    if (winScroll > 50) navbar.classList.add('shadow-xl', 'h-16');
+                    else navbar.classList.remove('shadow-xl', 'h-20');
+                };
+
+                this.render();
+            },
+
+            initScrollReveal() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+            },
+
+            render() {
+                const grid = document.getElementById('product-grid');
+                const filtered = this.currentCategory === 'all' ? products : products.filter(p => p.category === this.currentCategory);
+                
+                grid.innerHTML = filtered.map((p, i) => `
+                    <div class="reveal bg-white rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full" style="transition-delay: ${i * 50}ms">
+                        <div class="relative overflow-hidden h-64 bg-gray-50">
+                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500"></div>
+                            <div class="absolute top-5 right-5 bg-white/90 backdrop-blur-md text-[10px] font-bold px-4 py-1.5 rounded-full text-brand-500 border border-brand-500/10 shadow-sm">${p.category}</div>
+                        </div>
+                        <div class="p-8 flex flex-col flex-1">
+                            <h3 class="font-bold text-gray-900 mb-2 leading-tight flex-1 group-hover:text-brand-500 transition">${p.name}</h3>
+                            <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-50">
+                                <span class="font-bold text-brand-500 text-2xl">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
+                                <button onclick="app.addToCart(${p.id})" class="btn-glow bg-brand-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center hover:bg-brand-600 transition active:scale-90 shadow-xl shadow-brand-500/20">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+                this.initScrollReveal();
+            },
+
+            filter(cat) {
+                this.currentCategory = cat;
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    const isActive = btn.innerText.includes(cat) || (cat === 'all' && btn.innerText === 'Todas');
+                    btn.classList.toggle('active', isActive);
+                    btn.classList.toggle('bg-brand-500', isActive);
+                    btn.classList.toggle('text-white', isActive);
+                    btn.classList.toggle('text-gray-500', !isActive);
+                });
+                this.render();
+            },
+
+            addToCart(id) {
+                const p = products.find(i => i.id === id);
+                const exist = this.cart.find(item => item.id === id);
+                if (exist) exist.qty++;
+                else this.cart.push({ ...p, qty: 1 });
+                
+                this.updateUI();
+                this.showToast();
+            },
+
+            updateUI() {
+                const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
+                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                
+                document.getElementById('cart-count').innerText = count;
+                document.getElementById('cart-count').classList.toggle('hidden', count === 0);
+                document.getElementById('cart-total-val').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                document.getElementById('checkout-btn').disabled = count === 0;
+
+                const list = document.getElementById('cart-items');
+                if(this.cart.length === 0) {
+                    list.innerHTML = `<div class="text-center py-20 text-gray-300 flex flex-col items-center"><i class="fas fa-shopping-basket text-6xl mb-6 opacity-20"></i><p>Sua sacola está vazia por enquanto.</p></div>`;
+                } else {
+                    list.innerHTML = this.cart.map((item, idx) => `
+                        <div class="flex gap-6 items-center bg-gray-50 p-6 rounded-[2rem] border border-gray-100 hover:border-brand-500 transition duration-300">
+                            <img src="${item.img}" class="w-24 h-24 object-cover rounded-2xl border-2 border-white shadow-sm">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-gray-900 mb-1 leading-tight">${item.name}</h4>
+                                <p class="text-brand-500 font-bold">R$ ${item.price.toFixed(2)}</p>
+                                <div class="flex items-center gap-5 mt-4">
+                                    <button onclick="app.qty(${idx}, -1)" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-500 transition"><i class="fas fa-minus text-xs"></i></button>
+                                    <span class="font-bold text-gray-700">${item.qty}</span>
+                                    <button onclick="app.qty(${idx}, 1)" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-brand-500 hover:border-brand-500 transition"><i class="fas fa-plus text-xs"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            },
+
+            qty(idx, delta) {
+                this.cart[idx].qty += delta;
+                if(this.cart[idx].qty <= 0) this.cart.splice(idx, 1);
+                this.updateUI();
+            },
+
+            toggleCart() {
+                const side = document.getElementById('cart-sidebar');
+                const overlay = document.getElementById('cart-overlay');
+                const isOpen = !side.classList.contains('translate-x-full');
+                
+                if (isOpen) {
+                    side.classList.add('translate-x-full');
+                    overlay.classList.add('hidden', 'opacity-0');
+                    setTimeout(() => overlay.classList.add('hidden'), 500);
+                    document.body.style.overflow = '';
+                } else {
+                    side.classList.remove('translate-x-full');
+                    overlay.classList.remove('hidden');
+                    setTimeout(() => overlay.classList.remove('opacity-0'), 10);
+                    document.body.style.overflow = 'hidden';
+                }
+            },
+
+            showPage(page) {
+                ['home', 'checkout'].forEach(p => document.getElementById(`page-${p}`).classList.add('hidden'));
+                document.getElementById(`page-${page}`).classList.remove('hidden');
+                
+                if(page === 'checkout') {
+                    if(!document.getElementById('cart-sidebar').classList.contains('translate-x-full')) this.toggleCart();
+                    this.updateSummary();
+                }
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            },
+
+            scrollToSection(id) {
+                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            },
+
+            updateDelivery() {
+                this.updateSummary();
+            },
+
+            updateSummary() {
+                const delivery = parseFloat(document.getElementById('delivery-type').value);
+                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+                
+                document.getElementById('sum-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-delivery').innerText = `R$ ${delivery.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-total').innerText = `R$ ${(subtotal + delivery).toFixed(2).replace('.', ',')}`;
+
+                document.getElementById('summary-items').innerHTML = this.cart.map(item => `
+                    <div class="flex justify-between text-sm text-white/50">
+                        <span>${item.qty}x ${item.name}</span>
+                        <span class="font-bold text-white">R$ ${(item.price * item.qty).toFixed(2)}</span>
+                    </div>
+                `).join('');
+            },
+
+            showToast() {
+                const t = document.getElementById('toast');
+                t.classList.remove('translate-y-40');
+                setTimeout(() => t.classList.add('translate-y-40'), 3000);
+            },
+
+            sendToWhatsApp() {
+                const name = document.getElementById('cust-name').value;
+                const addr = document.getElementById('cust-address').value;
+                const delivery = document.getElementById('delivery-type').options[document.getElementById('delivery-type').selectedIndex].text;
+                
+                if(!name || !addr) {
+                    alert("Ops! Precisamos do seu nome e endereço para realizar a entrega em São Miguel.");
+                    return;
+                }
+
+                let msg = `*ATTIVA’S SHOES - NOVO PEDIDO*%0A%0A`;
+                msg += `*Cliente:* ${name}%0A`;
+                msg += `*Entrega:* ${delivery}%0A`;
+                msg += `*Local:* ${addr}%0A%0A`;
+                msg += `*CALÇADOS:*%0A`;
+                
+                this.cart.forEach(item => {
+                    msg += `👠 ${item.qty}x ${item.name} (R$ ${item.price.toFixed(2)})%0A`;
+                });
+
+                const total = document.getElementById('sum-total').innerText;
+                msg += `%0A*VALOR TOTAL: ${total}*`;
+
+                window.open(`https://wa.me/5584999999999?text=${msg}`);
+            }
+        };
+
+        app.init();
+    </script>
+</body>
+</html>
