@@ -3,50 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Attiva’s Shoes | Especialista em Calçados Femininos</title>
+    <title>Attiva’s Shoes | Especialista em Calçado Feminino 2026</title>
     
-    <!-- SEO Local e Meta Tags -->
-    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçados femininos premium. Entrega rápida no centro e sítios.">
-    <meta name="keywords" content="Calçados femininos, São Miguel RN, sandálias, salto alto, moda feminina">
-    <meta name="author" content="Attiva’s Shoes">
-    <meta property="og:title" content="Attiva’s Shoes | O melhor passo para o seu estilo">
-    <meta property="og:description" content="Especialista em calçados femininos em São Miguel/RN. Confira nossa nova coleção!">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80">
-    <meta name="theme-color" content="#1e40af">
+    <!-- --- CONFIGURAÇÕES DE RASTREIO (GOOGLE & META) --- -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WFQRV65PC9"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
 
-    <!-- Schema.org para Google (SEO Local) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Attiva’s Shoes",
-      "description": "Especialista em calçados femininos em São Miguel/RN",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "São Miguel",
-        "addressRegion": "RN",
-        "addressCountry": "BR"
-      },
-      "priceRange": "$$",
-      "telephone": "+5584999999999"
-    }
+      gtag('config', 'G-WFQRV65PC9');
     </script>
 
-    <!-- Tailwind CSS -->
+    <!-- Meta Pixel Code (Substitua ID-DO-PIXEL pelo seu ID quando tiver) -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'ID-DO-PIXEL');
+      fbq('track', 'PageView');
+    </script>
+    <!-- --- FIM DAS CONFIGURAÇÕES DE RASTREIO --- -->
+
+    <!-- SEO & Social Media -->
+    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçado feminino premium. Entrega rápida e suporte especializado 24h. Coleção 2026.">
+    <meta name="theme-color" content="#b67b7e">
+    <meta property="og:title" content="Attiva’s Shoes | Boutique Premium 2026">
+    <meta property="og:image" content="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Poppins', 'sans-serif'] },
-                    colors: {
-                        brand: { 50: '#eff6ff', 500: '#1e40af', 600: '#1d4ed8', 900: '#1e3a8a' }
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
                     },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    colors: {
+                        brand: { 
+                            50: '#fdf8f7',
+                            100: '#f9e6e7',
+                            500: '#b67b7e', // Rosé Identidade Oficial
+                            600: '#a36a6d',
+                            900: '#4a3233'
+                        }
                     }
                 }
             }
@@ -54,567 +66,618 @@
     </script>
 
     <style>
-        /* Progress Bar no Topo */
-        #scroll-progress {
-            position: fixed; top: 0; left: 0; width: 0%; height: 4px;
-            background: linear-gradient(90deg, #1e40af, #60a5fa);
-            z-index: 100; transition: width 0.1s;
-        }
-
-        /* Preloader Profissional */
+        /* Preloader */
         #preloader {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #ffffff; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; z-index: 9999;
+            position: fixed; inset: 0; background: #fff;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; z-index: 9999;
         }
-        .loader-bar {
-            width: 200px; height: 2px; background: #eee;
-            margin-top: 20px; position: relative; overflow: hidden;
-            border-radius: 10px;
-        }
-        .loader-progress {
-            width: 0%; height: 100%; background: #1e40af;
-            animation: load 2s ease-in-out forwards;
-        }
-        @keyframes load { to { width: 100%; } }
+        .loader-logo { width: 140px; animation: softPulse 2s infinite ease-in-out; }
+        @keyframes softPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
 
-        /* Scroll Reveal - Classes de Animação */
-        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        /* Reveal Animation */
+        .reveal { opacity: 0; transform: translateY(20px); transition: all 1s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
 
-        /* Efeito de Vidro e Glow */
-        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .btn-glow:hover { box-shadow: 0 0 20px rgba(30, 64, 175, 0.4); }
+        /* EFEITO BRILHO (SHIMMER) */
+        .shimmer { position: relative; overflow: hidden; }
+        .shimmer::after {
+            content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transform: rotate(30deg); animation: shimmerEffect 4s infinite;
+        }
+        @keyframes shimmerEffect { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
 
-        /* WhatsApp Floating Pulsing */
-        .whatsapp-btn {
-            position: fixed; bottom: 25px; right: 25px;
-            background: #25d366; color: white; width: 60px; height: 60px;
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 30px; z-index: 50;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            animation: pulse-whatsapp 2s infinite;
+        /* Estilo Marca-Texto */
+        .highlight-box {
+            background-color: #b67b7e; color: white; padding: 2px 12px;
+            display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone;
         }
-        @keyframes pulse-whatsapp {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(37, 211, 102, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+
+        /* Scroll Customizado */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #fdf8f7; }
+        ::-webkit-scrollbar-thumb { background: #b67b7e; border-radius: 10px; }
+
+        /* Botão Flutuante */
+        .wa-float {
+            position: fixed; bottom: 25px; right: 25px; background: #25d366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 28px; z-index: 100; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            transition: 0.3s ease;
         }
+        .wa-float:hover { transform: scale(1.1) rotate(5deg); }
+
+        /* Slider Boutique */
+        .slider-container { position: relative; width: 100%; height: 500px; overflow: hidden; border-radius: 2rem; cursor: pointer; }
+        .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1); pointer-events: none; }
+        .slide.active { opacity: 1; pointer-events: auto; }
+
+        /* Sacola Shake Animation */
+        @keyframes basketShake {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2) rotate(10deg); }
+            50% { transform: scale(1.2) rotate(-10deg); }
+            75% { transform: scale(1.2) rotate(5deg); }
+        }
+        .shake-it { animation: basketShake 0.5s ease-in-out; }
+
+        /* Product Image Hover */
+        .product-card-img { cursor: cell; transition: all 0.5s ease; }
+        .product-card-img:hover img { transform: scale(1.08); filter: brightness(0.9); }
+        .product-card-img:active img { transform: scale(0.96); }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800 flex flex-col min-h-screen">
+<body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
-    <!-- Progress Bar -->
-    <div id="scroll-progress"></div>
-
-    <!-- Preloader / Intro -->
+    <!-- Preloader -->
     <div id="preloader">
-        <div class="text-brand-500 text-5xl mb-4 animate-bounce">
-            <i class="fas fa-shoe-prints"></i>
+        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo" alt="Attiva's Shoes">
+        <div class="mt-8 w-40 h-[1px] bg-slate-100 relative overflow-hidden">
+            <div class="absolute inset-0 bg-brand-500 w-0 animate-[load_2s_ease-in-out_forwards]"></div>
         </div>
-        <h2 class="text-brand-500 font-bold text-2xl tracking-tighter uppercase">Attiva’s Shoes</h2>
-        <div class="loader-bar"><div class="loader-progress"></div></div>
+    </div>
+    <style>@keyframes load { to { width: 100%; } }</style>
+
+    <!-- Top Bar -->
+    <div class="bg-brand-500 text-white text-[10px] font-bold py-2.5 text-center uppercase tracking-[0.2em] shimmer z-[60]">
+        <i class="fas fa-sparkles mr-2"></i> Coleção 2026 • São Miguel/RN • Especialista em calçados femininos
     </div>
 
-    <!-- Barra de Info Local -->
-    <div class="bg-brand-500 text-white text-[10px] md:text-xs py-2 text-center font-bold tracking-widest uppercase relative z-50">
-        <span class="animate-pulse"><i class="fas fa-truck-moving mr-2"></i> ENTREGAMOS EM TODA SÃO MIGUEL/RN</span>
-    </div>
-
-    <!-- Navbar -->
-    <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-40 border-b border-gray-100 h-20 flex items-center transition-all duration-300" id="navbar">
+    <!-- Navegação -->
+    <nav class="sticky top-0 bg-white/90 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-24 flex items-center">
         <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="app.showPage('home')">
-                <div class="w-12 h-12 bg-brand-500 text-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-12 transition duration-300">
-                    <i class="fas fa-shoe-prints"></i>
-                </div>
-                <div>
-                    <span class="font-bold text-xl leading-none block text-brand-500">ATTIVA’S</span>
-                    <span class="text-[10px] font-bold tracking-[0.3em] text-gray-400 uppercase">Shoes • Feminino</span>
-                </div>
+            <div class="flex items-center cursor-pointer hover:opacity-80 transition" onclick="app.showPage('home')">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-14 md:h-20 object-contain" alt="Logo">
             </div>
-
-            <div class="flex items-center gap-6">
-                <button onclick="app.scrollToSection('about')" class="hidden md:block text-sm font-bold text-gray-500 hover:text-brand-500 transition">Sobre</button>
-                <div class="relative cursor-pointer p-2 hover:bg-gray-100 rounded-xl transition" onclick="app.toggleCart()">
-                    <i class="fas fa-shopping-bag text-gray-700 text-xl"></i>
-                    <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
+            
+            <div class="flex items-center gap-3 md:gap-8 text-nowrap">
+                <div class="hidden md:flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                    <a href="#products" onclick="app.scrollToSection('products')" class="hover:text-brand-500 transition">Coleção</a>
+                    <a href="#about" onclick="app.scrollToSection('about')" class="hover:text-brand-500 transition">Boutique</a>
+                </div>
+                <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-lg shimmer">
+                    Ver Loja
+                </button>
+                <div class="relative cursor-pointer p-2 group" onclick="app.toggleCart()" id="cart-icon-container">
+                    <i class="fas fa-shopping-bag text-2xl text-slate-700 group-hover:text-brand-500 transition"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-brand-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full hidden border-2 border-white">0</span>
                 </div>
             </div>
         </div>
     </nav>
 
-    <main class="flex-grow">
-        
-        <!-- PÁGINA HOME -->
-        <div id="page-home">
+    <main>
+        <!-- HOME PAGE -->
+        <div id="page-home" class="fade-in">
+            
             <!-- Hero Section -->
-            <section class="max-w-7xl mx-auto px-4 py-8">
-                <div class="relative rounded-[3rem] overflow-hidden bg-brand-900 h-[500px] md:h-[600px] flex items-center shadow-3xl reveal">
-                    <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10"></div>
-                    <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80" class="absolute inset-0 w-full h-full object-cover">
-                    <div class="relative z-20 p-8 md:p-20 text-white max-w-3xl">
-                        <span class="bg-brand-500 text-[10px] font-bold px-4 py-2 rounded-full mb-6 inline-block uppercase tracking-widest">Coleção Premium 2024</span>
-                        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">Sinta o poder em cada <span class="text-blue-400">passo.</span></h1>
-                        <p class="text-gray-300 text-lg mb-8 max-w-md">Especialista em calçados femininos que unem o conforto ortopédico ao design de luxo.</p>
+            <section class="max-w-7xl mx-auto px-4 py-6">
+                <div class="relative rounded-[2.5rem] overflow-hidden bg-brand-900 h-[500px] md:h-[650px] flex items-center shadow-2xl reveal">
+                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" class="absolute inset-0 w-full h-full object-cover opacity-80" alt="Banner Attiva's Shoes">
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-transparent to-transparent"></div>
+                    
+                    <div class="relative z-10 p-8 md:p-20 text-white">
+                        <span class="text-[10px] font-bold uppercase tracking-[0.4em] bg-white/20 backdrop-blur-md px-4 py-2 rounded-full mb-6 inline-block shimmer border border-white/10">Coleção Premium 2026</span>
+                        <h1 class="font-serif text-5xl md:text-8xl mb-8 leading-tight italic">Beleza que te<br>inspira a ir além.</h1>
                         <div class="flex flex-col sm:flex-row gap-4">
-                            <button onclick="app.scrollToSection('products')" class="btn-glow bg-white text-brand-500 px-10 py-4 rounded-2xl font-bold hover:bg-blue-50 transition flex items-center justify-center gap-2">
-                                Comprar Agora <i class="fas fa-chevron-right text-xs"></i>
+                            <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-10 py-5 rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-brand-600 transition shadow-xl flex items-center justify-center gap-3 shimmer">
+                                <i class="fas fa-shopping-cart"></i> Explorar Produtos na Loja
                             </button>
-                            <button onclick="app.scrollToSection('about')" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-4 rounded-2xl font-bold hover:bg-white/20 transition">
-                                Ver Quem Somos
-                            </button>
+                            <a href="https://wa.me/5584921626352" target="_blank" class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-5 rounded-full font-bold uppercase text-[10px] tracking-widest hover:bg-white/20 transition text-center">
+                                Falar com Consultora
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Preços de Entrega Local -->
-            <section class="max-w-7xl mx-auto px-4 py-12">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500">
-                        <div class="w-16 h-16 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-map-pin"></i></div>
-                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Centro São Miguel</p><p class="font-bold text-2xl text-gray-800">R$ 4,00</p></div>
+            <!-- SEÇÃO DE REDES SOCIAIS -->
+            <section class="max-w-7xl mx-auto px-4 py-10">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="bg-white p-8 rounded-[2.5rem] border border-brand-50 flex items-center gap-6 reveal group hover:shadow-xl transition-all duration-500">
+                        <div class="w-16 h-16 bg-brand-50 text-brand-500 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-inner">
+                            <i class="fab fa-instagram"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Nosso Dia a Dia</p>
+                            <p class="font-serif italic font-bold text-xl tracking-tight">@attivasshoes</p>
+                        </div>
+                    </a>
+                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="bg-white p-8 rounded-[2.5rem] border border-brand-50 flex items-center gap-6 reveal group hover:shadow-xl transition-all duration-500" style="transition-delay: 0.1s">
+                        <div class="w-16 h-16 bg-brand-50 text-brand-500 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-inner">
+                            <i class="fab fa-facebook-f"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Siga no Facebook</p>
+                            <p class="font-serif italic font-bold text-xl tracking-tight">/attivasshoes</p>
+                        </div>
+                    </a>
+                    <a href="https://wa.me/5584921626352" target="_blank" class="bg-green-50 p-8 rounded-[2.5rem] border border-green-100 flex items-center gap-6 reveal group hover:shadow-xl transition-all duration-500 shimmer" style="transition-delay: 0.2s">
+                        <div class="w-16 h-16 bg-white text-green-500 rounded-3xl flex items-center justify-center text-3xl group-hover:scale-110 transition shadow-sm">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] font-bold text-green-600 uppercase tracking-widest mb-1">Dúvidas? Chame agora</p>
+                            <p class="font-bold text-xl text-green-700 tracking-tighter">(84) 92162-6352</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- QUEM SOMOS -->
+            <section id="about" class="max-w-7xl mx-auto px-4 py-20 reveal">
+                <div class="bg-white rounded-[4rem] p-10 md:p-20 border border-brand-100 flex flex-col lg:flex-row gap-16 items-center shadow-soft overflow-hidden">
+                    <div class="lg:w-1/2">
+                        <div class="mb-6">
+                            <span class="bg-brand-500 text-white text-[10px] font-bold px-4 py-1.5 rounded uppercase tracking-[0.2em] shimmer">Boutique Exclusiva</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-bold text-slate-900 mb-10 leading-[1.3]">
+                            <span class="highlight-box italic shimmer">Attiva’s Shoes: Conectando</span><br>
+                            <span class="highlight-box mt-2 italic shimmer">Você ao Melhor.</span>
+                        </h2>
+                        <p class="text-slate-500 text-lg leading-relaxed mb-12 font-light">
+                            Especialistas em traduzir tendências para o conforto do seu pé. Nossa boutique física em São Miguel/RN é o ponto de encontro de mulheres que buscam o extraordinário.
+                        </p>
+                        <div class="flex flex-wrap gap-8">
+                            <div class="bg-brand-50 p-8 rounded-[2.5rem] border border-brand-100 flex-1 min-w-[150px]">
+                                <p class="text-5xl font-bold text-brand-500 tracking-tighter">50k+</p>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-2">Clientes Amando</p>
+                            </div>
+                            <div class="bg-brand-50 p-8 rounded-[2.5rem] border border-brand-100 flex-1 min-w-[150px]">
+                                <div class="flex items-center gap-3">
+                                    <p class="text-5xl font-bold text-brand-500 tracking-tighter">24h</p>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full animate-ping"></div>
+                                </div>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-2">Pronta para você</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500" style="transition-delay: 100ms">
-                        <div class="w-16 h-16 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-tree"></i></div>
-                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Sítios Região</p><p class="font-bold text-2xl text-gray-800">R$ 10,00</p></div>
-                    </div>
-                    <div class="reveal bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100 flex items-center gap-6 hover:shadow-xl transition duration-500" style="transition-delay: 200ms">
-                        <div class="w-16 h-16 bg-green-50 text-green-500 rounded-2xl flex items-center justify-center text-3xl"><i class="fas fa-store"></i></div>
-                        <div><p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Retirada Física</p><p class="font-bold text-2xl text-green-600">Grátis</p></div>
+                    <!-- Slider Boutique Interativo -->
+                    <div class="lg:w-1/2 w-full relative">
+                        <div class="slider-container shadow-2xl group border-4 border-brand-50" onclick="app.nextSlide()">
+                            <div class="slide active"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            <div class="slide"><img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover"></div>
+                            
+                            <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none text-white">
+                                <span class="bg-brand-500/90 backdrop-blur px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-xl">Toque para mudar de foto</span>
+                            </div>
+
+                            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+                                <div class="w-2.5 h-2.5 rounded-full bg-white/40 dot active" data-index="0"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-white/40 dot" data-index="1"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-white/40 dot" data-index="2"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-white/40 dot" data-index="3"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Grade de Produtos -->
+            <!-- Vitrine Virtual -->
             <section id="products" class="max-w-7xl mx-auto px-4 py-16">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6 reveal">
-                    <div>
-                        <span class="text-brand-500 font-bold text-sm tracking-widest uppercase">Vitrine Attiva's</span>
-                        <h2 class="text-4xl font-bold text-gray-900 mt-2">Nossos Calçados</h2>
+                <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-8 reveal">
+                    <div class="text-center md:text-left">
+                        <h2 class="font-serif text-4xl md:text-6xl text-slate-900 italic leading-tight uppercase tracking-tighter">Vitrine Virtual</h2>
+                        <p class="text-slate-400 text-sm mt-3 uppercase tracking-widest font-medium"><i class="fas fa-hand-pointer mr-2 animate-bounce"></i>Toque na imagem para adicionar à sacola</p>
                     </div>
-                    <div class="flex gap-3 bg-white p-1.5 rounded-2xl border border-gray-100 shadow-sm overflow-x-auto">
-                        <button onclick="app.filter('all')" class="filter-btn active bg-brand-500 text-white px-6 py-2.5 rounded-xl text-xs font-bold transition">Todas</button>
-                        <button onclick="app.filter('Salto')" class="filter-btn text-gray-500 px-6 py-2.5 rounded-xl text-xs font-bold transition hover:bg-gray-50">Saltos</button>
-                        <button onclick="app.filter('Sandália')" class="filter-btn text-gray-500 px-6 py-2.5 rounded-xl text-xs font-bold transition hover:bg-gray-50">Sandálias</button>
+                    <div class="flex gap-2 bg-slate-100 p-1.5 rounded-3xl">
+                        <button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-2xl transition shadow-md">Tudo</button>
+                        <button onclick="app.filter('Salto')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500">Saltos</button>
+                        <button onclick="app.filter('Sandália')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500">Sandálias</button>
+                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-500 px-6 py-3 rounded-2xl transition hover:text-brand-500">Bolsas</button>
                     </div>
                 </div>
                 
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <!-- Dinâmico JS -->
+                <div id="product-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 md:gap-12">
+                    <!-- Dinâmico via JS -->
                 </div>
             </section>
 
-            <!-- SEÇÃO QUEM SOMOS (Design Agência) -->
-            <section id="about" class="max-w-7xl mx-auto px-4 py-20 reveal">
-                <div class="bg-white rounded-[3rem] p-8 md:p-16 shadow-2xl border border-gray-50 flex flex-col lg:flex-row gap-16 items-center">
-                    <div class="lg:w-1/2">
-                        <span class="bg-brand-500 text-white text-[10px] font-bold px-4 py-1.5 rounded-lg mb-6 inline-block uppercase tracking-[0.2em]">Quem Somos</span>
-                        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-8 leading-tight">
-                            <span class="bg-brand-500 text-white px-3 inline-block transform -rotate-1">Sua Loja Online: Conectando</span>
-                            <br>
-                            <span class="bg-brand-500 text-white px-3 inline-block mt-2">Você ao Melhor.</span>
-                        </h2>
-                        <p class="text-gray-500 text-lg leading-relaxed mb-10">
-                            Fundada com a missão de democratizar o acesso a produtos premium, a <strong class="text-brand-500">Attiva’s Shoes</strong> se destaca pela curadoria rigorosa e pelo atendimento humanizado. Não somos apenas um e-commerce; somos seus parceiros em São Miguel/RN.
-                        </p>
-                        <div class="grid grid-cols-2 gap-8">
-                            <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 group hover:border-brand-500 transition">
-                                <p class="text-4xl font-bold text-brand-500 mb-2 group-hover:scale-110 transition inline-block">50k+</p>
-                                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Clientes Satisfeitos</p>
+            <!-- DEPOIMENTOS -->
+            <section id="testimonials" class="bg-brand-900 py-32 reveal rounded-t-[5rem] overflow-hidden relative">
+                <div class="max-w-7xl mx-auto px-4 relative z-10 text-white">
+                    <div class="text-center mb-24">
+                        <h2 class="font-serif text-4xl md:text-6xl italic tracking-tighter mb-4">Quem usa, brilha.</h2>
+                        <div class="h-1 w-20 bg-brand-500 mx-auto rounded-full shimmer"></div>
+                        <p class="text-brand-100/50 mt-8 uppercase text-xs tracking-[0.3em] font-bold">Feedback Real de Clientes</p>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700">
+                            <div class="flex items-center gap-5 mb-8 text-white">
+                                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Mariana Silva</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">Centro São Miguel</p></div>
                             </div>
-                            <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 group hover:border-brand-500 transition">
-                                <p class="text-4xl font-bold text-brand-500 mb-2 group-hover:scale-110 transition inline-block">24h</p>
-                                <p class="text-xs text-gray-400 font-bold uppercase tracking-widest">Suporte Especializado</p>
+                            <p class="text-brand-50 italic text-lg mb-10 leading-relaxed font-light">"O conforto do calçado Rosé é absoluto. Uso o dia todo no trabalho e parece que estou nas nuvens."</p>
+                            <div class="rounded-3xl overflow-hidden h-56 shadow-2xl relative text-slate-800">
+                                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                                <div class="absolute inset-0 bg-brand-900/20"></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="lg:w-1/2 w-full relative group">
-                        <div class="absolute -inset-4 bg-brand-500/10 rounded-[3rem] blur-2xl group-hover:bg-brand-500/20 transition"></div>
-                        <img src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e12?auto=format&fit=crop&w=800&q=80" alt="Equipe Attiva's Shoes" class="rounded-[3rem] shadow-2xl relative z-10 w-full h-[500px] object-cover">
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700">
+                            <div class="flex items-center gap-5 mb-8 text-white">
+                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Clara Freitas</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">Sítio Novo / RN</p></div>
+                            </div>
+                            <p class="text-brand-50 italic text-lg mb-10 leading-relaxed font-light">"A entrega no sítio foi super rápida! O atendimento 24h me ajudou muito. Com certeza virei cliente fiel."</p>
+                            <div class="rounded-3xl overflow-hidden h-56 shadow-2xl relative text-slate-800">
+                                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                                <div class="absolute inset-0 bg-brand-900/20"></div>
+                            </div>
+                        </div>
+                        <div class="bg-white/5 backdrop-blur-xl p-10 rounded-[3.5rem] border border-white/5 group hover:border-brand-500 transition-all duration-700">
+                            <div class="flex items-center gap-5 mb-8 text-white">
+                                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150" class="w-16 h-16 rounded-full object-cover border-2 border-brand-500 p-0.5">
+                                <div><p class="font-bold uppercase text-xs tracking-wider">Beatriz Melo</p><p class="text-[9px] text-brand-500 font-bold uppercase mt-1">São Miguel / RN</p></div>
+                            </div>
+                            <p class="text-brand-50 italic text-lg mb-10 leading-relaxed font-light">"Sempre compro na Attiva's Shoes. A qualidade e o design são de luxo. Essa nova coleção Rosé é incrível!"</p>
+                            <div class="rounded-3xl overflow-hidden h-56 shadow-2xl relative text-slate-800">
+                                <img src="https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=400&q=80" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
+                                <div class="absolute inset-0 bg-brand-900/20"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Localização e Mapa -->
-            <section class="max-w-7xl mx-auto px-4 py-20 reveal">
-                <div class="bg-gray-900 rounded-[3rem] p-8 md:p-12 overflow-hidden relative shadow-3xl text-white">
-                    <div class="flex flex-col md:flex-row gap-12 items-center relative z-10">
-                        <div class="md:w-1/3">
-                            <h3 class="text-3xl font-bold mb-6">Nossa Loja em São Miguel</h3>
-                            <p class="text-gray-400 mb-8 leading-relaxed">Venha nos visitar! Estamos localizados estrategicamente para atender toda a região de São Miguel e arredores.</p>
-                            <div class="space-y-4">
-                                <div class="flex items-center gap-4"><i class="fas fa-map-marker-alt text-brand-500 text-xl"></i> Rua Principal, Centro - São Miguel/RN</div>
-                                <div class="flex items-center gap-4"><i class="fas fa-phone-alt text-brand-500 text-xl"></i> (84) 9 9999-9999</div>
-                            </div>
-                        </div>
-                        <div class="md:w-2/3 w-full h-80 rounded-[2rem] overflow-hidden border border-white/10">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15873.344445353521!2d-38.37136011400494!3d-6.205934415449791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a43585d6805177%3A0xc008b8b39444197c!2zU8OjbyBNaWd1ZWwsIFJOLCA1OTkwMC0wMDA!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <!-- Localização -->
+            <section class="max-w-7xl mx-auto px-4 py-24 reveal text-slate-800">
+                <div class="bg-white rounded-[4rem] p-10 md:p-16 shadow-premium border border-slate-50 flex flex-col md:flex-row gap-16 items-center">
+                    <div class="md:w-1/3 text-slate-800">
+                        <span class="text-brand-500 font-bold text-[10px] tracking-widest uppercase mb-4 block shimmer">Localização Oficial</span>
+                        <h3 class="text-4xl font-bold mb-8 text-slate-900 uppercase tracking-tighter leading-none">Boutique no Centro de São Miguel</h3>
+                        <div class="space-y-6">
+                            <a href="https://maps.app.goo.gl/79Mwrr4hhap8oajt5" target="_blank" class="flex items-center gap-6 p-6 rounded-[2rem] bg-slate-50 border border-slate-100 hover:border-brand-500 transition group shadow-sm">
+                                <div class="w-12 h-12 bg-brand-500 text-white rounded-2xl flex items-center justify-center text-xl group-hover:rotate-12 transition"><i class="fas fa-location-arrow"></i></div>
+                                <div>
+                                    <p class="text-[9px] font-bold text-slate-400 uppercase tracking-widest text-nowrap">Ver Rota GPS</p>
+                                    <span class="text-sm font-semibold text-slate-600">Abrir Google Maps</span>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                    <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-brand-500 rounded-full blur-[120px] opacity-20"></div>
+                    <div class="md:w-2/3 w-full h-[450px] rounded-[3.5rem] overflow-hidden border border-slate-100 shadow-inner">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31746.68889070438!2d-38.39136011400494!3d-6.205934415449791!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a43585d6805177%3A0xc008b8b39444197c!2zU8OjbyBNaWd1ZWwsIFJOLCA1OTkwMC0wMDA!5e0!3m2!1spt-BR!2sbr!4v1710000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
                 </div>
             </section>
         </div>
 
         <!-- PÁGINA CHECKOUT -->
-        <div id="page-checkout" class="hidden max-w-5xl mx-auto px-4 py-12 fade-in">
-            <button onclick="app.showPage('home')" class="mb-10 text-gray-400 hover:text-brand-500 font-bold flex items-center gap-2 transition group">
-                <i class="fas fa-arrow-left group-hover:-translate-x-1 transition"></i> Voltar para a Loja
-            </button>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-                <div class="space-y-8">
-                    <div class="bg-white p-10 rounded-[2.5rem] shadow-sm border border-gray-100">
-                        <h3 class="font-bold text-2xl mb-8 flex items-center gap-4"><i class="fas fa-truck text-brand-500"></i> Onde entregamos?</h3>
-                        <form id="checkout-form" class="space-y-6">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Seu Nome</label>
-                                <input type="text" id="cust-name" placeholder="Como deseja ser chamada?" class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2" required>
+        <div id="page-checkout" class="hidden max-w-6xl mx-auto px-4 py-12 fade-in text-slate-800">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                <div class="space-y-10">
+                    <button onclick="app.showPage('home')" class="text-slate-400 font-bold text-[10px] uppercase tracking-widest hover:text-brand-500 transition flex items-center gap-3">
+                        <i class="fas fa-arrow-left"></i> Voltar à Loja
+                    </button>
+                    <div class="bg-white p-10 md:p-14 rounded-[4rem] border border-brand-100 shadow-sm">
+                        <h3 class="font-serif text-3xl mb-12 italic tracking-tighter">Detalhes da Encomenda.</h3>
+                        <form id="checkout-form" class="space-y-8">
+                            <div class="relative">
+                                <i class="fas fa-user absolute top-1/2 -translate-y-1/2 left-5 text-brand-500/30"></i>
+                                <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm" required>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Tipo de Entrega em São Miguel</label>
-                                <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2 cursor-pointer">
-                                    <option value="4">Centro São Miguel (R$ 4,00)</option>
-                                    <option value="10">Sítios da Região (R$ 10,00)</option>
-                                    <option value="0">Retirar na Loja (Grátis)</option>
+                            <div class="relative">
+                                <i class="fas fa-truck absolute top-1/2 -translate-y-1/2 left-5 text-brand-500/30"></i>
+                                <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm cursor-pointer appearance-none">
+                                    <option value="4">Entrega Centro São Miguel (R$ 4,00)</option>
+                                    <option value="10">Entrega Sítio Região (R$ 10,00)</option>
+                                    <option value="0">Levantamento na Boutique (Grátis)</option>
                                 </select>
                             </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-400 uppercase mb-2 ml-1 tracking-widest">Endereço / Referência</label>
-                                <textarea id="cust-address" placeholder="Ex: Rua Tal, próx. ao mercadinho..." class="w-full bg-gray-50 border-gray-200 rounded-2xl p-4 focus:ring-2 focus:ring-brand-500 outline-none transition border-2 h-32" required></textarea>
+                            <div class="relative">
+                                <i class="fas fa-map-marker-alt absolute top-8 left-5 text-brand-500/30"></i>
+                                <textarea id="cust-address" placeholder="Endereço Completo ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-[1.5rem] p-5 pl-12 focus:ring-2 focus:ring-brand-500 outline-none transition font-medium text-sm h-40" required></textarea>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div>
-                    <div class="bg-brand-900 text-white p-10 rounded-[3rem] shadow-3xl sticky top-24">
-                        <h3 class="font-bold text-2xl mb-8">Resumo do Pedido</h3>
-                        <div id="summary-items" class="space-y-4 mb-8 max-h-48 overflow-y-auto pr-3 custom-scrollbar">
-                            <!-- JS -->
-                        </div>
-                        <div class="space-y-4 border-t border-white/10 pt-8 mb-8">
-                            <div class="flex justify-between text-white/50"><span>Subtotal:</span><span id="sum-subtotal">R$ 0,00</span></div>
-                            <div class="flex justify-between text-white/50"><span>Frete Local:</span><span id="sum-delivery">R$ 4,00</span></div>
-                            <div class="flex justify-between text-3xl font-bold pt-4"><span>Total:</span><span id="sum-total">R$ 0,00</span></div>
-                        </div>
-                        <button onclick="app.sendToWhatsApp()" class="btn-glow w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 rounded-2xl transition flex items-center justify-center gap-4 shadow-xl active:scale-95 text-lg">
-                            <i class="fab fa-whatsapp text-2xl"></i> ENVIAR PEDIDO AGORA
-                        </button>
+                <div class="bg-brand-900 text-white p-12 md:p-16 rounded-[5rem] shadow-2xl sticky top-28 shimmer">
+                    <h3 class="font-serif text-4xl mb-12 italic text-brand-50">Sua Sacola.</h3>
+                    <div id="summary-items" class="space-y-6 mb-12 max-h-60 overflow-y-auto pr-3 custom-scrollbar"></div>
+                    <div class="space-y-4 border-t border-white/10 pt-12 mb-12">
+                        <div class="flex justify-between text-brand-100/40 text-sm uppercase tracking-widest"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
+                        <div class="flex justify-between text-brand-100/40 text-sm uppercase tracking-widest"><span>Taxa Local</span><span id="sum-delivery">R$ 4,00</span></div>
+                        <div class="flex justify-between text-4xl font-serif italic pt-6 tracking-tighter"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
                     </div>
+                    <button onclick="app.sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-6 rounded-3xl transition shadow-xl active:scale-95 uppercase tracking-widest text-xs flex items-center justify-center gap-4 shimmer">
+                        <i class="fab fa-whatsapp text-2xl"></i> Finalizar Pedido no Zap
+                    </button>
                 </div>
             </div>
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-            <div class="col-span-1 md:col-span-1">
-                <div class="flex items-center gap-2 mb-6">
-                    <div class="w-10 h-10 bg-brand-500 text-white rounded-xl flex items-center justify-center font-bold">A</div>
-                    <span class="font-bold text-xl text-brand-500 uppercase tracking-tighter">Attiva’s Shoes</span>
-                </div>
-                <p class="text-gray-400 text-sm leading-relaxed">Conectando você ao melhor do estilo e conforto em calçados femininos premium em São Miguel/RN.</p>
-            </div>
-            <div>
-                <h4 class="font-bold text-gray-900 mb-6">Categorias</h4>
-                <ul class="text-sm text-gray-500 space-y-3">
-                    <li><a href="#" class="hover:text-brand-500 transition">Salto Alto</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">Sandálias</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">Sapatilhas</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">Rasteirinhas</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-gray-900 mb-6">Suporte</h4>
-                <ul class="text-sm text-gray-500 space-y-3">
-                    <li><a href="#" class="hover:text-brand-500 transition">Prazos de Entrega</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">Trocas e Devoluções</a></li>
-                    <li><a href="#" class="hover:text-brand-500 transition">Política de Privacidade</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold text-gray-900 mb-6">Pagamento</h4>
-                <div class="flex flex-wrap gap-2 opacity-50">
-                    <i class="fab fa-cc-visa text-3xl"></i>
-                    <i class="fab fa-cc-mastercard text-3xl"></i>
-                    <i class="fas fa-pix text-2xl"></i>
-                    <i class="fas fa-barcode text-2xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="text-center text-xs text-gray-400 border-t border-gray-100 pt-10">
-            &copy; 2024 Attiva’s Shoes. Todos os direitos reservados. Orgulhosamente de São Miguel, RN.
-        </div>
-    </footer>
-
-    <!-- Sidebar Carrinho -->
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[60] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
-        <div class="p-8 border-b flex justify-between items-center bg-gray-50">
-            <h3 class="font-bold text-2xl">Minha Sacola</h3>
-            <button onclick="app.toggleCart()" class="w-12 h-12 rounded-full hover:bg-gray-200 flex items-center justify-center text-3xl transition duration-300">&times;</button>
-        </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar">
-            <!-- JS -->
-        </div>
-        <div class="p-8 bg-white border-t-2 border-gray-100 rounded-t-[3rem] shadow-inner">
-            <div class="flex justify-between items-center mb-8 font-bold text-2xl">
-                <span class="text-gray-400">Total parcial:</span>
-                <span id="cart-total-val" class="text-brand-500">R$ 0,00</span>
-            </div>
-            <button onclick="app.showPage('checkout')" id="checkout-btn" class="btn-glow w-full bg-brand-500 text-white font-bold py-5 rounded-2xl shadow-xl disabled:opacity-50 transition active:scale-95 text-lg" disabled>Fechar Pedido</button>
-        </div>
-    </div>
-    <div id="cart-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
-
     <!-- WhatsApp Floating -->
-    <a href="https://wa.me/5584999999999" target="_blank" class="whatsapp-btn" title="Fale com a gente!">
+    <a href="https://wa.me/5584921626352" target="_blank" class="wa-float shimmer" title="Falar com Especialista">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-gray-100 shadow-2xl rounded-[2rem] p-5 flex items-center gap-4 transform translate-y-40 transition-transform duration-500 z-[100] w-11/12 max-w-sm">
-        <div class="w-12 h-12 bg-blue-50 text-brand-500 rounded-2xl flex items-center justify-center shrink-0 shadow-inner"><i class="fas fa-shopping-bag text-lg"></i></div>
-        <div>
-            <p class="font-bold text-gray-900">Na sacola!</p>
-            <p class="text-xs text-gray-400">Calçado adicionado com sucesso.</p>
+    <!-- Sidebar Carrinho -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[480px] bg-white shadow-2xl z-[100] transform translate-x-full transition-transform duration-700 ease-[cubic-bezier(0.65,0,0.35,1)] flex flex-col text-slate-800">
+        <div class="p-10 border-b border-brand-50 flex justify-between items-center bg-brand-50/50">
+            <h3 class="font-serif text-3xl italic tracking-tighter">A Minha Sacola.</h3>
+            <button onclick="app.toggleCart()" class="text-3xl">&times;</button>
+        </div>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-10 space-y-10 custom-scrollbar"></div>
+        <div class="p-8 bg-white border-t border-brand-100 rounded-t-[4rem] shadow-inner">
+            <div class="flex justify-between items-center mb-10 font-bold text-3xl tracking-tighter">
+                <span class="text-slate-400 uppercase text-xs tracking-widest">Subtotal</span>
+                <span id="cart-total-val" class="text-brand-50 italic font-serif">R$ 0,00</span>
+            </div>
+            <button onclick="app.showPage('checkout')" id="checkout-btn" class="w-full bg-brand-500 text-white font-bold py-6 rounded-3xl shadow-xl disabled:opacity-50 transition active:scale-95 text-[10px] uppercase tracking-widest shimmer" disabled>Finalizar Pedido</button>
         </div>
     </div>
+    <div id="cart-overlay" class="fixed inset-0 bg-brand-900/30 backdrop-blur-md z-[90] hidden opacity-0 transition-opacity duration-700" onclick="app.toggleCart()"></div>
 
-    <!-- Analytics Placeholder -->
-    <script>
-        // Google Analytics 4 (Fictício)
-        // window.dataLayer = window.dataLayer || [];
-        // function gtag(){dataLayer.push(arguments);}
-        // gtag('js', new Date());
-        // gtag('config', 'G-XXXXXXX');
-    </script>
+    <!-- Footer -->
+    <footer class="bg-white border-t border-brand-50 pt-24 pb-12">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-16 text-center md:text-left">
+            <div class="col-span-1">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-14 mb-10 mx-auto md:mx-0 object-contain">
+                <p class="text-slate-400 text-sm font-light leading-relaxed">Curadoria premium de calçados e acessórios femininos em São Miguel/RN. Elegância redefinida em 2026.</p>
+                <div class="flex justify-center md:justify-start gap-4 mt-10">
+                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="w-11 h-11 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="w-11 h-11 rounded-2xl bg-brand-50 flex items-center justify-center text-brand-500 hover:bg-brand-500 hover:text-white transition shadow-sm border border-brand-100"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-8 uppercase text-[10px] tracking-[0.3em]">Atendimento</h4>
+                <ul class="text-sm text-slate-500 space-y-5 font-light">
+                    <li><a href="https://wa.me/5584921626352" target="_blank" class="hover:text-brand-500 transition font-bold text-brand-500 italic text-lg tracking-tight">(84) 9 92162-6352</a></li>
+                    <li><i class="fas fa-shield-heart mr-2 text-brand-500"></i> Especialistas VIP 24h</li>
+                    <li><a href="https://maps.app.goo.gl/79Mwrr4hhap8oajt5" target="_blank" class="hover:text-brand-500 transition"><i class="fas fa-location-arrow mr-2 text-brand-500"></i> Localização GPS</a></li>
+                </ul>
+            </div>
+            <div class="col-span-1 md:col-span-2 text-center md:text-left text-slate-800">
+                 <h4 class="font-bold text-slate-900 mb-8 uppercase text-[10px] tracking-[0.3em]">Pagamento Seguro</h4>
+                 <div class="flex flex-wrap gap-6 opacity-40 justify-center md:justify-start grayscale hover:grayscale-0 transition duration-700">
+                    <i class="fab fa-cc-visa text-5xl"></i>
+                    <i class="fab fa-cc-mastercard text-5xl"></i>
+                    <i class="fas fa-barcode text-4xl"></i>
+                    <i class="fas fa-qrcode text-4xl"></i>
+                 </div>
+            </div>
+        </div>
+        <div class="text-center text-[9px] text-slate-300 pt-12 uppercase tracking-[0.4em] font-bold border-t border-slate-50 mt-12">
+            &copy; 2026 Attiva’s Shoes • São Miguel / RN • Todos os direitos reservados.
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-10 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-premium rounded-[3rem] p-6 flex items-center gap-5 transform translate-y-48 transition-transform duration-500 z-[200] shimmer text-slate-800">
+        <div class="w-12 h-12 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center shadow-inner"><i class="fas fa-check text-lg"></i></div>
+        <span class="font-bold text-[10px] uppercase tracking-[0.3em] text-slate-700">Na sua sacola!</span>
+    </div>
 
     <script>
         const products = [
-            { id: 1, name: "Sandália Ortopédica Comfort Blue", price: 139.90, category: "Sandália", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=400&q=80" },
-            { id: 2, name: "Scarpin Attiva Nobuck Noir", price: 229.00, category: "Salto", img: "https://images.unsplash.com/photo-1535043902720-9ac15eff829b?auto=format&fit=crop&w=400&q=80" },
-            { id: 3, name: "Salto Agulha Glamour Red", price: 259.90, category: "Salto", img: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=400&q=80" },
-            { id: 4, name: "Sandália Verão Boho Style", price: 98.50, category: "Sandália", img: "https://images.unsplash.com/photo-1603808033192-082d6919d3e1?auto=format&fit=crop&w=400&q=80" },
-            { id: 5, name: "Casual Soft Walk Feminino", price: 169.90, category: "Sapatilha", img: "https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=400&q=80" },
-            { id: 6, name: "Rasteira Attiva Gold", price: 89.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=400&q=80" },
-            { id: 7, name: "Sapatilha Floral Vintage", price: 119.00, category: "Sapatilha", img: "https://images.unsplash.com/photo-1512374382149-433a42799d36?auto=format&fit=crop&w=400&q=80" },
-            { id: 8, name: "Sandália Plataforma Sun", price: 189.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=400&q=80" },
+            { id: 1, name: "Scarpin Attiva Rosé Gold 2026", price: 279.90, category: "Salto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80" },
+            { id: 2, name: "Sandália Summer Luxe 2026", price: 198.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=600&q=80" },
+            { id: 3, name: "Bolsa Tote Rosé Attiva", price: 425.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80" },
+            { id: 4, name: "Rasteirinha Shine Gold Premium", price: 95.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=600&q=80" },
+            { id: 5, name: "Bolsa de Mão Velvet Noir", price: 389.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=80" },
+            { id: 6, name: "Noir Classic Velvet Elite", price: 245.00, category: "Salto", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" },
+            { id: 7, name: "Bolsa Crossbody Rosé 2026", price: 215.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=80" },
+            { id: 8, name: "Urban Velvet Feminino Soft", price: 210.00, category: "Esporte", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" },
         ];
 
         const app = {
             cart: [],
-            currentCategory: 'all',
+            currentCat: 'all',
+            slideIdx: 0,
+            autoSlide: null,
 
             init() {
-                // Preloader Logic
                 window.onload = () => {
                     setTimeout(() => {
                         const loader = document.getElementById('preloader');
                         loader.style.opacity = '0';
-                        setTimeout(() => loader.style.display = 'none', 600);
-                        this.initScrollReveal();
-                    }, 2000);
+                        setTimeout(() => loader.style.visibility = 'hidden', 600);
+                        this.initReveal();
+                        this.startSlider();
+                    }, 1800);
                 };
-                
-                // Progress Bar Logic
-                window.onscroll = () => {
-                    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                    const scrolled = (winScroll / height) * 100;
-                    document.getElementById("scroll-progress").style.width = scrolled + "%";
-                    
-                    const navbar = document.getElementById('navbar');
-                    if (winScroll > 50) navbar.classList.add('shadow-xl', 'h-16');
-                    else navbar.classList.remove('shadow-xl', 'h-20');
-                };
-
                 this.render();
             },
 
-            initScrollReveal() {
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('active');
-                        }
-                    });
-                }, { threshold: 0.1 });
+            // Carrossel Boutique
+            startSlider() {
+                this.autoSlide = setInterval(() => this.nextSlide(), 4500);
+            },
 
+            nextSlide() {
+                const slides = document.querySelectorAll('.slide');
+                const dots = document.querySelectorAll('.dot');
+                if(!slides.length) return;
+
+                slides[this.slideIdx].classList.remove('active');
+                dots[this.slideIdx].classList.remove('active', 'bg-brand-500', 'w-6');
+                dots[this.slideIdx].classList.add('bg-white/40', 'w-2.5');
+
+                this.slideIdx = (this.slideIdx + 1) % slides.length;
+
+                slides[this.slideIdx].classList.add('active');
+                dots[this.slideIdx].classList.add('active', 'bg-brand-500', 'w-6');
+                dots[this.slideIdx].classList.remove('bg-white/40', 'w-2.5');
+
+                clearInterval(this.autoSlide);
+                this.autoSlide = setInterval(() => this.nextSlide(), 4500);
+            },
+
+            initReveal() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+                }, { threshold: 0.1 });
                 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
             },
 
             render() {
                 const grid = document.getElementById('product-grid');
-                const filtered = this.currentCategory === 'all' ? products : products.filter(p => p.category === this.currentCategory);
-                
+                const filtered = this.currentCat === 'all' ? products : products.filter(p => p.category === this.currentCat);
                 grid.innerHTML = filtered.map((p, i) => `
-                    <div class="reveal bg-white rounded-[2.5rem] border border-gray-100 shadow-sm hover:shadow-2xl transition-all duration-500 group overflow-hidden flex flex-col h-full" style="transition-delay: ${i * 50}ms">
-                        <div class="relative overflow-hidden h-64 bg-gray-50">
-                            <img src="${p.img}" class="w-full h-full object-cover group-hover:scale-110 transition duration-1000">
-                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition duration-500"></div>
-                            <div class="absolute top-5 right-5 bg-white/90 backdrop-blur-md text-[10px] font-bold px-4 py-1.5 rounded-full text-brand-500 border border-brand-500/10 shadow-sm">${p.category}</div>
+                    <div class="reveal bg-white rounded-[3rem] border border-brand-50 shadow-sm hover:shadow-2xl transition-all duration-700 group overflow-hidden flex flex-col h-full hover:-translate-y-2" style="transition-delay: ${i * 0.05}s">
+                        <div class="product-card-img relative overflow-hidden h-72 md:h-96 bg-brand-50" onclick="app.add(${p.id})">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000">
+                            <div class="absolute inset-0 bg-brand-900/0 group-hover:bg-brand-900/5 transition duration-500 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                <div class="bg-white/95 backdrop-blur px-5 py-3 rounded-full text-[10px] font-bold text-brand-500 shadow-2xl uppercase tracking-widest scale-75 group-hover:scale-100 transition-transform">
+                                    Adicionar na Sacola
+                                </div>
+                            </div>
+                            <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm text-[8px] font-bold px-4 py-1.5 rounded-full text-brand-500 border border-brand-100 uppercase tracking-widest shimmer shadow-sm">${p.category}</div>
                         </div>
                         <div class="p-8 flex flex-col flex-1">
-                            <h3 class="font-bold text-gray-900 mb-2 leading-tight flex-1 group-hover:text-brand-500 transition">${p.name}</h3>
-                            <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-50">
-                                <span class="font-bold text-brand-500 text-2xl">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
-                                <button onclick="app.addToCart(${p.id})" class="btn-glow bg-brand-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center hover:bg-brand-600 transition active:scale-90 shadow-xl shadow-brand-500/20">
+                            <h3 class="font-medium text-slate-800 mb-3 leading-tight flex-1 uppercase text-[11px] group-hover:text-brand-500 transition tracking-tighter">${p.name}</h3>
+                            <div class="flex items-center justify-between mt-8 pt-6 border-t border-brand-50">
+                                <span class="font-serif italic text-2xl text-slate-900 tracking-tighter">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
+                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-12 h-12 rounded-2xl flex items-center justify-center hover:bg-brand-600 transition active:scale-90 shadow-lg shadow-brand-500/20 shimmer">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 `).join('');
-                this.initScrollReveal();
+                this.initReveal();
             },
 
             filter(cat) {
-                this.currentCategory = cat;
+                this.currentCat = cat;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    const isActive = btn.innerText.includes(cat) || (cat === 'all' && btn.innerText === 'Todas');
-                    btn.classList.toggle('active', isActive);
-                    btn.classList.toggle('bg-brand-500', isActive);
-                    btn.classList.toggle('text-white', isActive);
-                    btn.classList.toggle('text-gray-500', !isActive);
+                    const active = btn.innerText.includes(cat) || (cat === 'all' && btn.innerText === 'Tudo');
+                    btn.classList.toggle('active', active);
+                    btn.classList.toggle('bg-white', active);
+                    btn.classList.toggle('text-brand-500', active);
+                    btn.classList.toggle('text-slate-500', !active);
+                    btn.classList.toggle('shadow-md', active);
                 });
                 this.render();
             },
 
-            addToCart(id) {
+            // Adicionar com rastreio de eventos (Preparado para entregar ao cliente)
+            add(id) {
                 const p = products.find(i => i.id === id);
                 const exist = this.cart.find(item => item.id === id);
-                if (exist) exist.qty++;
-                else this.cart.push({ ...p, qty: 1 });
-                
+                if (exist) exist.qty++; else this.cart.push({ ...p, qty: 1 });
                 this.updateUI();
                 this.showToast();
+                
+                // Rastreio de eventos para Analytics/Pixel
+                if(typeof gtag === 'function') gtag('event', 'add_to_cart', { items: [{ item_name: p.name, price: p.price }] });
+                if(typeof fbq === 'function') fbq('track', 'AddToCart', { content_name: p.name, value: p.price, currency: 'BRL' });
+
+                const icon = document.getElementById('cart-icon-container');
+                icon.classList.add('shake-it');
+                setTimeout(() => icon.classList.remove('shake-it'), 500);
             },
 
             updateUI() {
-                const count = this.cart.reduce((sum, item) => sum + item.qty, 0);
-                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                
+                const count = this.cart.reduce((s, i) => s + i.qty, 0);
+                const sub = this.cart.reduce((s, i) => s + (i.price * i.qty), 0);
                 document.getElementById('cart-count').innerText = count;
                 document.getElementById('cart-count').classList.toggle('hidden', count === 0);
-                document.getElementById('cart-total-val').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+                document.getElementById('cart-total-val').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
                 document.getElementById('checkout-btn').disabled = count === 0;
-
                 const list = document.getElementById('cart-items');
-                if(this.cart.length === 0) {
-                    list.innerHTML = `<div class="text-center py-20 text-gray-300 flex flex-col items-center"><i class="fas fa-shopping-basket text-6xl mb-6 opacity-20"></i><p>Sua sacola está vazia por enquanto.</p></div>`;
-                } else {
-                    list.innerHTML = this.cart.map((item, idx) => `
-                        <div class="flex gap-6 items-center bg-gray-50 p-6 rounded-[2rem] border border-gray-100 hover:border-brand-500 transition duration-300">
-                            <img src="${item.img}" class="w-24 h-24 object-cover rounded-2xl border-2 border-white shadow-sm">
+                if(this.cart.length === 0) list.innerHTML = `<div class="text-center py-20 text-slate-200 uppercase text-[9px] tracking-[0.4em] font-bold">Sua sacola está vazia</div>`;
+                else list.innerHTML = this.cart.map((item, idx) => `
+                        <div class="flex gap-6 items-center bg-brand-50 p-6 rounded-[2.5rem] border border-brand-100 hover:border-brand-500 transition duration-500">
+                            <img src="${item.img}" class="w-24 h-24 object-cover rounded-2xl border-2 border-white shadow-sm bg-white">
                             <div class="flex-1">
-                                <h4 class="font-bold text-gray-900 mb-1 leading-tight">${item.name}</h4>
-                                <p class="text-brand-500 font-bold">R$ ${item.price.toFixed(2)}</p>
-                                <div class="flex items-center gap-5 mt-4">
-                                    <button onclick="app.qty(${idx}, -1)" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-red-500 hover:border-red-500 transition"><i class="fas fa-minus text-xs"></i></button>
-                                    <span class="font-bold text-gray-700">${item.qty}</span>
-                                    <button onclick="app.qty(${idx}, 1)" class="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center text-gray-400 hover:text-brand-500 hover:border-brand-500 transition"><i class="fas fa-plus text-xs"></i></button>
+                                <h4 class="font-bold text-slate-900 mb-1 leading-tight text-[10px] uppercase">${item.name}</h4>
+                                <p class="text-brand-50 font-serif italic text-sm">R$ ${item.price.toFixed(2)}</p>
+                                <div class="flex items-center gap-4 mt-5">
+                                    <button onclick="app.qty(${idx}, -1)" class="w-9 h-9 rounded-2xl border border-brand-200 flex items-center justify-center text-slate-400 transition bg-white shadow-sm hover:border-brand-500"><i class="fas fa-minus text-[8px]"></i></button>
+                                    <span class="font-bold text-slate-700 text-xs">${item.qty}</span>
+                                    <button onclick="app.qty(${idx}, 1)" class="w-9 h-9 rounded-2xl border border-brand-200 flex items-center justify-center text-brand-500 transition bg-white shadow-sm hover:border-brand-500"><i class="fas fa-plus text-[8px]"></i></button>
                                 </div>
                             </div>
                         </div>
                     `).join('');
-                }
             },
 
-            qty(idx, delta) {
-                this.cart[idx].qty += delta;
+            qty(idx, d) {
+                this.cart[idx].qty += d;
                 if(this.cart[idx].qty <= 0) this.cart.splice(idx, 1);
                 this.updateUI();
             },
 
             toggleCart() {
                 const side = document.getElementById('cart-sidebar');
-                const overlay = document.getElementById('cart-overlay');
-                const isOpen = !side.classList.contains('translate-x-full');
-                
-                if (isOpen) {
-                    side.classList.add('translate-x-full');
-                    overlay.classList.add('hidden', 'opacity-0');
-                    setTimeout(() => overlay.classList.add('hidden'), 500);
-                    document.body.style.overflow = '';
-                } else {
-                    side.classList.remove('translate-x-full');
-                    overlay.classList.remove('hidden');
-                    setTimeout(() => overlay.classList.remove('opacity-0'), 10);
-                    document.body.style.overflow = 'hidden';
-                }
+                const over = document.getElementById('cart-overlay');
+                const open = !side.classList.contains('translate-x-full');
+                side.classList.toggle('translate-x-full', open);
+                over.classList.toggle('hidden', open);
+                setTimeout(() => over.classList.toggle('opacity-0', open), 10);
+                document.body.style.overflow = open ? '' : 'hidden';
             },
 
-            showPage(page) {
-                ['home', 'checkout'].forEach(p => document.getElementById(`page-${p}`).classList.add('hidden'));
-                document.getElementById(`page-${page}`).classList.remove('hidden');
-                
-                if(page === 'checkout') {
-                    if(!document.getElementById('cart-sidebar').classList.contains('translate-x-full')) this.toggleCart();
-                    this.updateSummary();
-                }
+            showPage(p) {
+                ['home', 'checkout'].forEach(id => document.getElementById(`page-${id}`).classList.add('hidden'));
+                document.getElementById(`page-${p}`).classList.remove('hidden');
+                if(p === 'checkout') { if(!document.getElementById('cart-sidebar').classList.contains('translate-x-full')) this.toggleCart(); this.updateSummary(); }
                 window.scrollTo({top: 0, behavior: 'smooth'});
             },
 
-            scrollToSection(id) {
-                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            },
+            scrollToSection(id) { const target = document.getElementById(id); if (target) window.scrollTo({ top: target.offsetTop - 100, behavior: 'smooth' }); },
 
-            updateDelivery() {
-                this.updateSummary();
-            },
+            updateDelivery() { this.updateSummary(); },
 
             updateSummary() {
-                const delivery = parseFloat(document.getElementById('delivery-type').value);
-                const subtotal = this.cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
-                
-                document.getElementById('sum-subtotal').innerText = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-                document.getElementById('sum-delivery').innerText = `R$ ${delivery.toFixed(2).replace('.', ',')}`;
-                document.getElementById('sum-total').innerText = `R$ ${(subtotal + delivery).toFixed(2).replace('.', ',')}`;
-
-                document.getElementById('summary-items').innerHTML = this.cart.map(item => `
-                    <div class="flex justify-between text-sm text-white/50">
-                        <span>${item.qty}x ${item.name}</span>
-                        <span class="font-bold text-white">R$ ${(item.price * item.qty).toFixed(2)}</span>
+                const del = parseFloat(document.getElementById('delivery-type').value);
+                const sub = this.cart.reduce((s, i) => s + (i.price * i.qty), 0);
+                document.getElementById('sum-subtotal').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-delivery').innerText = `R$ ${del.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-total').innerText = `R$ ${(sub + del).toFixed(2).replace('.', ',')}`;
+                document.getElementById('summary-items').innerHTML = this.cart.map(i => `
+                    <div class="flex justify-between text-[11px] text-white/50 uppercase tracking-widest font-medium">
+                        <span>${i.qty}x ${i.name}</span>
+                        <span class="font-bold text-white tracking-tighter">R$ ${(i.price * i.qty).toFixed(2)}</span>
                     </div>
                 `).join('');
             },
 
-            showToast() {
-                const t = document.getElementById('toast');
-                t.classList.remove('translate-y-40');
-                setTimeout(() => t.classList.add('translate-y-40'), 3000);
-            },
+            showToast() { const t = document.getElementById('toast'); t.classList.remove('translate-y-48'); setTimeout(() => t.classList.add('translate-y-48'), 2000); },
 
             sendToWhatsApp() {
-                const name = document.getElementById('cust-name').value;
-                const addr = document.getElementById('cust-address').value;
-                const delivery = document.getElementById('delivery-type').options[document.getElementById('delivery-type').selectedIndex].text;
+                const n = document.getElementById('cust-name').value;
+                const a = document.getElementById('cust-address').value;
+                const dSelect = document.getElementById('delivery-type');
+                const dText = dSelect.options[dSelect.selectedIndex].text;
+                if(!n || !a) return alert("Por favor, preencha o seu nome e a morada de entrega.");
+
+                // Rastreio de Conversão (Finalização)
+                if(typeof fbq === 'function') fbq('track', 'Purchase', { value: document.getElementById('sum-total').innerText, currency: 'BRL' });
+
+                let msg = `*👠 NOVO PEDIDO - ATTIVA’S SHOES*%0A%0A*Cliente:* ${n.toUpperCase()}%0A*Entrega:* ${dText}%0A*Local:* ${a}%0A%0A*ITENS:*%0A`;
+                this.cart.forEach(i => msg += `• ${i.qty}x ${i.name.toUpperCase()} (R$ ${i.price.toFixed(2)})%0A`);
+                msg += `%0A*TOTAL FINAL: ${document.getElementById('sum-total').innerText}*%0A%0A_Aguardamos confirmação da boutique..._`;
                 
-                if(!name || !addr) {
-                    alert("Ops! Precisamos do seu nome e endereço para realizar a entrega em São Miguel.");
-                    return;
-                }
-
-                let msg = `*ATTIVA’S SHOES - NOVO PEDIDO*%0A%0A`;
-                msg += `*Cliente:* ${name}%0A`;
-                msg += `*Entrega:* ${delivery}%0A`;
-                msg += `*Local:* ${addr}%0A%0A`;
-                msg += `*CALÇADOS:*%0A`;
-                
-                this.cart.forEach(item => {
-                    msg += `👠 ${item.qty}x ${item.name} (R$ ${item.price.toFixed(2)})%0A`;
-                });
-
-                const total = document.getElementById('sum-total').innerText;
-                msg += `%0A*VALOR TOTAL: ${total}*`;
-
-                window.open(`https://wa.me/5584999999999?text=${msg}`);
+                window.open(`https://wa.me/5584921626352?text=${msg}`);
             }
         };
-
         app.init();
     </script>
 </body>
