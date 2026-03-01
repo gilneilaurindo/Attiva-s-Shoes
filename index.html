@@ -96,6 +96,25 @@
             50% { opacity: 0.8; transform: translateY(-30px) scale(1.2); }
             100% { transform: translateY(-60px) scale(0); opacity: 0; }
         }
+        
+        /* Estilo para input de ficheiro premium */
+        input[type=file]::file-selector-button {
+            border: none;
+            background: #b67b7e;
+            padding: 8px 16px;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: background .2s ease-in-out;
+            font-size: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-right: 12px;
+        }
+        input[type=file]::file-selector-button:hover {
+            background: #a36a6d;
+        }
     </style>
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
@@ -428,6 +447,7 @@
             
             <form id="form-product" onsubmit="event.preventDefault(); app.admin.saveProduct();" class="space-y-4">
                 <input type="hidden" id="prod-id">
+                <input type="hidden" id="prod-img-url-old"> <!-- Guarda a URL antiga caso ela só edite o nome -->
                 
                 <div>
                     <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Nome do Produto</label>
@@ -449,10 +469,13 @@
                     </div>
                 </div>
 
+                <!-- NOVO INPUT: Tirar Foto ou Escolher Arquivo -->
                 <div>
-                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">URL da Imagem</label>
-                    <input type="url" id="prod-img" placeholder="https://..." class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
-                    <p class="text-[8px] text-slate-400 mt-1 ml-2">Cole o link (URL) da imagem armazenada.</p>
+                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Foto do Produto</label>
+                    <div class="mt-1 relative">
+                        <input type="file" id="prod-img-file" accept="image/*" class="w-full bg-brand-50 border-0 rounded-xl p-3 outline-none text-sm font-medium text-slate-600">
+                    </div>
+                    <p id="foto-aviso" class="text-[8px] text-slate-400 mt-1 ml-2">Tire uma foto agora ou escolha da galeria.</p>
                 </div>
 
                 <div class="pt-4 flex gap-3">
@@ -478,7 +501,7 @@
         // CONFIGURAÇÃO DO SEU BANCO DE DADOS
         // ==========================================
         const SUPABASE_URL = 'https://lcarpfdljhuyzzmzaxzm.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_OcoVjcKf5JmYho8fwHjJCA_XIiZYbNm'; 
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjYXJwZmRsamh1eXp6bXpheHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzI1MDIsImV4cCI6MjA4Nzk0ODUwMn0.15QaKN5REbQis_xygysDzMNKVlZbcnbRZzP8IIC6ry0'; 
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -585,7 +608,7 @@
             },
 
             // ==========================================
-            // LÓGICA DA GERÊNCIA (ADICIONAR/EDITAR PRODUTOS)
+            // LÓGICA DA GERÊNCIA (ADICIONAR/EDITAR E UPLOAD DE FOTOS)
             // ==========================================
             admin: {
                 openForm(id = null) {
@@ -595,6 +618,8 @@
                     
                     form.reset();
                     document.getElementById('prod-id').value = '';
+                    document.getElementById('prod-img-url-old').value = '';
+                    document.getElementById('foto-aviso').innerText = "Tire uma foto agora ou escolha da galeria.";
 
                     if (id) {
                         title.innerText = "Editar Produto";
@@ -604,7 +629,8 @@
                             document.getElementById('prod-name').value = p.name;
                             document.getElementById('prod-price').value = p.price;
                             document.getElementById('prod-category').value = p.category;
-                            document.getElementById('prod-img').value = p.img;
+                            document.getElementById('prod-img-url-old').value = p.img;
+                            document.getElementById('foto-aviso').innerText = "Deixe vazio para manter a foto atual.";
                         }
                     } else {
                         title.innerText = "Novo Produto";
@@ -614,39 +640,77 @@
                 closeForm() {
                     document.getElementById('modal-product').classList.add('hidden');
                 },
+                
                 async saveProduct() {
                     const btn = document.getElementById('btn-save-prod');
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A guardar...';
 
                     const id = document.getElementById('prod-id').value;
+                    const fileInput = document.getElementById('prod-img-file');
+                    let finalImageUrl = document.getElementById('prod-img-url-old').value;
+
+                    // 1. Lógica para fazer o Upload da nova foto (se ela escolheu alguma)
+                    if (fileInput.files.length > 0) {
+                        const file = fileInput.files[0];
+                        const fileExt = file.name.split('.').pop();
+                        const fileName = `${Date.now()}.${fileExt}`; // Cria um nome único para a foto
+                        
+                        app.showToast("A enviar fotografia para a nuvem...");
+                        
+                        // Faz o upload para a pasta "fotos" no Supabase
+                        const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                            .from('fotos')
+                            .upload(fileName, file);
+                            
+                        if (uploadError) {
+                            app.showToast("Erro ao enviar foto: " + uploadError.message, true);
+                            btn.innerHTML = 'Guardar';
+                            return;
+                        }
+                        
+                        // Pega o link público da imagem que acabou de subir
+                        const { data: publicUrlData } = supabaseClient.storage
+                            .from('fotos')
+                            .getPublicUrl(fileName);
+                            
+                        finalImageUrl = publicUrlData.publicUrl;
+                    }
+
+                    // Se for produto novo e ela não tirou foto, avisa:
+                    if (!id && !finalImageUrl) {
+                        app.showToast("Por favor, adicione uma foto do produto!", true);
+                        btn.innerHTML = 'Guardar';
+                        return;
+                    }
+
+                    // 2. Lógica para guardar os dados na tabela (com o link da foto atualizado)
                     const productData = {
                         name: document.getElementById('prod-name').value,
                         price: parseFloat(document.getElementById('prod-price').value),
                         category: document.getElementById('prod-category').value,
-                        img: document.getElementById('prod-img').value
+                        img: finalImageUrl
                     };
 
                     let errorInfo = null;
 
                     if (id) {
-                        // Edita um produto existente
                         const { error } = await supabaseClient.from('produtos').update(productData).eq('id', id);
                         errorInfo = error;
                     } else {
-                        // Cria um novo produto
                         const { error } = await supabaseClient.from('produtos').insert([productData]);
                         errorInfo = error;
                     }
 
                     if (errorInfo) {
-                        app.showToast("Erro ao guardar: " + errorInfo.message, true);
+                        app.showToast("Erro ao guardar dados: " + errorInfo.message, true);
                     } else {
                         app.showToast("Produto guardado com sucesso!");
                         this.closeForm();
-                        app.fetchProducts(); // Volta a carregar a lista de produtos
+                        app.fetchProducts(); // Atualiza a vitrine
                     }
                     btn.innerHTML = 'Guardar';
                 },
+
                 async deleteProduct(id) {
                     if(!confirm("Tem a certeza que deseja eliminar este produto definitivamente?")) return;
                     
