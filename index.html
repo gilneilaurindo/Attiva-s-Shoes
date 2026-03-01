@@ -1,27 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Attiva’s Shoes | Especialista em Calçados Femininos 2026</title>
+    <title>Attiva’s Shoes | Especialista em Calçado Feminino 2026</title>
     
     <!-- Favicon Personalizado -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23b67b7e%22 d=%22M80,30h-10c0-11-9-20-20-20s-20,9-20,20H20c-2.8,0-5,2.2-5,5v50c0,5.5,4.5,10,10,10h50c5.5,0,10-4.5,10-10V35C85,32.2,82.8,30,80,30z M50,18c6.6,0,12,5.4,12,12H38C38,23.4,43.4,18,50,18z%22/></svg>">
 
-    <!-- CONFIGURAÇÕES DE RASTREIO -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WFQRV65PC9"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-WFQRV65PC9');
-    </script>
-
     <!-- SEO & Social -->
-    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçados femininos premium. Entrega rápida e suporte especializado 24h. Coleção 2026.">
+    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçado feminino premium. Coleção 2026.">
     <meta name="theme-color" content="#b67b7e">
-    <meta property="og:title" content="Attiva’s Shoes | Boutique Premium 2026">
-    <meta property="og:image" content="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/sociais.jpg">
 
     <!-- Bibliotecas -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -29,6 +18,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
+    <!-- SDK do Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -57,11 +49,8 @@
     <style>
         html { scroll-behavior: smooth; }
         body { line-height: 1.6; letter-spacing: 0.01em; -webkit-tap-highlight-color: transparent; }
-
-        /* Optimizações de Performance */
         section { content-visibility: auto; contain-intrinsic-size: 1px 400px; }
         #hero, nav { content-visibility: visible; }
-
         #preloader {
             position: fixed; inset: 0; background: #fff;
             display: flex; flex-direction: column; justify-content: center;
@@ -69,7 +58,6 @@
         }
         .loader-logo { width: 100px; animation: softPulse 2s infinite ease-in-out; }
         @keyframes softPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
-
         .shimmer { position: relative; overflow: hidden; }
         .shimmer::after {
             content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
@@ -77,57 +65,30 @@
             transform: rotate(30deg); animation: shimmerEffect 4s infinite;
         }
         @keyframes shimmerEffect { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
-
-        .highlight-box {
-            background-color: #b67b7e; color: white; padding: 0.1em 0.4em;
-            display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone;
-        }
-
         .wa-float {
             position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white;
             width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center;
             justify-content: center; font-size: 24px; z-index: 100; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
         }
-
-        /* Melhora o aspeto dos cartões em 2 colunas */
         .product-card-title {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            min-height: 2.8em;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden; min-height: 2.8em;
         }
-
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-        /* Animação do Slider da Boutique */
         .boutique-slider { position: relative; width: 100%; height: 100%; }
         .boutique-slide { 
-            position: absolute; 
-            inset: 0; 
-            opacity: 0; 
-            transition: opacity 1.5s ease-in-out; 
-            object-fit: cover; 
-            width: 100%; 
-            height: 100%; 
+            position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease-in-out; 
+            object-fit: cover; width: 100%; height: 100%; 
         }
         .boutique-slide.active { opacity: 1; }
-
-        /* Animação de Brilhos Rosa */
-        .sparkles-container {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-            z-index: 5;
-        }
+        .sparkles-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
         .sparkle {
-            position: absolute;
-            background-color: #f9e6e7; /* Rosa claro da marca */
-            border-radius: 50%;
-            box-shadow: 0 0 10px 2px rgba(182, 123, 126, 0.6); /* Brilho rosa escuro */
+            position: absolute; background-color: #f9e6e7;
+            /* Recorte mágico em forma de estrela/brilho de 4 pontas */
+            clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
             opacity: 0;
+            filter: drop-shadow(0 0 5px rgba(182, 123, 126, 0.8));
             animation: floatAndTwinkle linear infinite;
         }
         @keyframes floatAndTwinkle {
@@ -139,11 +100,9 @@
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
-    <!-- Preloader -->
+    <!-- Preloader animado -->
     <div id="preloader">
-        <!-- Container dos Brilhos Mágicos do Preloader -->
         <div id="preloader-sparkles" class="sparkles-container"></div>
-        
         <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo relative z-10" alt="Attiva's Shoes">
         <div class="mt-8 w-32 h-[1px] bg-slate-100 relative overflow-hidden rounded-full z-10">
             <div class="absolute inset-0 bg-brand-500 w-0 animate-[load_1.5s_ease-in-out_forwards]"></div>
@@ -151,12 +110,12 @@
     </div>
     <style>@keyframes load { to { width: 100%; } }</style>
 
-    <!-- Barra Informativa -->
+    <!-- Barra Superior -->
     <div class="bg-brand-500 text-white text-[8px] md:text-[11px] font-bold py-2.5 text-center uppercase tracking-[0.2em] shimmer z-[60] px-4">
-        Coleção 2026 • São Miguel/RN • Entrega no Centro e Sítios
+        Coleção 2026 • São Miguel/RN • Entregas no Centro e Sítios
     </div>
 
-    <!-- Navegação Compacta -->
+    <!-- Navegação principal -->
     <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-16 md:h-24 flex items-center">
         <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer" onclick="app.showPage('home')">
@@ -168,6 +127,11 @@
                     <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-4 md:px-8 py-2 md:py-3.5 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-md">
                         Loja
                     </button>
+                    <!-- Botão de Sair do modo Gestão (oculto por defeito) -->
+                    <button id="btn-logout" onclick="app.auth.logout()" class="hidden text-brand-900 hover:text-brand-500 text-sm font-bold uppercase tracking-widest transition">
+                        <i class="fas fa-sign-out-alt"></i> Sair
+                    </button>
+                    <!-- Cesto de Compras -->
                     <div class="relative cursor-pointer p-2" onclick="app.toggleCart()" id="cart-icon-container">
                         <i class="fas fa-shopping-bag text-xl md:text-2xl text-slate-700"></i>
                         <span id="cart-count" class="absolute top-0 right-0 bg-brand-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full hidden border border-white">0</span>
@@ -180,16 +144,13 @@
     <main>
         <div id="page-home" class="fade-in">
             
-            <!-- Hero Section (Mobile Optimized) -->
+            <!-- Destaque Principal -->
             <section id="hero" class="max-w-7xl mx-auto px-2 py-2 md:px-4 md:py-8">
                 <div class="relative rounded-[2rem] md:rounded-[4rem] overflow-hidden bg-brand-900 h-[300px] md:h-[550px] flex items-center shadow-premium">
                     <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" 
                          class="absolute inset-0 w-full h-full object-cover opacity-70" 
-                         alt="Coleção 2026"
-                         fetchpriority="high">
+                         alt="Coleção 2026" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80'">
                     <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/30 to-transparent"></div>
-                    
-                    <!-- Container dos Brilhos Mágicos -->
                     <div id="hero-sparkles" class="sparkles-container"></div>
                     
                     <div class="relative z-10 p-6 md:p-24 text-white w-full">
@@ -202,12 +163,18 @@
                 </div>
             </section>
 
-            <!-- Vitrine Virtual (2 Colunas no Mobile) -->
-            <section id="products" class="max-w-7xl mx-auto px-3 py-10 md:py-24">
+            <!-- Vitrine Dinâmica (Integrada ao Supabase) -->
+            <section id="products" class="max-w-7xl mx-auto px-3 py-10 md:py-24 relative">
                 <div class="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-20 gap-6">
-                    <div class="text-center md:text-left">
+                    <div class="text-center md:text-left flex items-center gap-4">
                         <h2 class="font-serif text-3xl md:text-7xl text-slate-900 italic tracking-tighter uppercase leading-none">Coleção Boutique</h2>
+                        
+                        <!-- Botão Adicionar Novo Produto (Exclusivo da Administração) -->
+                        <button id="btn-add-product" onclick="app.admin.openForm()" class="hidden bg-green-500 text-white w-10 h-10 md:w-12 md:h-12 rounded-full items-center justify-center hover:bg-green-600 transition shadow-lg shrink-0" title="Adicionar Novo Produto">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
+                    <!-- Filtros -->
                     <div class="w-full md:w-auto flex gap-2 overflow-x-auto no-scrollbar pb-1">
                         <button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-xl transition shadow-sm shrink-0">Tudo</button>
                         <button onclick="app.filter('Salto')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0">Saltos</button>
@@ -216,35 +183,33 @@
                     </div>
                 </div>
                 
-                <!-- Grelha optimizada: 2 colunas mobile, 4 colunas desktop -->
-                <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-10 md:gap-y-20"></div>
+                <!-- Aqui os produtos serão inseridos magicamente pelo Supabase -->
+                <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-10 md:gap-y-20">
+                    <div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">
+                        A carregar coleção... <i class="fas fa-spinner fa-spin ml-2"></i>
+                    </div>
+                </div>
             </section>
 
             <!-- Canais de Conversão -->
             <section class="max-w-7xl mx-auto px-4 py-8 md:py-20">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10">
                     <a href="https://wa.me/5584921626352" target="_blank" class="bg-green-50 p-6 md:p-10 rounded-[2.5rem] border border-green-100 flex items-center gap-4 md:gap-8 group">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-green-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-sm shrink-0">
-                            <i class="fab fa-whatsapp"></i>
-                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-green-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-sm shrink-0"><i class="fab fa-whatsapp"></i></div>
                         <div class="min-w-0">
                             <p class="text-[8px] font-bold text-green-600 uppercase tracking-widest mb-1">WhatsApp</p>
                             <p class="font-bold text-sm md:text-xl text-green-700 truncate">(84) 92162-6352</p>
                         </div>
                     </a>
                     <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="bg-white p-6 md:p-10 rounded-[2.5rem] border border-brand-50 flex items-center gap-4 md:gap-8 group shadow-sm">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0">
-                            <i class="fab fa-instagram"></i>
-                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0"><i class="fab fa-instagram"></i></div>
                         <div class="min-w-0">
                             <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Instagram</p>
                             <p class="font-serif italic font-bold text-sm md:text-xl truncate text-slate-800">@attivasshoes</p>
                         </div>
                     </a>
                     <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="bg-white p-6 md:p-10 rounded-[2.5rem] border border-brand-50 flex items-center gap-4 md:gap-8 group shadow-sm">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0">
-                            <i class="fab fa-facebook-f"></i>
-                        </div>
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0"><i class="fab fa-facebook-f"></i></div>
                         <div class="min-w-0">
                             <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Facebook</p>
                             <p class="font-serif italic font-bold text-sm md:text-xl truncate text-slate-800">attivasshoes</p>
@@ -262,7 +227,7 @@
                             Sofisticação em cada passo.
                         </h2>
                         <p class="text-slate-500 text-sm md:text-xl leading-relaxed mb-8 font-light">
-                            Referência premium em calçado feminino em São Miguel/RN. Curadoria exclusiva para mulheres que valorizam elegância e conforto.
+                            Referência premium em calçados femininos em São Miguel/RN. Curadoria exclusiva para mulheres que valorizam elegância e conforto.
                         </p>
                         <div class="flex gap-4">
                             <div class="bg-brand-50 p-6 rounded-3xl flex-1 text-center">
@@ -291,15 +256,12 @@
             <section id="location" class="max-w-7xl mx-auto px-4 py-8 md:py-16">
                 <div class="bg-brand-900 rounded-[3rem] p-6 md:p-16 flex flex-col md:flex-row items-center gap-10 shadow-premium text-white relative overflow-hidden" data-aos="fade-up">
                     <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                    
-                    <!-- Container dos Brilhos Mágicos da Localização -->
                     <div id="location-sparkles" class="sparkles-container"></div>
-
                     <div class="w-full md:w-1/2 space-y-6 relative z-10">
                         <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full inline-block border border-white/10">Nossa Localização</span>
                         <h2 class="text-3xl md:text-6xl font-serif italic leading-tight">Venha nos fazer<br>uma visita.</h2>
                         <p class="text-white/80 font-light text-sm md:text-lg leading-relaxed">
-                            Estamos localizados no coração de São Miguel/RN. Um espaço acolhedor e pensado em cada detalhe para oferecer a você a melhor experiência em calçados femininos.
+                            Estamos localizados no coração de São Miguel/RN. Um espaço acolhedor e pensado em cada detalhe para oferecer a você a melhor experiência.
                         </p>
                         <div class="flex items-center gap-4 mt-6 bg-white/5 p-4 rounded-2xl border border-white/10">
                             <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shrink-0 shadow-lg"><i class="fas fa-map-marker-alt text-xl"></i></div>
@@ -310,7 +272,6 @@
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 h-64 md:h-[400px] rounded-[2rem] overflow-hidden border-4 border-white/10 relative z-10 shadow-2xl">
-                        <!-- Mapa do Google Incorporado para São Miguel/RN -->
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15837.262502693723!2d-38.3079965!3d-6.2163351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a2dce23e42100d%3A0xc39f9972c3d1000!2zU8OjbyBNaWd1ZWwsIFJO!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
@@ -324,19 +285,16 @@
                         O que dizem<br>nossas clientes.
                     </h2>
                 </div>
-                
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-                    <!-- Depoimento 1 -->
                     <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="200">
                         <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
                         <div class="flex text-yellow-400 text-xs mb-6 gap-1">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
-                            "Comprei o Scarpin Rosé e estou simplesmente apaixonada! A entrega aqui no centro de São Miguel foi super rápida e o atendimento pelo WhatsApp foi impecável. Conforto e elegância que valem cada centavo."
+                            "Comprei o Scarpin Rosé e estou simplesmente apaixonada! A entrega aqui no centro de São Miguel foi super rápida e o atendimento pelo WhatsApp foi impecável."
                         </p>
                         <div class="flex items-center gap-4 mt-auto">
-                            <!-- FOTO DA CLIENTE 1 -->
                             <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Letícia Oliveira" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
                             <div>
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Letícia Oliveira</p>
@@ -344,18 +302,15 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Depoimento 2 -->
                     <div class="bg-brand-50 p-8 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-md relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="300">
                         <div class="absolute -top-6 right-10 text-brand-200 text-6xl opacity-50 font-serif">"</div>
                         <div class="flex text-yellow-400 text-xs mb-6 gap-1">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-slate-700 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-medium italic">
-                            "A melhor boutique da região! As bolsas têm um acabamento premium perfeito. Precisava de um calçado para uma festa de última hora e elas me salvaram enviando rápido para o sítio."
+                            "A melhor boutique da região! As bolsas têm um acabamento premium perfeito. Precisava de um calçado para uma festa de última hora e elas me salvaram."
                         </p>
                         <div class="flex items-center gap-4 mt-auto">
-                            <!-- FOTO DA CLIENTE 2 -->
                             <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Mariana Costa" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-white">
                             <div>
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-900">Mariana Costa</p>
@@ -363,18 +318,15 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Depoimento 3 -->
                     <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="400">
                         <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
                         <div class="flex text-yellow-400 text-xs mb-6 gap-1">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
-                            "Minha primeira compra na Attiva's e já virei fã. A rasteirinha da coleção nova é super versátil e confortável pro dia a dia. Todo o processo de compra pelo site foi fácil e seguro."
+                            "Minha primeira compra na Attiva's e já virei fã. A rasteirinha da coleção nova é super versátil e confortável pro dia a dia."
                         </p>
                         <div class="flex items-center gap-4 mt-auto">
-                            <!-- FOTO DA CLIENTE 3 -->
                             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Aline Fernandes" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
                             <div>
                                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Aline Fernandes</p>
@@ -385,23 +337,27 @@
                 </div>
             </section>
 
-            <!-- RODAPÉ -->
-            <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100 text-center">
+            <!-- Rodapé e Acesso Secreto à Gestão -->
+            <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100 text-center flex flex-col items-center justify-center gap-4">
                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     &copy; 2026 Attiva's. Todos os direitos reservados.
                 </p>
+                <!-- O botão do cadeado abre o modo Gestão para a sua cliente -->
+                <button onclick="app.auth.toggleLoginModal()" class="text-slate-300 hover:text-brand-500 transition opacity-50 hover:opacity-100 p-2" title="Acesso à Gestão">
+                    <i class="fas fa-lock text-sm"></i>
+                </button>
             </footer>
         </div>
 
-        <!-- CHECKOUT -->
+        <!-- Ecrã de Finalização da Compra (Checkout) -->
         <div id="page-checkout" class="hidden max-w-6xl mx-auto px-4 py-10 md:py-24 fade-in">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-start">
                 <div class="space-y-8">
                     <button onclick="app.showPage('home')" class="text-slate-400 font-bold text-[10px] uppercase tracking-widest hover:text-brand-500 flex items-center gap-3">
-                        <i class="fas fa-arrow-left"></i> Voltar
+                        <i class="fas fa-arrow-left"></i> Voltar à Loja
                     </button>
                     <div class="bg-white p-6 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-sm">
-                        <h3 class="font-serif text-2xl md:text-4xl mb-8 italic">Seus Dados.</h3>
+                        <h3 class="font-serif text-2xl md:text-4xl mb-8 italic">Os seus Dados.</h3>
                         <form id="checkout-form" class="space-y-6">
                             <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium" required>
                             <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium">
@@ -409,7 +365,7 @@
                                 <option value="10">Sítio Região (R$ 10,00)</option>
                                 <option value="0">Retirar na Boutique (Grátis)</option>
                             </select>
-                            <textarea id="cust-address" placeholder="Endereço ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium h-32 md:h-40" required></textarea>
+                            <textarea id="cust-address" placeholder="Morada ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium h-32 md:h-40" required></textarea>
                         </form>
                     </div>
                 </div>
@@ -429,10 +385,10 @@
         </div>
     </main>
 
-    <!-- Sidebar Carrinho -->
+    <!-- Barra lateral do Cesto -->
     <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white shadow-2xl z-[1000] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
         <div class="p-6 md:p-8 border-b border-brand-50 flex justify-between items-center bg-brand-50/50">
-            <h3 class="font-serif text-xl md:text-2xl italic tracking-tighter uppercase">Minha Sacola.</h3>
+            <h3 class="font-serif text-xl md:text-2xl italic tracking-tighter uppercase">A Minha Sacola.</h3>
             <button onclick="app.toggleCart()" class="text-3xl p-2">&times;</button>
         </div>
         <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar"></div>
@@ -446,95 +402,137 @@
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-brand-900/20 backdrop-blur-sm z-[900] hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
 
-    <!-- WhatsApp Floating -->
-    <a href="https://wa.me/5584921626352" target="_blank" class="wa-float" title="Suporte">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Notificação -->
-    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-xl rounded-full p-4 flex items-center gap-4 transform translate-y-48 transition-transform duration-500 z-[2000] w-[80%] max-w-xs">
-        <div class="w-10 h-10 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center shrink-0"><i class="fas fa-check"></i></div>
-        <span class="font-bold text-[9px] uppercase tracking-widest text-slate-700">Item adicionado!</span>
+    <!-- MODAL DE LOGIN SECRETO (Para a Cliente) -->
+    <div id="modal-login" class="fixed inset-0 bg-brand-900/40 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 shadow-premium border border-brand-100">
+            <div class="text-center mb-8">
+                <h3 class="font-serif text-2xl italic">Painel da Boutique</h3>
+                <p class="text-xs text-slate-400 mt-2">Área reservada à gerência.</p>
+            </div>
+            <div class="space-y-4">
+                <input type="email" id="adm-email" placeholder="E-mail" class="w-full bg-brand-50 border-0 rounded-2xl p-4 outline-none text-sm">
+                <input type="password" id="adm-password" placeholder="Palavra-passe" class="w-full bg-brand-50 border-0 rounded-2xl p-4 outline-none text-sm">
+                
+                <button id="btn-login-submit" onclick="app.auth.login()" class="w-full bg-brand-500 text-white font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">
+                    Iniciar Sessão
+                </button>
+                <button onclick="app.auth.toggleLoginModal()" class="w-full text-slate-400 text-[9px] uppercase font-bold tracking-widest pt-2">Cancelar</button>
+            </div>
+        </div>
     </div>
 
-    <!-- JS -->
+    <!-- MODAL DE ADICIONAR/EDITAR PRODUTOS -->
+    <div id="modal-product" class="fixed inset-0 bg-brand-900/60 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-6 md:p-10 shadow-premium border border-brand-100 max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <h3 id="modal-product-title" class="font-serif text-2xl md:text-3xl italic mb-6">Novo Produto</h3>
+            
+            <form id="form-product" onsubmit="event.preventDefault(); app.admin.saveProduct();" class="space-y-4">
+                <input type="hidden" id="prod-id">
+                
+                <div>
+                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Nome do Produto</label>
+                    <input type="text" id="prod-name" placeholder="Ex: Sandália Luxe" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Preço (R$)</label>
+                        <input type="number" id="prod-price" step="0.01" placeholder="0.00" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Categoria</label>
+                        <select id="prod-category" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
+                            <option value="Salto">Salto</option>
+                            <option value="Sandália">Sandália</option>
+                            <option value="Bolsas">Bolsas</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">URL da Imagem</label>
+                    <input type="url" id="prod-img" placeholder="https://..." class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
+                    <p class="text-[8px] text-slate-400 mt-1 ml-2">Cole o link (URL) da imagem armazenada.</p>
+                </div>
+
+                <div class="pt-4 flex gap-3">
+                    <button type="button" onclick="app.admin.closeForm()" class="flex-1 bg-slate-100 text-slate-500 font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest hover:bg-slate-200 transition">Cancelar</button>
+                    <button type="submit" id="btn-save-prod" class="flex-1 bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Notificações Visuais no Ecrã -->
+    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-xl rounded-full p-4 flex items-center gap-4 transform translate-y-48 transition-transform duration-500 z-[3000] w-[90%] max-w-sm">
+        <div id="toast-icon" class="w-10 h-10 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center shrink-0">
+            <i class="fas fa-check"></i>
+        </div>
+        <span id="toast-message" class="font-bold text-[10px] uppercase tracking-widest text-slate-700">Mensagem</span>
+    </div>
+
+    <!-- Script Principal JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        const products = [
-            { id: 1, name: "Scarpin Attiva Rosé Gold 2026", price: 279.90, category: "Salto", img: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=75" },
-            { id: 2, name: "Sandália Summer Luxe 2026", price: 198.00, category: "Sandália", img: "https://images.unsplash.com/photo-1560343090-f0409e92791a?auto=format&fit=crop&w=600&q=75" },
-            { id: 3, name: "Bolsa Tote Rosé Attiva", price: 425.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=75" },
-            { id: 4, name: "Rasteirinha Shine Gold Premium", price: 95.90, category: "Sandália", img: "https://images.unsplash.com/photo-1562273138-f46be4ebdf33?auto=format&fit=crop&w=600&q=75" },
-            { id: 5, name: "Bolsa de Mão Velvet Noir", price: 389.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1591561954557-26941169b49e?auto=format&fit=crop&w=600&q=75" },
-            { id: 6, name: "Noir Classic Velvet Elite", price: 245.00, category: "Salto", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" },
-            { id: 7, name: "Bolsa Crossbody Rosé 2026", price: 215.00, category: "Bolsas", img: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?auto=format&fit=crop&w=600&q=75" },
-            { id: 8, name: "Urban Velvet Feminino Soft", price: 210.00, category: "Esporte", img: "https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" },
-        ];
+        // ==========================================
+        // CONFIGURAÇÃO DO SEU BANCO DE DADOS
+        // ==========================================
+        const SUPABASE_URL = 'https://lcarpfdljhuyzzmzaxzm.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_OcoVjcKf5JmYho8fwHjJCA_XIiZYbNm'; 
+
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
         const app = {
+            allProducts: [],
             cart: [],
             currentCat: 'all',
-            slideIdx: 0,
-            autoSlide: null,
+            isAdmin: false,
             boutiqueSlideIdx: 0,
 
-            init() {
-                // Inicia os brilhos antes da tela carregar totalmente
+            async init() {
+                // Inicia os brilhos mágicos do design premium imediatamente
                 const isMobile = window.innerWidth < 768;
                 this.createSparkles('preloader-sparkles', isMobile ? 20 : 40);
                 this.createSparkles('hero-sparkles', isMobile ? 25 : 50);
-                this.createSparkles('location-sparkles', isMobile ? 15 : 30);
 
-                window.onload = () => {
-                    setTimeout(() => {
-                        const loader = document.getElementById('preloader');
-                        loader.style.opacity = '0';
-                        setTimeout(() => loader.style.visibility = 'hidden', 500);
-                        AOS.init({ duration: 800, once: true });
-                        this.startSlider();
-                        this.startBoutiqueSlider(); // Inicia o novo slider da seção Sobre
-                    }, 800);
-                };
-                this.render();
+                try {
+                    // 1. Verifica se a cliente fez login como Administradora
+                    await this.auth.checkSession();
+
+                    // 2. Vai buscar os sapatos à sua nova tabela "produtos" no Supabase
+                    await this.fetchProducts();
+                } catch (error) {
+                    console.error("Erro na inicialização:", error);
+                    // Se houver um erro grave, tenta renderizar pelo menos uma mensagem na grelha
+                    document.getElementById('product-grid').innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-red-400 text-xs font-bold uppercase tracking-widest">Erro ao ligar ao catálogo. Verifique a sua ligação.</div>`;
+                } finally {
+                    // O bloco 'finally' garante que o preloader vai SEMPRE desaparecer, 
+                    // mesmo que o Supabase dê erro ou não encontre produtos.
+                    window.onload = () => {
+                        setTimeout(() => this.hidePreloader(), 800);
+                    };
+                    
+                    // Se o window.onload já tiver disparado antes desta função terminar:
+                    if (document.readyState === "complete") {
+                        setTimeout(() => this.hidePreloader(), 800);
+                    }
+                }
             },
-
-            // Gerador de Brilhos Rosa Dinâmico
-            createSparkles(containerId, particleCount) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-
-                for (let i = 0; i < particleCount; i++) {
-                    let sparkle = document.createElement('div');
-                    sparkle.className = 'sparkle';
-                    
-                    // Posição aleatória
-                    sparkle.style.left = Math.random() * 100 + '%';
-                    sparkle.style.top = Math.random() * 100 + '%';
-                    
-                    // Tamanho aleatório (entre 2px e 6px)
-                    let size = Math.random() * 4 + 2;
-                    sparkle.style.width = size + 'px';
-                    sparkle.style.height = size + 'px';
-                    
-                    // Duração e delay aleatórios para parecer natural
-                    sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
-                    sparkle.style.animationDelay = (Math.random() * 4) + 's';
-                    
-                    container.appendChild(sparkle);
+            
+            // Função auxiliar para esconder o ecrã de carregamento com segurança
+            hidePreloader() {
+                const loader = document.getElementById('preloader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.visibility = 'hidden';
+                        loader.style.display = 'none'; // Garante que é removido do fluxo visual
+                        AOS.init({ duration: 800, once: true });
+                        this.startBoutiqueSlider();
+                    }, 500);
                 }
             },
 
-            // Slider original (caso use em alguma parte no futuro)
-            startSlider() { this.autoSlide = setInterval(() => this.nextSlide(), 4500); },
-            nextSlide() {
-                const slides = document.querySelectorAll('.slide');
-                if(!slides.length) return;
-                slides[this.slideIdx].classList.remove('active');
-                this.slideIdx = (this.slideIdx + 1) % slides.length;
-                slides[this.slideIdx].classList.add('active');
-            },
-
-            // Novo Slider Animado da Boutique
             startBoutiqueSlider() {
                 setInterval(() => {
                     const slides = document.querySelectorAll('.boutique-slide');
@@ -542,27 +540,183 @@
                     slides[this.boutiqueSlideIdx].classList.remove('active');
                     this.boutiqueSlideIdx = (this.boutiqueSlideIdx + 1) % slides.length;
                     slides[this.boutiqueSlideIdx].classList.add('active');
-                }, 3500); // Troca a cada 3.5 segundos
+                }, 3500);
+            },
+
+            // ==========================================
+            // LÓGICA DE AUTENTICAÇÃO (O CADEADO)
+            // ==========================================
+            auth: {
+                toggleLoginModal() {
+                    document.getElementById('modal-login').classList.toggle('hidden');
+                },
+                async login() {
+                    const email = document.getElementById('adm-email').value;
+                    const password = document.getElementById('adm-password').value;
+                    const btn = document.getElementById('btn-login-submit');
+                    
+                    if(!email || !password) return app.showToast("Preencha todos os campos!", true);
+                    
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    
+                    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    
+                    if (error) {
+                        app.showToast("Erro: " + error.message, true);
+                        btn.innerHTML = 'Iniciar Sessão';
+                    } else {
+                        app.showToast("Sessão iniciada com sucesso!");
+                        setTimeout(() => location.reload(), 1000); 
+                    }
+                },
+                async logout() {
+                    await supabaseClient.auth.signOut();
+                    location.reload();
+                },
+                async checkSession() {
+                    const { data: { session } } = await supabaseClient.auth.getSession();
+                    if (session) {
+                        app.isAdmin = true;
+                        document.getElementById('btn-logout').classList.remove('hidden');
+                        document.getElementById('btn-add-product').classList.remove('hidden');
+                        document.getElementById('btn-add-product').classList.add('flex');
+                    }
+                }
+            },
+
+            // ==========================================
+            // LÓGICA DA GERÊNCIA (ADICIONAR/EDITAR PRODUTOS)
+            // ==========================================
+            admin: {
+                openForm(id = null) {
+                    const modal = document.getElementById('modal-product');
+                    const form = document.getElementById('form-product');
+                    const title = document.getElementById('modal-product-title');
+                    
+                    form.reset();
+                    document.getElementById('prod-id').value = '';
+
+                    if (id) {
+                        title.innerText = "Editar Produto";
+                        const p = app.allProducts.find(x => x.id === id);
+                        if(p) {
+                            document.getElementById('prod-id').value = p.id;
+                            document.getElementById('prod-name').value = p.name;
+                            document.getElementById('prod-price').value = p.price;
+                            document.getElementById('prod-category').value = p.category;
+                            document.getElementById('prod-img').value = p.img;
+                        }
+                    } else {
+                        title.innerText = "Novo Produto";
+                    }
+                    modal.classList.remove('hidden');
+                },
+                closeForm() {
+                    document.getElementById('modal-product').classList.add('hidden');
+                },
+                async saveProduct() {
+                    const btn = document.getElementById('btn-save-prod');
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+
+                    const id = document.getElementById('prod-id').value;
+                    const productData = {
+                        name: document.getElementById('prod-name').value,
+                        price: parseFloat(document.getElementById('prod-price').value),
+                        category: document.getElementById('prod-category').value,
+                        img: document.getElementById('prod-img').value
+                    };
+
+                    let errorInfo = null;
+
+                    if (id) {
+                        // Edita um produto existente
+                        const { error } = await supabaseClient.from('produtos').update(productData).eq('id', id);
+                        errorInfo = error;
+                    } else {
+                        // Cria um novo produto
+                        const { error } = await supabaseClient.from('produtos').insert([productData]);
+                        errorInfo = error;
+                    }
+
+                    if (errorInfo) {
+                        app.showToast("Erro ao guardar: " + errorInfo.message, true);
+                    } else {
+                        app.showToast("Produto guardado com sucesso!");
+                        this.closeForm();
+                        app.fetchProducts(); // Volta a carregar a lista de produtos
+                    }
+                    btn.innerHTML = 'Guardar';
+                },
+                async deleteProduct(id) {
+                    if(!confirm("Tem a certeza que deseja eliminar este produto definitivamente?")) return;
+                    
+                    app.showToast("A eliminar produto...");
+                    const { error } = await supabaseClient.from('produtos').delete().eq('id', id);
+                    if(error) {
+                        app.showToast("Erro ao eliminar.", true);
+                    } else {
+                        app.showToast("Produto eliminado!");
+                        app.fetchProducts();
+                    }
+                }
+            },
+
+            // ==========================================
+            // LER DADOS DO SUPABASE E MOSTRAR NO ECRÃ
+            // ==========================================
+            async fetchProducts() {
+                const { data, error } = await supabaseClient
+                    .from('produtos')
+                    .select('*')
+                    .order('id', { ascending: false }); // O mais recente fica no topo
+
+                if (error) {
+                    console.error("Erro a carregar:", error.message);
+                    return;
+                }
+                this.allProducts = data;
+                this.render();
             },
 
             render() {
                 const grid = document.getElementById('product-grid');
-                const filtered = this.currentCat === 'all' ? products : products.filter(p => p.category === this.currentCat);
+                const filtered = this.currentCat === 'all' 
+                    ? this.allProducts 
+                    : this.allProducts.filter(p => p.category === this.currentCat);
+
+                if(filtered.length === 0) {
+                    grid.innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">Nenhum produto encontrado nesta categoria.</div>`;
+                    return;
+                }
+
                 grid.innerHTML = filtered.map((p, i) => `
-                    <div class="reveal bg-white rounded-3xl border border-brand-50 shadow-sm transition-all duration-300 group overflow-hidden flex flex-col h-full" data-aos="fade-up" data-aos-delay="${i * 30}">
-                        <div class="product-card-img relative overflow-hidden h-44 md:h-[400px] bg-brand-50" onclick="app.add(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000" loading="lazy">
-                            <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+                    <div class="reveal bg-white rounded-3xl border border-brand-50 shadow-sm transition-all duration-300 group overflow-hidden flex flex-col h-full relative" data-aos="fade-up" data-aos-delay="${i * 30}">
+                        
+                        ${this.isAdmin ? `
+                            <!-- Botões de Admin sobrepostos na fotografia -->
+                            <div class="absolute top-2 right-2 z-20 flex flex-col gap-2">
+                                <button onclick="app.admin.openForm(${p.id})" class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-600 transition" title="Editar">
+                                    <i class="fas fa-pen text-xs"></i>
+                                </button>
+                                <button onclick="app.admin.deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-600 transition" title="Eliminar">
+                                    <i class="fas fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+
+                        <div class="product-card-img relative overflow-hidden h-44 md:h-[400px] bg-brand-50 cursor-pointer" onclick="app.add(${p.id})">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80'" loading="lazy">
+                            <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center pointer-events-none">
                                 <div class="bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[8px] font-bold text-brand-500 uppercase tracking-widest shadow-xl">
                                     Adicionar
                                 </div>
                             </div>
                         </div>
-                        <div class="p-3 md:p-8 flex flex-col flex-1">
+                        <div class="p-4 md:p-8 flex flex-col flex-1">
                             <h3 class="product-card-title font-medium text-slate-800 text-[10px] md:text-[13px] uppercase tracking-tight mb-2 md:mb-4">${p.name}</h3>
                             <div class="flex items-center justify-between mt-auto md:pt-6 md:border-t border-brand-50">
-                                <span class="font-serif italic text-sm md:text-3xl text-slate-900">R$ ${p.price.toFixed(2).replace('.', ',')}</span>
-                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-7 h-7 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:bg-brand-600 transition shadow-md shadow-brand-500/10">
+                                <span class="font-serif italic text-sm md:text-3xl text-slate-900">R$ ${parseFloat(p.price).toFixed(2).replace('.', ',')}</span>
+                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:bg-brand-600 transition shadow-md">
                                     <i class="fas fa-plus text-[10px] md:text-base"></i>
                                 </button>
                             </div>
@@ -584,18 +738,23 @@
                 this.render();
             },
 
+            // ==========================================
+            // LÓGICA DO CESTO DE COMPRAS E CHECKOUT
+            // ==========================================
             add(id) {
-                const p = products.find(i => i.id === id);
+                // Previne adicionar ao carrinho se a loja estiver em modo de edição
+                if(this.isAdmin) return; 
+                
+                const p = this.allProducts.find(i => i.id === id);
+                if(!p) return;
+
                 const exist = this.cart.find(item => item.id === id);
                 if (exist) exist.qty++; else this.cart.push({ ...p, qty: 1 });
-                this.updateUI();
-                this.showToast();
                 
-                // VIBRAÇÃO (Haptic Feedback) - 50 milissegundos
-                if (navigator.vibrate) {
-                    navigator.vibrate(50);
-                }
-
+                this.updateUI();
+                this.showToast(`${p.name} adicionado ao cesto!`);
+                if (navigator.vibrate) navigator.vibrate(50);
+                
                 const icon = document.getElementById('cart-icon-container');
                 icon.classList.add('animate-bounce');
                 setTimeout(() => icon.classList.remove('animate-bounce'), 500);
@@ -608,14 +767,17 @@
                 document.getElementById('cart-count').classList.toggle('hidden', count === 0);
                 document.getElementById('cart-total-val').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
                 document.getElementById('checkout-btn').disabled = count === 0;
+                
                 const list = document.getElementById('cart-items');
-                if(this.cart.length === 0) list.innerHTML = `<div class="text-center py-10 text-slate-300 text-[10px] font-bold uppercase tracking-widest">Sua sacola está vazia</div>`;
-                else list.innerHTML = this.cart.map((item, idx) => `
+                if(this.cart.length === 0) {
+                    list.innerHTML = `<div class="text-center py-10 text-slate-300 text-[10px] font-bold uppercase tracking-widest">A sua sacola está vazia</div>`;
+                } else {
+                    list.innerHTML = this.cart.map((item, idx) => `
                         <div class="flex gap-4 items-center bg-brand-50 p-4 rounded-3xl border border-brand-100">
-                            <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border border-white" loading="lazy">
+                            <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border border-white" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=150&q=80'" loading="lazy">
                             <div class="flex-1 min-w-0">
                                 <h4 class="font-bold text-slate-800 text-[10px] uppercase truncate">${item.name}</h4>
-                                <p class="text-brand-500 font-serif italic text-sm">R$ ${item.price.toFixed(2)}</p>
+                                <p class="text-brand-500 font-serif italic text-sm">R$ ${parseFloat(item.price).toFixed(2).replace('.', ',')}</p>
                                 <div class="flex items-center gap-4 mt-2">
                                     <button onclick="app.qty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-white border border-brand-100 flex items-center justify-center text-[8px] text-slate-400">-</button>
                                     <span class="font-bold text-slate-700 text-[10px]">${item.qty}</span>
@@ -624,9 +786,14 @@
                             </div>
                         </div>
                     `).join('');
+                }
             },
 
-            qty(idx, d) { if(this.cart[idx].qty + d <= 0) this.cart.splice(idx, 1); else this.cart[idx].qty += d; this.updateUI(); },
+            qty(idx, d) { 
+                if(this.cart[idx].qty + d <= 0) this.cart.splice(idx, 1); 
+                else this.cart[idx].qty += d; 
+                this.updateUI(); 
+            },
 
             toggleCart() {
                 const side = document.getElementById('cart-sidebar');
@@ -639,14 +806,27 @@
             },
 
             showPage(p) {
-                ['home', 'checkout'].forEach(id => document.getElementById(`page-${id}`).classList.add('hidden'));
+                // Esconde as páginas principais
+                ['home', 'checkout'].forEach(id => 
+                    document.getElementById(`page-${id}`).classList.add('hidden')
+                );
+
+                // Mostra a página solicitada
                 document.getElementById(`page-${p}`).classList.remove('hidden');
-                if(p === 'checkout' && !document.getElementById('cart-sidebar').classList.contains('translate-x-full')) this.toggleCart();
+                
+                // Se for checkout, fecha o sidebar do carrinho se estiver aberto
+                if (p === 'checkout' && !document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
+                    this.toggleCart();
+                }
+                
                 this.updateSummary();
-                window.scrollTo({top: 0, behavior: 'smooth'});
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             },
 
-            scrollToSection(id) { const target = document.getElementById(id); if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); },
+            scrollToSection(id) { 
+                const target = document.getElementById(id); 
+                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); 
+            },
 
             updateDelivery() { this.updateSummary(); },
 
@@ -660,14 +840,12 @@
                     document.getElementById('sum-total').innerText = `R$ ${(sub + del).toFixed(2).replace('.', ',')}`;
                     summaryList.innerHTML = this.cart.map(i => `
                         <div class="flex justify-between text-[9px] uppercase tracking-wider text-white/50">
-                            <span>${i.qty}x ${i.name}</span>
-                            <span class="text-white">R$ ${(i.price * i.qty).toFixed(2)}</span>
+                            <span class="truncate pr-2">${i.qty}x ${i.name}</span>
+                            <span class="text-white shrink-0">R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}</span>
                         </div>
                     `).join('');
                 }
             },
-
-            showToast() { const t = document.getElementById('toast'); t.classList.remove('translate-y-48'); setTimeout(() => t.classList.add('translate-y-48'), 2000); },
 
             sendToWhatsApp() {
                 const n = document.getElementById('cust-name').value;
@@ -676,33 +854,69 @@
                 const dText = dSelect.options[dSelect.selectedIndex].text;
                 
                 if(!n || !a) {
-                    alert("Por favor, preencha o seu nome e endereço.");
+                    this.showToast("Por favor, preencha o seu nome e morada/endereço.", true);
                     return;
                 }
 
-                // VIBRAÇÃO DE SUCESSO AO FINALIZAR (vibra, pausa, vibra)
-                if (navigator.vibrate) {
-                    navigator.vibrate([100, 50, 100]);
-                }
+                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
 
                 let msg = `*📋 FORMULÁRIO DE PEDIDO - ATTIVA’S SHOES*%0A%0A`;
-                msg += `*DADOS DO CLIENTE:*%0A`;
-                msg += `• *Nome:* ${n.toUpperCase()}%0A`;
-                msg += `• *Entrega:* ${dText}%0A`;
-                msg += `• *Endereço/Ref:* ${a}%0A%0A`;
-                
+                msg += `*DADOS DO CLIENTE:*%0A• *Nome:* ${n.toUpperCase()}%0A• *Entrega:* ${dText}%0A• *Endereço/Ref:* ${a}%0A%0A`;
                 msg += `*ITENS ESCOLHIDOS:*%0A`;
                 this.cart.forEach(i => {
                     msg += `• ${i.qty}x ${i.name.toUpperCase()} - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}%0A`;
                 });
-                
-                msg += `%0A*VALOR TOTAL: ${document.getElementById('sum-total').innerText}*%0A%0A`;
-                msg += `_Enviado via Attiva's Boutique Online 2026_`;
+                msg += `%0A*VALOR TOTAL: ${document.getElementById('sum-total').innerText}*%0A%0A_Enviado via Attiva's Boutique Online_`;
                 
                 window.open(`https://wa.me/5584921626352?text=${msg}`);
+            },
+
+            // ==========================================
+            // FUNÇÕES AUXILIARES VISUAIS
+            // ==========================================
+            showToast(msg, isError = false) { 
+                const t = document.getElementById('toast'); 
+                const icon = document.getElementById('toast-icon');
+                
+                document.getElementById('toast-message').innerText = msg;
+                
+                if(isError) {
+                    icon.classList.replace('bg-brand-50', 'bg-red-50');
+                    icon.classList.replace('text-brand-500', 'text-red-500');
+                    icon.innerHTML = '<i class="fas fa-times"></i>';
+                } else {
+                    icon.classList.replace('bg-red-50', 'bg-brand-50');
+                    icon.classList.replace('text-red-500', 'text-brand-500');
+                    icon.innerHTML = '<i class="fas fa-check"></i>';
+                }
+
+                t.classList.remove('translate-y-48'); 
+                setTimeout(() => t.classList.add('translate-y-48'), 3000); 
+            },
+
+            createSparkles(containerId, particleCount) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                for (let i = 0; i < particleCount; i++) {
+                    let sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    // Tamanho maior para as estrelas ficarem visíveis e brilhantes
+                    let size = Math.random() * 12 + 8; 
+                    sparkle.style.width = size + 'px';
+                    sparkle.style.height = size + 'px';
+                    sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    sparkle.style.animationDelay = (Math.random() * 4) + 's';
+                    container.appendChild(sparkle);
+                }
             }
         };
-        app.init();
+
+        // Inicialização Segura Profissional
+        document.addEventListener("DOMContentLoaded", () => {
+            app.init();
+        });
     </script>
 </body>
 </html>
