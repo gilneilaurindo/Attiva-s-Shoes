@@ -100,14 +100,52 @@
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animação do Slider da Boutique */
+        .boutique-slider { position: relative; width: 100%; height: 100%; }
+        .boutique-slide { 
+            position: absolute; 
+            inset: 0; 
+            opacity: 0; 
+            transition: opacity 1.5s ease-in-out; 
+            object-fit: cover; 
+            width: 100%; 
+            height: 100%; 
+        }
+        .boutique-slide.active { opacity: 1; }
+
+        /* Animação de Brilhos Rosa */
+        .sparkles-container {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 5;
+        }
+        .sparkle {
+            position: absolute;
+            background-color: #f9e6e7; /* Rosa claro da marca */
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(182, 123, 126, 0.6); /* Brilho rosa escuro */
+            opacity: 0;
+            animation: floatAndTwinkle linear infinite;
+        }
+        @keyframes floatAndTwinkle {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { opacity: 0.8; transform: translateY(-30px) scale(1.2); }
+            100% { transform: translateY(-60px) scale(0); opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
     <!-- Preloader -->
     <div id="preloader">
-        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo" alt="Attiva's Shoes">
-        <div class="mt-8 w-32 h-[1px] bg-slate-100 relative overflow-hidden rounded-full">
+        <!-- Container dos Brilhos Mágicos do Preloader -->
+        <div id="preloader-sparkles" class="sparkles-container"></div>
+        
+        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo relative z-10" alt="Attiva's Shoes">
+        <div class="mt-8 w-32 h-[1px] bg-slate-100 relative overflow-hidden rounded-full z-10">
             <div class="absolute inset-0 bg-brand-500 w-0 animate-[load_1.5s_ease-in-out_forwards]"></div>
         </div>
     </div>
@@ -149,7 +187,10 @@
                          class="absolute inset-0 w-full h-full object-cover opacity-70" 
                          alt="Coleção 2026"
                          fetchpriority="high">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-transparent to-transparent"></div>
+                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/30 to-transparent"></div>
+                    
+                    <!-- Container dos Brilhos Mágicos -->
+                    <div id="hero-sparkles" class="sparkles-container"></div>
                     
                     <div class="relative z-10 p-6 md:p-24 text-white w-full">
                         <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full mb-4 inline-block border border-white/10">Trend 2026</span>
@@ -212,7 +253,7 @@
                 </div>
             </section>
 
-            <!-- QUEM SOMOS -->
+            <!-- QUEM SOMOS (Com Slider Animado) -->
             <section id="about" class="max-w-7xl mx-auto px-4 py-10 md:py-24">
                 <div class="bg-white rounded-[3rem] p-6 md:p-20 border border-brand-100 flex flex-col lg:flex-row gap-10 md:gap-20 items-center shadow-premium">
                     <div class="lg:w-1/2 w-full">
@@ -234,11 +275,122 @@
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full h-64 md:h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-brand-50">
-                        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="w-full h-full object-cover" loading="lazy">
+                    <!-- Slider Animado -->
+                    <div class="lg:w-1/2 w-full h-64 md:h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-brand-50 relative">
+                        <div class="boutique-slider" id="boutique-slider">
+                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="boutique-slide active" alt="Attiva's Shoes Boutique">
+                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
+                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
+                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
+                        </div>
                     </div>
                 </div>
             </section>
+
+            <!-- LOCALIZAÇÃO -->
+            <section id="location" class="max-w-7xl mx-auto px-4 py-8 md:py-16">
+                <div class="bg-brand-900 rounded-[3rem] p-6 md:p-16 flex flex-col md:flex-row items-center gap-10 shadow-premium text-white relative overflow-hidden" data-aos="fade-up">
+                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    
+                    <!-- Container dos Brilhos Mágicos da Localização -->
+                    <div id="location-sparkles" class="sparkles-container"></div>
+
+                    <div class="w-full md:w-1/2 space-y-6 relative z-10">
+                        <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full inline-block border border-white/10">Nossa Localização</span>
+                        <h2 class="text-3xl md:text-6xl font-serif italic leading-tight">Venha nos fazer<br>uma visita.</h2>
+                        <p class="text-white/80 font-light text-sm md:text-lg leading-relaxed">
+                            Estamos localizados no coração de São Miguel/RN. Um espaço acolhedor e pensado em cada detalhe para oferecer a você a melhor experiência em calçados femininos.
+                        </p>
+                        <div class="flex items-center gap-4 mt-6 bg-white/5 p-4 rounded-2xl border border-white/10">
+                            <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shrink-0 shadow-lg"><i class="fas fa-map-marker-alt text-xl"></i></div>
+                            <div>
+                                <p class="font-bold text-sm md:text-base">Centro, São Miguel - RN</p>
+                                <p class="text-[10px] md:text-xs text-white/60 uppercase tracking-widest mt-1">Atendimento presencial e retirada</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-1/2 h-64 md:h-[400px] rounded-[2rem] overflow-hidden border-4 border-white/10 relative z-10 shadow-2xl">
+                        <!-- Mapa do Google Incorporado para São Miguel/RN -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15837.262502693723!2d-38.3079965!3d-6.2163351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a2dce23e42100d%3A0xc39f9972c3d1000!2zU8OjbyBNaWd1ZWwsIFJO!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DEPOIMENTOS DE CLIENTES -->
+            <section id="testimonials" class="max-w-7xl mx-auto px-4 py-10 md:py-24 overflow-hidden">
+                <div class="text-center mb-12 md:mb-20">
+                    <span class="text-brand-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-4 block" data-aos="fade-up">Experiências Reais</span>
+                    <h2 class="font-serif text-3xl md:text-6xl text-slate-900 italic tracking-tighter uppercase leading-none" data-aos="fade-up" data-aos-delay="100">
+                        O que dizem<br>nossas clientes.
+                    </h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
+                    <!-- Depoimento 1 -->
+                    <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="200">
+                        <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
+                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
+                            "Comprei o Scarpin Rosé e estou simplesmente apaixonada! A entrega aqui no centro de São Miguel foi super rápida e o atendimento pelo WhatsApp foi impecável. Conforto e elegância que valem cada centavo."
+                        </p>
+                        <div class="flex items-center gap-4 mt-auto">
+                            <!-- FOTO DA CLIENTE 1 -->
+                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Letícia Oliveira" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Letícia Oliveira</p>
+                                <p class="text-[8px] text-slate-400 uppercase mt-0.5">Cliente Verificada</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 2 -->
+                    <div class="bg-brand-50 p-8 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-md relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="300">
+                        <div class="absolute -top-6 right-10 text-brand-200 text-6xl opacity-50 font-serif">"</div>
+                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-700 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-medium italic">
+                            "A melhor boutique da região! As bolsas têm um acabamento premium perfeito. Precisava de um calçado para uma festa de última hora e elas me salvaram enviando rápido para o sítio."
+                        </p>
+                        <div class="flex items-center gap-4 mt-auto">
+                            <!-- FOTO DA CLIENTE 2 -->
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Mariana Costa" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-white">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-900">Mariana Costa</p>
+                                <p class="text-[8px] text-brand-500 uppercase mt-0.5">Cliente Fiel</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Depoimento 3 -->
+                    <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="400">
+                        <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
+                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
+                            "Minha primeira compra na Attiva's e já virei fã. A rasteirinha da coleção nova é super versátil e confortável pro dia a dia. Todo o processo de compra pelo site foi fácil e seguro."
+                        </p>
+                        <div class="flex items-center gap-4 mt-auto">
+                            <!-- FOTO DA CLIENTE 3 -->
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Aline Fernandes" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
+                            <div>
+                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Aline Fernandes</p>
+                                <p class="text-[8px] text-slate-400 uppercase mt-0.5">Cliente Verificada</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RODAPÉ -->
+            <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100 text-center">
+                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                    &copy; 2026 Attiva's. Todos os direitos reservados.
+                </p>
+            </footer>
         </div>
 
         <!-- CHECKOUT -->
@@ -324,8 +476,15 @@
             currentCat: 'all',
             slideIdx: 0,
             autoSlide: null,
+            boutiqueSlideIdx: 0,
 
             init() {
+                // Inicia os brilhos antes da tela carregar totalmente
+                const isMobile = window.innerWidth < 768;
+                this.createSparkles('preloader-sparkles', isMobile ? 20 : 40);
+                this.createSparkles('hero-sparkles', isMobile ? 25 : 50);
+                this.createSparkles('location-sparkles', isMobile ? 15 : 30);
+
                 window.onload = () => {
                     setTimeout(() => {
                         const loader = document.getElementById('preloader');
@@ -333,19 +492,57 @@
                         setTimeout(() => loader.style.visibility = 'hidden', 500);
                         AOS.init({ duration: 800, once: true });
                         this.startSlider();
+                        this.startBoutiqueSlider(); // Inicia o novo slider da seção Sobre
                     }, 800);
                 };
                 this.render();
             },
 
-            startSlider() { this.autoSlide = setInterval(() => this.nextSlide(), 4500); },
+            // Gerador de Brilhos Rosa Dinâmico
+            createSparkles(containerId, particleCount) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
 
+                for (let i = 0; i < particleCount; i++) {
+                    let sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    
+                    // Posição aleatória
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    
+                    // Tamanho aleatório (entre 2px e 6px)
+                    let size = Math.random() * 4 + 2;
+                    sparkle.style.width = size + 'px';
+                    sparkle.style.height = size + 'px';
+                    
+                    // Duração e delay aleatórios para parecer natural
+                    sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    sparkle.style.animationDelay = (Math.random() * 4) + 's';
+                    
+                    container.appendChild(sparkle);
+                }
+            },
+
+            // Slider original (caso use em alguma parte no futuro)
+            startSlider() { this.autoSlide = setInterval(() => this.nextSlide(), 4500); },
             nextSlide() {
                 const slides = document.querySelectorAll('.slide');
                 if(!slides.length) return;
                 slides[this.slideIdx].classList.remove('active');
                 this.slideIdx = (this.slideIdx + 1) % slides.length;
                 slides[this.slideIdx].classList.add('active');
+            },
+
+            // Novo Slider Animado da Boutique
+            startBoutiqueSlider() {
+                setInterval(() => {
+                    const slides = document.querySelectorAll('.boutique-slide');
+                    if(!slides.length) return;
+                    slides[this.boutiqueSlideIdx].classList.remove('active');
+                    this.boutiqueSlideIdx = (this.boutiqueSlideIdx + 1) % slides.length;
+                    slides[this.boutiqueSlideIdx].classList.add('active');
+                }, 3500); // Troca a cada 3.5 segundos
             },
 
             render() {
@@ -393,6 +590,12 @@
                 if (exist) exist.qty++; else this.cart.push({ ...p, qty: 1 });
                 this.updateUI();
                 this.showToast();
+                
+                // VIBRAÇÃO (Haptic Feedback) - 50 milissegundos
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+
                 const icon = document.getElementById('cart-icon-container');
                 icon.classList.add('animate-bounce');
                 setTimeout(() => icon.classList.remove('animate-bounce'), 500);
@@ -475,6 +678,11 @@
                 if(!n || !a) {
                     alert("Por favor, preencha o seu nome e endereço.");
                     return;
+                }
+
+                // VIBRAÇÃO DE SUCESSO AO FINALIZAR (vibra, pausa, vibra)
+                if (navigator.vibrate) {
+                    navigator.vibrate([100, 50, 100]);
                 }
 
                 let msg = `*📋 FORMULÁRIO DE PEDIDO - ATTIVA’S SHOES*%0A%0A`;
