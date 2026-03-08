@@ -85,7 +85,6 @@
         .sparkles-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
         .sparkle {
             position: absolute; background-color: #f9e6e7;
-            /* Recorte mágico em forma de estrela/brilho de 4 pontas */
             clip-path: polygon(50% 0%, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0% 50%, 40% 40%);
             opacity: 0;
             filter: drop-shadow(0 0 5px rgba(182, 123, 126, 0.8));
@@ -97,24 +96,19 @@
             100% { transform: translateY(-60px) scale(0); opacity: 0; }
         }
         
-        /* Estilo para input de ficheiro premium */
         input[type=file]::file-selector-button {
-            border: none;
-            background: #b67b7e;
-            padding: 8px 16px;
-            border-radius: 8px;
-            color: #fff;
-            cursor: pointer;
-            transition: background .2s ease-in-out;
-            font-size: 10px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-right: 12px;
+            border: none; background: #b67b7e; padding: 8px 16px; border-radius: 8px;
+            color: #fff; cursor: pointer; transition: background .2s ease-in-out;
+            font-size: 10px; font-weight: bold; text-transform: uppercase;
+            letter-spacing: 0.1em; margin-right: 12px;
         }
-        input[type=file]::file-selector-button:hover {
-            background: #a36a6d;
-        }
+        input[type=file]::file-selector-button:hover { background: #a36a6d; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #fdf8f7; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #b67b7e; border-radius: 10px; }
+        
+        .size-btn.selected { background-color: #b67b7e; color: white; border-color: #b67b7e; }
+        .size-btn:disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
     </style>
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
@@ -146,7 +140,7 @@
                     <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-4 md:px-8 py-2 md:py-3.5 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-md">
                         Loja
                     </button>
-                    <!-- Botão de Sair do modo Gestão (oculto por defeito) -->
+                    <!-- Botão de Sair do modo Gestão -->
                     <button id="btn-logout" onclick="app.auth.logout()" class="hidden text-brand-900 hover:text-brand-500 text-sm font-bold uppercase tracking-widest transition">
                         <i class="fas fa-sign-out-alt"></i> Sair
                     </button>
@@ -182,27 +176,26 @@
                 </div>
             </section>
 
-            <!-- Vitrine Dinâmica (Integrada ao Supabase) -->
+            <!-- Vitrine Dinâmica -->
             <section id="products" class="max-w-7xl mx-auto px-3 py-10 md:py-24 relative">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-20 gap-6">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12 gap-6">
                     <div class="text-center md:text-left flex items-center gap-4">
-                        <h2 class="font-serif text-3xl md:text-7xl text-slate-900 italic tracking-tighter uppercase leading-none">Coleção Boutique</h2>
+                        <h2 class="font-serif text-3xl md:text-7xl text-slate-900 italic tracking-tighter uppercase leading-none">Coleção</h2>
                         
                         <!-- Botão Adicionar Novo Produto (Exclusivo da Administração) -->
                         <button id="btn-add-product" onclick="app.admin.openForm()" class="hidden bg-green-500 text-white w-10 h-10 md:w-12 md:h-12 rounded-full items-center justify-center hover:bg-green-600 transition shadow-lg shrink-0" title="Adicionar Novo Produto">
                             <i class="fas fa-plus"></i>
                         </button>
                     </div>
-                    <!-- Filtros -->
-                    <div class="w-full md:w-auto flex gap-2 overflow-x-auto no-scrollbar pb-1">
-                        <button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-xl transition shadow-sm shrink-0">Tudo</button>
-                        <button onclick="app.filter('Salto')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0">Saltos</button>
-                        <button onclick="app.filter('Sandália')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0">Sandálias</button>
-                        <button onclick="app.filter('Bolsas')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0">Bolsas</button>
+                </div>
+                
+                <!-- Filtros Dinâmicos -->
+                <div class="w-full overflow-x-auto no-scrollbar pb-6 mb-6 border-b border-brand-100">
+                    <div id="category-filters" class="flex gap-2 w-max">
+                        <!-- Gerado via JS -->
                     </div>
                 </div>
                 
-                <!-- Aqui os produtos serão inseridos magicamente pelo Supabase -->
                 <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-10 md:gap-y-20">
                     <div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">
                         A carregar coleção... <i class="fas fa-spinner fa-spin ml-2"></i>
@@ -237,7 +230,7 @@
                 </div>
             </section>
 
-            <!-- QUEM SOMOS (Com Slider Animado) -->
+            <!-- QUEM SOMOS -->
             <section id="about" class="max-w-7xl mx-auto px-4 py-10 md:py-24">
                 <div class="bg-white rounded-[3rem] p-6 md:p-20 border border-brand-100 flex flex-col lg:flex-row gap-10 md:gap-20 items-center shadow-premium">
                     <div class="lg:w-1/2 w-full">
@@ -259,7 +252,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Slider Animado -->
                     <div class="lg:w-1/2 w-full h-64 md:h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-brand-50 relative">
                         <div class="boutique-slider" id="boutique-slider">
                             <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="boutique-slide active" alt="Attiva's Shoes Boutique">
@@ -271,97 +263,11 @@
                 </div>
             </section>
 
-            <!-- LOCALIZAÇÃO -->
-            <section id="location" class="max-w-7xl mx-auto px-4 py-8 md:py-16">
-                <div class="bg-brand-900 rounded-[3rem] p-6 md:p-16 flex flex-col md:flex-row items-center gap-10 shadow-premium text-white relative overflow-hidden" data-aos="fade-up">
-                    <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                    <div id="location-sparkles" class="sparkles-container"></div>
-                    <div class="w-full md:w-1/2 space-y-6 relative z-10">
-                        <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-widest bg-white/10 backdrop-blur-md px-4 py-2 rounded-full inline-block border border-white/10">Nossa Localização</span>
-                        <h2 class="text-3xl md:text-6xl font-serif italic leading-tight">Venha nos fazer<br>uma visita.</h2>
-                        <p class="text-white/80 font-light text-sm md:text-lg leading-relaxed">
-                            Estamos localizados no coração de São Miguel/RN. Um espaço acolhedor e pensado em cada detalhe para oferecer a você a melhor experiência.
-                        </p>
-                        <div class="flex items-center gap-4 mt-6 bg-white/5 p-4 rounded-2xl border border-white/10">
-                            <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center shrink-0 shadow-lg"><i class="fas fa-map-marker-alt text-xl"></i></div>
-                            <div>
-                                <p class="font-bold text-sm md:text-base">Centro, São Miguel - RN</p>
-                                <p class="text-[10px] md:text-xs text-white/60 uppercase tracking-widest mt-1">Atendimento presencial e retirada</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 h-64 md:h-[400px] rounded-[2rem] overflow-hidden border-4 border-white/10 relative z-10 shadow-2xl">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15837.262502693723!2d-38.3079965!3d-6.2163351!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x7a2dce23e42100d%3A0xc39f9972c3d1000!2zU8OjbyBNaWd1ZWwsIFJO!5e0!3m2!1spt-BR!2sbr!4v1700000000000!5m2!1spt-BR!2sbr" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-                </div>
-            </section>
-
-            <!-- DEPOIMENTOS DE CLIENTES -->
-            <section id="testimonials" class="max-w-7xl mx-auto px-4 py-10 md:py-24 overflow-hidden">
-                <div class="text-center mb-12 md:mb-20">
-                    <span class="text-brand-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-4 block" data-aos="fade-up">Experiências Reais</span>
-                    <h2 class="font-serif text-3xl md:text-6xl text-slate-900 italic tracking-tighter uppercase leading-none" data-aos="fade-up" data-aos-delay="100">
-                        O que dizem<br>nossas clientes.
-                    </h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10">
-                    <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="200">
-                        <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
-                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
-                            "Comprei o Scarpin Rosé e estou simplesmente apaixonada! A entrega aqui no centro de São Miguel foi super rápida e o atendimento pelo WhatsApp foi impecável."
-                        </p>
-                        <div class="flex items-center gap-4 mt-auto">
-                            <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Letícia Oliveira" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Letícia Oliveira</p>
-                                <p class="text-[8px] text-slate-400 uppercase mt-0.5">Cliente Verificada</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-brand-50 p-8 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-md relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="300">
-                        <div class="absolute -top-6 right-10 text-brand-200 text-6xl opacity-50 font-serif">"</div>
-                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-slate-700 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-medium italic">
-                            "A melhor boutique da região! As bolsas têm um acabamento premium perfeito. Precisava de um calçado para uma festa de última hora e elas me salvaram."
-                        </p>
-                        <div class="flex items-center gap-4 mt-auto">
-                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Mariana Costa" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-white">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-900">Mariana Costa</p>
-                                <p class="text-[8px] text-brand-500 uppercase mt-0.5">Cliente Fiel</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bg-white p-8 md:p-12 rounded-[2.5rem] border border-brand-50 shadow-sm relative group hover:-translate-y-2 transition duration-500" data-aos="fade-up" data-aos-delay="400">
-                        <div class="absolute -top-6 right-10 text-brand-100 text-6xl opacity-50 font-serif">"</div>
-                        <div class="flex text-yellow-400 text-xs mb-6 gap-1">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-8 relative z-10 font-light">
-                            "Minha primeira compra na Attiva's e já virei fã. A rasteirinha da coleção nova é super versátil e confortável pro dia a dia."
-                        </p>
-                        <div class="flex items-center gap-4 mt-auto">
-                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Aline Fernandes" class="w-12 h-12 rounded-full object-cover shadow-md border-2 border-brand-100">
-                            <div>
-                                <p class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Aline Fernandes</p>
-                                <p class="text-[8px] text-slate-400 uppercase mt-0.5">Cliente Verificada</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Rodapé e Acesso Secreto à Gestão -->
+            <!-- Rodapé e Acesso Secreto -->
             <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100 text-center flex flex-col items-center justify-center gap-4">
                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     &copy; 2026 Attiva's. Todos os direitos reservados.
                 </p>
-                <!-- O botão do cadeado abre o modo Gestão para a sua cliente -->
                 <button onclick="app.auth.toggleLoginModal()" class="text-slate-300 hover:text-brand-500 transition opacity-50 hover:opacity-100 p-2" title="Acesso à Gestão">
                     <i class="fas fa-lock text-sm"></i>
                 </button>
@@ -421,6 +327,23 @@
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-brand-900/20 backdrop-blur-sm z-[900] hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
 
+    <!-- MODAL SELEÇÃO DE TAMANHO (Para Cliente) -->
+    <div id="modal-size" class="fixed inset-0 bg-brand-900/60 backdrop-blur-md z-[1500] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-premium border border-brand-100 text-center relative">
+            <button onclick="app.closeSizeModal()" class="absolute top-4 right-6 text-2xl text-slate-400 hover:text-slate-800">&times;</button>
+            <h3 class="font-serif text-2xl italic mb-2" id="modal-size-title">Escolha o Tamanho</h3>
+            <p class="text-[10px] text-slate-400 uppercase tracking-widest mb-6" id="modal-size-subtitle">Disponibilidade em tempo real</p>
+            
+            <div id="size-options-container" class="grid grid-cols-4 gap-3 mb-8">
+                <!-- Tamanhos gerados via JS -->
+            </div>
+            
+            <button id="btn-confirm-size" class="w-full bg-brand-500 text-white font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition disabled:opacity-50" disabled>
+                Adicionar à Sacola
+            </button>
+        </div>
+    </div>
+
     <!-- MODAL DE LOGIN SECRETO (Para a Cliente) -->
     <div id="modal-login" class="fixed inset-0 bg-brand-900/40 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-md rounded-[3rem] p-8 shadow-premium border border-brand-100">
@@ -440,47 +363,68 @@
         </div>
     </div>
 
-    <!-- MODAL DE ADICIONAR/EDITAR PRODUTOS -->
-    <div id="modal-product" class="fixed inset-0 bg-brand-900/60 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-lg rounded-[2.5rem] p-6 md:p-10 shadow-premium border border-brand-100 max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <h3 id="modal-product-title" class="font-serif text-2xl md:text-3xl italic mb-6">Novo Produto</h3>
+    <!-- MODAL DE ADICIONAR/EDITAR PRODUTOS (Painel Pro) -->
+    <div id="modal-product" class="fixed inset-0 bg-brand-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] p-6 md:p-10 shadow-premium border border-brand-100 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+            <button onclick="app.admin.closeForm()" class="absolute top-6 right-6 text-2xl text-slate-400 hover:text-slate-800">&times;</button>
+            <h3 id="modal-product-title" class="font-serif text-2xl md:text-3xl italic mb-2">Novo Produto</h3>
+            <p class="text-[10px] uppercase tracking-widest text-brand-500 mb-6 font-bold">Gestão Profissional</p>
             
-            <form id="form-product" onsubmit="event.preventDefault(); app.admin.saveProduct();" class="space-y-4">
+            <form id="form-product" onsubmit="event.preventDefault(); app.admin.saveProduct();" class="space-y-6">
                 <input type="hidden" id="prod-id">
-                <input type="hidden" id="prod-img-url-old"> <!-- Guarda a URL antiga caso ela só edite o nome -->
+                <input type="hidden" id="prod-img-url-old">
                 
-                <div>
-                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Nome do Produto</label>
-                    <input type="text" id="prod-name" placeholder="Ex: Sandália Luxe" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
-                </div>
-                
-                <div class="grid grid-cols-2 gap-4">
+                <div class="bg-brand-50/50 p-6 rounded-3xl border border-brand-50 space-y-4">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800 mb-2 border-b border-brand-100 pb-2">Informações Básicas</h4>
                     <div>
-                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Preço (R$)</label>
-                        <input type="number" id="prod-price" step="0.01" placeholder="0.00" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Nome do Produto</label>
+                        <input type="text" id="prod-name" placeholder="Ex: Sandália Luxe" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
                     </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Preço (R$)</label>
+                            <input type="number" id="prod-price" step="0.01" placeholder="0.00" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
+                        </div>
+                        <div>
+                            <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Categoria</label>
+                            <select id="prod-category" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
+                                <!-- Gerado via JS -->
+                            </select>
+                        </div>
+                    </div>
+
                     <div>
-                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Categoria</label>
-                        <select id="prod-category" class="w-full bg-brand-50 border-0 rounded-xl p-4 outline-none text-sm font-medium mt-1" required>
-                            <option value="Salto">Salto</option>
-                            <option value="Sandália">Sandália</option>
-                            <option value="Bolsas">Bolsas</option>
-                        </select>
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Foto do Produto</label>
+                        <div class="mt-1 relative bg-white border border-brand-50 rounded-xl p-2">
+                            <input type="file" id="prod-img-file" accept="image/*" class="w-full outline-none text-sm font-medium text-slate-600">
+                        </div>
+                        <p id="foto-aviso" class="text-[8px] text-brand-500 font-bold mt-1 ml-2">Tire uma foto ou escolha da galeria.</p>
                     </div>
                 </div>
 
-                <!-- NOVO INPUT: Tirar Foto ou Escolher Arquivo -->
-                <div>
-                    <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Foto do Produto</label>
-                    <div class="mt-1 relative">
-                        <input type="file" id="prod-img-file" accept="image/*" class="w-full bg-brand-50 border-0 rounded-xl p-3 outline-none text-sm font-medium text-slate-600">
+                <!-- CONTROLE DE ESTOQUE PROFISSIONAL -->
+                <div class="bg-white p-6 rounded-3xl border border-brand-100 shadow-sm space-y-4">
+                    <div class="flex justify-between items-center border-b border-brand-50 pb-2 mb-4">
+                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Controlo de Estoque</h4>
+                        <span class="text-[8px] text-slate-400 uppercase">Preencha com as quantidades disponíveis</span>
                     </div>
-                    <p id="foto-aviso" class="text-[8px] text-slate-400 mt-1 ml-2">Tire uma foto agora ou escolha da galeria.</p>
+                    
+                    <!-- Aba para calçados (tamanhos) -->
+                    <div id="stock-grid-shoes" class="grid grid-cols-4 gap-3">
+                        <!-- Inputs gerados via JS (33 ao 40) -->
+                    </div>
+                    
+                    <!-- Aba para tamanho único (bolsas, cintos) -->
+                    <div id="stock-grid-unique" class="hidden">
+                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Quantidade Total (Tamanho Único)</label>
+                        <input type="number" id="stock-unique" min="0" placeholder="Qtd" class="w-full bg-brand-50 border-0 rounded-xl p-3 outline-none text-sm font-bold mt-1 text-center">
+                    </div>
                 </div>
 
-                <div class="pt-4 flex gap-3">
+                <div class="pt-4 flex gap-3 sticky bottom-0 bg-white pb-2">
                     <button type="button" onclick="app.admin.closeForm()" class="flex-1 bg-slate-100 text-slate-500 font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest hover:bg-slate-200 transition">Cancelar</button>
-                    <button type="submit" id="btn-save-prod" class="flex-1 bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Guardar</button>
+                    <button type="submit" id="btn-save-prod" class="flex-[2] bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Salvar Alterações</button>
                 </div>
             </form>
         </div>
@@ -494,7 +438,6 @@
         <span id="toast-message" class="font-bold text-[10px] uppercase tracking-widest text-slate-700">Mensagem</span>
     </div>
 
-    <!-- Script Principal JavaScript -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // ==========================================
@@ -505,51 +448,71 @@
 
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+        // LISTA PROFISSIONAL DE CATEGORIAS
+        const CATEGORIAS = [
+            'Rasteira', 'Birken/Papete', 'Salto Alto', 'Voices', 'Meia Pata', 
+            'Plataforma', 'Anabela', 'Bolsas', 'Carteiras', 'Cintos', 
+            'Scarpin', 'Slingback', 'Dolmen', 'Salto Bloco', 'Sapatilha'
+        ];
+        // Categorias que não precisam de tamanho (33, 34...), apenas Tamanho Único
+        const CAT_TAMANHO_UNICO = ['Bolsas', 'Carteiras', 'Cintos'];
+
         const app = {
             allProducts: [],
             cart: [],
             currentCat: 'all',
             isAdmin: false,
             boutiqueSlideIdx: 0,
+            selectedProductForCart: null,
+            selectedSizeForCart: null,
 
             async init() {
-                // Inicia os brilhos mágicos do design premium imediatamente
                 const isMobile = window.innerWidth < 768;
                 this.createSparkles('preloader-sparkles', isMobile ? 20 : 40);
                 this.createSparkles('hero-sparkles', isMobile ? 25 : 50);
 
-                try {
-                    // 1. Verifica se a cliente fez login como Administradora
-                    await this.auth.checkSession();
+                this.renderCategories();
+                this.admin.setupStockInputs();
 
-                    // 2. Vai buscar os sapatos à sua nova tabela "produtos" no Supabase
+                try {
+                    await this.auth.checkSession();
                     await this.fetchProducts();
                 } catch (error) {
                     console.error("Erro na inicialização:", error);
-                    // Se houver um erro grave, tenta renderizar pelo menos uma mensagem na grelha
                     document.getElementById('product-grid').innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-red-400 text-xs font-bold uppercase tracking-widest">Erro ao ligar ao catálogo. Verifique a sua ligação.</div>`;
                 } finally {
-                    // O bloco 'finally' garante que o preloader vai SEMPRE desaparecer, 
-                    // mesmo que o Supabase dê erro ou não encontre produtos.
-                    window.onload = () => {
-                        setTimeout(() => this.hidePreloader(), 800);
-                    };
-                    
-                    // Se o window.onload já tiver disparado antes desta função terminar:
+                    window.onload = () => { setTimeout(() => this.hidePreloader(), 800); };
                     if (document.readyState === "complete") {
                         setTimeout(() => this.hidePreloader(), 800);
                     }
                 }
             },
-            
-            // Função auxiliar para esconder o ecrã de carregamento com segurança
+
+            // RENDERIZA OS FILTROS E OPÇÕES DE CATEGORIA
+            renderCategories() {
+                // Filtros na Home
+                const filterContainer = document.getElementById('category-filters');
+                let htmlFilters = `<button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-xl transition shadow-sm shrink-0 border border-brand-100">Tudo</button>`;
+                CATEGORIAS.forEach(cat => {
+                    htmlFilters += `<button onclick="app.filter('${cat}')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0 border border-transparent hover:border-brand-50">${cat}</button>`;
+                });
+                filterContainer.innerHTML = htmlFilters;
+
+                // Select no Admin
+                const selectCat = document.getElementById('prod-category');
+                selectCat.innerHTML = CATEGORIAS.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+                
+                // Evento para alternar tipo de estoque dependendo da categoria no admin
+                selectCat.addEventListener('change', (e) => this.admin.toggleStockType(e.target.value));
+            },
+
             hidePreloader() {
                 const loader = document.getElementById('preloader');
                 if (loader) {
                     loader.style.opacity = '0';
                     setTimeout(() => {
                         loader.style.visibility = 'hidden';
-                        loader.style.display = 'none'; // Garante que é removido do fluxo visual
+                        loader.style.display = 'none';
                         AOS.init({ duration: 800, once: true });
                         this.startBoutiqueSlider();
                     }, 500);
@@ -566,24 +529,15 @@
                 }, 3500);
             },
 
-            // ==========================================
-            // LÓGICA DE AUTENTICAÇÃO (O CADEADO)
-            // ==========================================
             auth: {
-                toggleLoginModal() {
-                    document.getElementById('modal-login').classList.toggle('hidden');
-                },
+                toggleLoginModal() { document.getElementById('modal-login').classList.toggle('hidden'); },
                 async login() {
                     const email = document.getElementById('adm-email').value;
                     const password = document.getElementById('adm-password').value;
                     const btn = document.getElementById('btn-login-submit');
-                    
                     if(!email || !password) return app.showToast("Preencha todos os campos!", true);
-                    
                     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                    
-                    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
-                    
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
                     if (error) {
                         app.showToast("Erro: " + error.message, true);
                         btn.innerHTML = 'Iniciar Sessão';
@@ -592,10 +546,7 @@
                         setTimeout(() => location.reload(), 1000); 
                     }
                 },
-                async logout() {
-                    await supabaseClient.auth.signOut();
-                    location.reload();
-                },
+                async logout() { await supabaseClient.auth.signOut(); location.reload(); },
                 async checkSession() {
                     const { data: { session } } = await supabaseClient.auth.getSession();
                     if (session) {
@@ -607,10 +558,26 @@
                 }
             },
 
-            // ==========================================
-            // LÓGICA DA GERÊNCIA (ADICIONAR/EDITAR E UPLOAD DE FOTOS)
-            // ==========================================
             admin: {
+                setupStockInputs() {
+                    const container = document.getElementById('stock-grid-shoes');
+                    let html = '';
+                    for(let i = 33; i <= 40; i++) {
+                        html += `
+                        <div class="bg-brand-50 p-2 rounded-xl text-center border border-brand-100/50">
+                            <label class="block text-[8px] font-bold text-brand-500 mb-1">Tam ${i}</label>
+                            <input type="number" id="stock-size-${i}" min="0" placeholder="0" class="w-full text-center bg-white border-0 rounded-lg p-1.5 text-xs font-bold text-slate-700 outline-none">
+                        </div>`;
+                    }
+                    container.innerHTML = html;
+                },
+
+                toggleStockType(category) {
+                    const isUnique = CAT_TAMANHO_UNICO.includes(category);
+                    document.getElementById('stock-grid-shoes').classList.toggle('hidden', isUnique);
+                    document.getElementById('stock-grid-unique').classList.toggle('hidden', !isUnique);
+                },
+
                 openForm(id = null) {
                     const modal = document.getElementById('modal-product');
                     const form = document.getElementById('form-product');
@@ -620,6 +587,10 @@
                     document.getElementById('prod-id').value = '';
                     document.getElementById('prod-img-url-old').value = '';
                     document.getElementById('foto-aviso').innerText = "Tire uma foto agora ou escolha da galeria.";
+                    
+                    // Resetar Estoque
+                    for(let i=33; i<=40; i++) document.getElementById(`stock-size-${i}`).value = '';
+                    document.getElementById('stock-unique').value = '';
 
                     if (id) {
                         title.innerText = "Editar Produto";
@@ -631,15 +602,29 @@
                             document.getElementById('prod-category').value = p.category;
                             document.getElementById('prod-img-url-old').value = p.img;
                             document.getElementById('foto-aviso').innerText = "Deixe vazio para manter a foto atual.";
+                            
+                            this.toggleStockType(p.category);
+                            
+                            // Preencher estoque
+                            let stockObj = p.estoque || {};
+                            if(typeof stockObj === 'string') stockObj = JSON.parse(stockObj);
+
+                            if(CAT_TAMANHO_UNICO.includes(p.category)) {
+                                document.getElementById('stock-unique').value = stockObj['Único'] || 0;
+                            } else {
+                                for(let i=33; i<=40; i++) {
+                                    document.getElementById(`stock-size-${i}`).value = stockObj[i] || '';
+                                }
+                            }
                         }
                     } else {
                         title.innerText = "Novo Produto";
+                        this.toggleStockType(document.getElementById('prod-category').value);
                     }
                     modal.classList.remove('hidden');
                 },
-                closeForm() {
-                    document.getElementById('modal-product').classList.add('hidden');
-                },
+
+                closeForm() { document.getElementById('modal-product').classList.add('hidden'); },
                 
                 async saveProduct() {
                     const btn = document.getElementById('btn-save-prod');
@@ -649,50 +634,53 @@
                     const fileInput = document.getElementById('prod-img-file');
                     let finalImageUrl = document.getElementById('prod-img-url-old').value;
 
-                    // 1. Lógica para fazer o Upload da nova foto (se ela escolheu alguma)
+                    // UPLOAD DA FOTO
                     if (fileInput.files.length > 0) {
                         const file = fileInput.files[0];
-                        const fileExt = file.name.split('.').pop();
-                        const fileName = `${Date.now()}.${fileExt}`; // Cria um nome único para a foto
+                        const fileName = `${Date.now()}.${file.name.split('.').pop()}`;
+                        app.showToast("A enviar fotografia...");
                         
-                        app.showToast("A enviar fotografia para a nuvem...");
-                        
-                        // Faz o upload para a pasta "fotos" no Supabase
                         const { data: uploadData, error: uploadError } = await supabaseClient.storage
-                            .from('fotos')
-                            .upload(fileName, file);
+                            .from('fotos').upload(fileName, file);
                             
                         if (uploadError) {
                             app.showToast("Erro ao enviar foto: " + uploadError.message, true);
-                            btn.innerHTML = 'Guardar';
+                            btn.innerHTML = 'Salvar Alterações';
                             return;
                         }
-                        
-                        // Pega o link público da imagem que acabou de subir
-                        const { data: publicUrlData } = supabaseClient.storage
-                            .from('fotos')
-                            .getPublicUrl(fileName);
-                            
+                        const { data: publicUrlData } = supabaseClient.storage.from('fotos').getPublicUrl(fileName);
                         finalImageUrl = publicUrlData.publicUrl;
                     }
 
-                    // Se for produto novo e ela não tirou foto, avisa:
                     if (!id && !finalImageUrl) {
                         app.showToast("Por favor, adicione uma foto do produto!", true);
-                        btn.innerHTML = 'Guardar';
+                        btn.innerHTML = 'Salvar Alterações';
                         return;
                     }
 
-                    // 2. Lógica para guardar os dados na tabela (com o link da foto atualizado)
+                    // CONSTRUIR OBJETO DE ESTOQUE
+                    const cat = document.getElementById('prod-category').value;
+                    let estoque = {};
+                    
+                    if (CAT_TAMANHO_UNICO.includes(cat)) {
+                        const val = parseInt(document.getElementById('stock-unique').value) || 0;
+                        if(val > 0) estoque['Único'] = val;
+                    } else {
+                        for(let i=33; i<=40; i++) {
+                            const val = parseInt(document.getElementById(`stock-size-${i}`).value);
+                            if(val > 0) estoque[i.toString()] = val;
+                        }
+                    }
+
                     const productData = {
                         name: document.getElementById('prod-name').value,
                         price: parseFloat(document.getElementById('prod-price').value),
-                        category: document.getElementById('prod-category').value,
-                        img: finalImageUrl
+                        category: cat,
+                        img: finalImageUrl,
+                        estoque: estoque // O Supabase vai salvar isso como JSON na nova coluna
                     };
 
                     let errorInfo = null;
-
                     if (id) {
                         const { error } = await supabaseClient.from('produtos').update(productData).eq('id', id);
                         errorInfo = error;
@@ -702,37 +690,27 @@
                     }
 
                     if (errorInfo) {
-                        app.showToast("Erro ao guardar dados: " + errorInfo.message, true);
+                        app.showToast("Erro ao guardar: " + errorInfo.message, true);
                     } else {
                         app.showToast("Produto guardado com sucesso!");
                         this.closeForm();
-                        app.fetchProducts(); // Atualiza a vitrine
+                        app.fetchProducts(); 
                     }
-                    btn.innerHTML = 'Guardar';
+                    btn.innerHTML = 'Salvar Alterações';
                 },
 
                 async deleteProduct(id) {
-                    if(!confirm("Tem a certeza que deseja eliminar este produto definitivamente?")) return;
-                    
-                    app.showToast("A eliminar produto...");
+                    if(!confirm("Tem a certeza que deseja eliminar este produto?")) return;
+                    app.showToast("A eliminar...");
                     const { error } = await supabaseClient.from('produtos').delete().eq('id', id);
-                    if(error) {
-                        app.showToast("Erro ao eliminar.", true);
-                    } else {
-                        app.showToast("Produto eliminado!");
-                        app.fetchProducts();
-                    }
+                    if(error) app.showToast("Erro ao eliminar.", true);
+                    else { app.showToast("Eliminado!"); app.fetchProducts(); }
                 }
             },
 
-            // ==========================================
-            // LER DADOS DO SUPABASE E MOSTRAR NO ECRÃ
-            // ==========================================
             async fetchProducts() {
                 const { data, error } = await supabaseClient
-                    .from('produtos')
-                    .select('*')
-                    .order('id', { ascending: false }); // O mais recente fica no topo
+                    .from('produtos').select('*').order('id', { ascending: false });
 
                 if (error) {
                     console.error("Erro a carregar:", error.message);
@@ -742,6 +720,13 @@
                 this.render();
             },
 
+            // FUNÇÃO AUXILIAR PARA CALCULAR ESTOQUE TOTAL DE UM PRODUTO
+            getTotalStock(estoque) {
+                if(!estoque) return 0;
+                let stockObj = typeof estoque === 'string' ? JSON.parse(estoque) : estoque;
+                return Object.values(stockObj).reduce((sum, val) => sum + parseInt(val), 0);
+            },
+
             render() {
                 const grid = document.getElementById('product-grid');
                 const filtered = this.currentCat === 'all' 
@@ -749,74 +734,165 @@
                     : this.allProducts.filter(p => p.category === this.currentCat);
 
                 if(filtered.length === 0) {
-                    grid.innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">Nenhum produto encontrado nesta categoria.</div>`;
+                    grid.innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">Nenhum produto nesta categoria.</div>`;
                     return;
                 }
 
-                grid.innerHTML = filtered.map((p, i) => `
-                    <div class="reveal bg-white rounded-3xl border border-brand-50 shadow-sm transition-all duration-300 group overflow-hidden flex flex-col h-full relative" data-aos="fade-up" data-aos-delay="${i * 30}">
+                grid.innerHTML = filtered.map((p, i) => {
+                    const totalStock = this.getTotalStock(p.estoque);
+                    const isEsgotado = totalStock <= 0;
+                    
+                    let sizesBadge = '';
+                    if(!isEsgotado && p.estoque) {
+                        let stockObj = typeof p.estoque === 'string' ? JSON.parse(p.estoque) : p.estoque;
+                        const availableSizes = Object.keys(stockObj).filter(k => stockObj[k] > 0);
+                        if(availableSizes.length > 0 && !CAT_TAMANHO_UNICO.includes(p.category)) {
+                            sizesBadge = `<p class="text-[8px] md:text-[10px] text-slate-400 mt-1 truncate">Tam: ${availableSizes.join(', ')}</p>`;
+                        } else if(CAT_TAMANHO_UNICO.includes(p.category)) {
+                            sizesBadge = `<p class="text-[8px] md:text-[10px] text-slate-400 mt-1">Tamanho Único</p>`;
+                        }
+                    }
+
+                    return `
+                    <div class="reveal bg-white rounded-3xl border border-brand-50 shadow-sm transition-all duration-300 group overflow-hidden flex flex-col h-full relative ${isEsgotado ? 'opacity-70' : ''}" data-aos="fade-up" data-aos-delay="${i * 30}">
                         
                         ${this.isAdmin ? `
-                            <!-- Botões de Admin sobrepostos na fotografia -->
                             <div class="absolute top-2 right-2 z-20 flex flex-col gap-2">
-                                <button onclick="app.admin.openForm(${p.id})" class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-600 transition" title="Editar">
+                                <button onclick="app.admin.openForm(${p.id})" class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-600 transition">
                                     <i class="fas fa-pen text-xs"></i>
                                 </button>
-                                <button onclick="app.admin.deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-600 transition" title="Eliminar">
+                                <button onclick="app.admin.deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-600 transition">
                                     <i class="fas fa-trash text-xs"></i>
                                 </button>
                             </div>
                         ` : ''}
 
-                        <div class="product-card-img relative overflow-hidden h-44 md:h-[400px] bg-brand-50 cursor-pointer" onclick="app.add(${p.id})">
+                        <div class="product-card-img relative overflow-hidden h-44 md:h-[400px] bg-brand-50 cursor-pointer" onclick="app.openSizeModal(${p.id})">
                             <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80'" loading="lazy">
-                            <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center pointer-events-none">
-                                <div class="bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[8px] font-bold text-brand-500 uppercase tracking-widest shadow-xl">
-                                    Adicionar
+                            
+                            ${isEsgotado ? `
+                                <div class="absolute inset-0 bg-white/50 backdrop-blur-[2px] flex items-center justify-center">
+                                    <span class="bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">Esgotado</span>
                                 </div>
-                            </div>
+                            ` : `
+                                <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center pointer-events-none">
+                                    <div class="bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[8px] font-bold text-brand-500 uppercase tracking-widest shadow-xl">Comprar</div>
+                                </div>
+                            `}
                         </div>
                         <div class="p-4 md:p-8 flex flex-col flex-1">
-                            <h3 class="product-card-title font-medium text-slate-800 text-[10px] md:text-[13px] uppercase tracking-tight mb-2 md:mb-4">${p.name}</h3>
-                            <div class="flex items-center justify-between mt-auto md:pt-6 md:border-t border-brand-50">
+                            <h3 class="product-card-title font-medium text-slate-800 text-[10px] md:text-[13px] uppercase tracking-tight">${p.name}</h3>
+                            ${sizesBadge}
+                            
+                            <div class="flex items-center justify-between mt-auto pt-4 md:pt-6 md:border-t border-brand-50">
                                 <span class="font-serif italic text-sm md:text-3xl text-slate-900">R$ ${parseFloat(p.price).toFixed(2).replace('.', ',')}</span>
-                                <button onclick="app.add(${p.id})" class="bg-brand-500 text-white w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:bg-brand-600 transition shadow-md">
-                                    <i class="fas fa-plus text-[10px] md:text-base"></i>
-                                </button>
+                                ${!isEsgotado ? `
+                                    <button onclick="app.openSizeModal(${p.id})" class="bg-brand-500 text-white w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:bg-brand-600 transition shadow-md">
+                                        <i class="fas fa-plus text-[10px] md:text-base"></i>
+                                    </button>
+                                ` : ''}
                             </div>
                         </div>
                     </div>
-                `).join('');
+                `}).join('');
             },
 
             filter(cat) {
                 this.currentCat = cat;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    const active = btn.innerText.includes(cat) || (cat === 'all' && btn.innerText === 'Tudo');
-                    btn.classList.toggle('active', active);
-                    btn.classList.toggle('bg-white', active);
-                    btn.classList.toggle('text-brand-500', active);
-                    btn.classList.toggle('text-slate-400', !active);
-                    btn.classList.toggle('shadow-sm', active);
+                    const isCat = btn.innerText === cat;
+                    btn.classList.toggle('active', isCat);
+                    btn.classList.toggle('bg-white', isCat);
+                    btn.classList.toggle('text-brand-500', isCat);
+                    btn.classList.toggle('shadow-sm', isCat);
+                    btn.classList.toggle('border-brand-100', isCat);
+                    
+                    btn.classList.toggle('text-slate-400', !isCat);
+                    btn.classList.toggle('border-transparent', !isCat);
                 });
                 this.render();
             },
 
             // ==========================================
-            // LÓGICA DO CESTO DE COMPRAS E CHECKOUT
+            // LÓGICA DE TAMANHOS E CESTO
             // ==========================================
-            add(id) {
-                // Previne adicionar ao carrinho se a loja estiver em modo de edição
-                if(this.isAdmin) return; 
-                
+            openSizeModal(id) {
+                if(this.isAdmin) return;
                 const p = this.allProducts.find(i => i.id === id);
                 if(!p) return;
 
-                const exist = this.cart.find(item => item.id === id);
-                if (exist) exist.qty++; else this.cart.push({ ...p, qty: 1 });
+                let stockObj = p.estoque || {};
+                if(typeof stockObj === 'string') stockObj = JSON.parse(stockObj);
+                
+                if(this.getTotalStock(stockObj) <= 0) {
+                    this.showToast("Produto esgotado!", true);
+                    return;
+                }
+
+                this.selectedProductForCart = p;
+                this.selectedSizeForCart = null;
+                
+                document.getElementById('modal-size-title').innerText = p.name;
+                const container = document.getElementById('size-options-container');
+                const btnConfirm = document.getElementById('btn-confirm-size');
+                btnConfirm.disabled = true;
+
+                // Preparar HTML dos botões de tamanho
+                let html = '';
+                
+                if(CAT_TAMANHO_UNICO.includes(p.category)) {
+                    const qtd = stockObj['Único'] || 0;
+                    html = `<button onclick="app.selectSize('Único', ${qtd})" class="size-btn col-span-4 bg-white border border-brand-100 rounded-xl py-4 font-bold text-sm text-slate-700 hover:bg-brand-50 transition ${qtd <= 0 ? 'opacity-30' : ''}" ${qtd <= 0 ? 'disabled' : ''}>Tamanho Único (Disponível)</button>`;
+                } else {
+                    for(let i=33; i<=40; i++) {
+                        const qtd = stockObj[i.toString()] || 0;
+                        html += `
+                        <button onclick="app.selectSize('${i}', ${qtd})" class="size-btn bg-white border border-brand-100 rounded-xl py-3 font-bold text-sm text-slate-700 hover:border-brand-500 transition relative ${qtd <= 0 ? 'opacity-30 line-through' : ''}" ${qtd <= 0 ? 'disabled' : ''}>
+                            ${i}
+                        </button>`;
+                    }
+                }
+                
+                container.innerHTML = html;
+                btnConfirm.onclick = () => this.addToCart();
+                document.getElementById('modal-size').classList.remove('hidden');
+            },
+
+            selectSize(size, stockAvailable) {
+                this.selectedSizeForCart = { size, stockAvailable };
+                document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+                event.currentTarget.classList.add('selected');
+                document.getElementById('btn-confirm-size').disabled = false;
+            },
+
+            closeSizeModal() {
+                document.getElementById('modal-size').classList.add('hidden');
+                this.selectedProductForCart = null;
+                this.selectedSizeForCart = null;
+            },
+
+            addToCart() {
+                if(!this.selectedProductForCart || !this.selectedSizeForCart) return;
+                
+                const p = this.selectedProductForCart;
+                const s = this.selectedSizeForCart.size;
+                const maxStock = this.selectedSizeForCart.stockAvailable;
+
+                // Verifica se já tem no carrinho para controlar o estoque máximo
+                const exist = this.cart.find(item => item.id === p.id && item.size === s);
+                if (exist) {
+                    if (exist.qty >= maxStock) {
+                        this.showToast(`Desculpe, só temos ${maxStock} unidade(s) do tamanho ${s}!`, true);
+                        return;
+                    }
+                    exist.qty++;
+                } else {
+                    this.cart.push({ ...p, qty: 1, size: s, maxStock: maxStock });
+                }
                 
                 this.updateUI();
-                this.showToast(`${p.name} adicionado ao cesto!`);
+                this.closeSizeModal();
+                this.showToast(`${p.name} (Tam ${s}) adicionado!`);
                 if (navigator.vibrate) navigator.vibrate(50);
                 
                 const icon = document.getElementById('cart-icon-container');
@@ -837,14 +913,16 @@
                     list.innerHTML = `<div class="text-center py-10 text-slate-300 text-[10px] font-bold uppercase tracking-widest">A sua sacola está vazia</div>`;
                 } else {
                     list.innerHTML = this.cart.map((item, idx) => `
-                        <div class="flex gap-4 items-center bg-brand-50 p-4 rounded-3xl border border-brand-100">
+                        <div class="flex gap-4 items-center bg-brand-50 p-4 rounded-3xl border border-brand-100 relative">
+                            <button onclick="app.qty(${idx}, -${item.qty})" class="absolute -top-2 -right-2 bg-white text-slate-400 hover:text-red-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs border border-brand-100">&times;</button>
                             <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border border-white" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=150&q=80'" loading="lazy">
                             <div class="flex-1 min-w-0">
                                 <h4 class="font-bold text-slate-800 text-[10px] uppercase truncate">${item.name}</h4>
-                                <p class="text-brand-500 font-serif italic text-sm">R$ ${parseFloat(item.price).toFixed(2).replace('.', ',')}</p>
-                                <div class="flex items-center gap-4 mt-2">
+                                <p class="text-[9px] text-slate-500 uppercase tracking-widest">Tam: <strong class="text-brand-500">${item.size}</strong></p>
+                                <p class="text-brand-500 font-serif italic text-sm mt-1">R$ ${parseFloat(item.price).toFixed(2).replace('.', ',')}</p>
+                                <div class="flex items-center gap-3 mt-2">
                                     <button onclick="app.qty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-white border border-brand-100 flex items-center justify-center text-[8px] text-slate-400">-</button>
-                                    <span class="font-bold text-slate-700 text-[10px]">${item.qty}</span>
+                                    <span class="font-bold text-slate-700 text-[10px] w-4 text-center">${item.qty}</span>
                                     <button onclick="app.qty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-white border border-brand-100 flex items-center justify-center text-[8px] text-brand-500">+</button>
                                 </div>
                             </div>
@@ -854,8 +932,14 @@
             },
 
             qty(idx, d) { 
-                if(this.cart[idx].qty + d <= 0) this.cart.splice(idx, 1); 
-                else this.cart[idx].qty += d; 
+                const item = this.cart[idx];
+                if(item.qty + d <= 0) {
+                    this.cart.splice(idx, 1); 
+                } else if (item.qty + d > item.maxStock) {
+                    this.showToast(`Limite de estoque atingido! (${item.maxStock} unid.)`, true);
+                } else {
+                    item.qty += d; 
+                }
                 this.updateUI(); 
             },
 
@@ -870,19 +954,11 @@
             },
 
             showPage(p) {
-                // Esconde as páginas principais
-                ['home', 'checkout'].forEach(id => 
-                    document.getElementById(`page-${id}`).classList.add('hidden')
-                );
-
-                // Mostra a página solicitada
+                ['home', 'checkout'].forEach(id => document.getElementById(`page-${id}`).classList.add('hidden'));
                 document.getElementById(`page-${p}`).classList.remove('hidden');
-                
-                // Se for checkout, fecha o sidebar do carrinho se estiver aberto
                 if (p === 'checkout' && !document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
                     this.toggleCart();
                 }
-                
                 this.updateSummary();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             },
@@ -904,7 +980,7 @@
                     document.getElementById('sum-total').innerText = `R$ ${(sub + del).toFixed(2).replace('.', ',')}`;
                     summaryList.innerHTML = this.cart.map(i => `
                         <div class="flex justify-between text-[9px] uppercase tracking-wider text-white/50">
-                            <span class="truncate pr-2">${i.qty}x ${i.name}</span>
+                            <span class="truncate pr-2">${i.qty}x ${i.name} (Tam ${i.size})</span>
                             <span class="text-white shrink-0">R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}</span>
                         </div>
                     `).join('');
@@ -924,36 +1000,28 @@
 
                 if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
 
-                let msg = `*📋 FORMULÁRIO DE PEDIDO - ATTIVA’S SHOES*%0A%0A`;
-                msg += `*DADOS DO CLIENTE:*%0A• *Nome:* ${n.toUpperCase()}%0A• *Entrega:* ${dText}%0A• *Endereço/Ref:* ${a}%0A%0A`;
-                msg += `*ITENS ESCOLHIDOS:*%0A`;
+                let msg = `*📋 PEDIDO - ATTIVA’S SHOES*%0A%0A`;
+                msg += `*CLIENTE:*%0A• Nome: ${n.toUpperCase()}%0A• Entrega: ${dText}%0A• Endereço: ${a}%0A%0A`;
+                msg += `*ITENS:*%0A`;
                 this.cart.forEach(i => {
-                    msg += `• ${i.qty}x ${i.name.toUpperCase()} - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}%0A`;
+                    msg += `• ${i.qty}x ${i.name.toUpperCase()} (Tam: ${i.size}) - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}%0A`;
                 });
-                msg += `%0A*VALOR TOTAL: ${document.getElementById('sum-total').innerText}*%0A%0A_Enviado via Attiva's Boutique Online_`;
+                msg += `%0A*TOTAL: ${document.getElementById('sum-total').innerText}*%0A`;
                 
                 window.open(`https://wa.me/5584921626352?text=${msg}`);
             },
 
-            // ==========================================
-            // FUNÇÕES AUXILIARES VISUAIS
-            // ==========================================
             showToast(msg, isError = false) { 
                 const t = document.getElementById('toast'); 
                 const icon = document.getElementById('toast-icon');
-                
                 document.getElementById('toast-message').innerText = msg;
-                
                 if(isError) {
-                    icon.classList.replace('bg-brand-50', 'bg-red-50');
-                    icon.classList.replace('text-brand-500', 'text-red-500');
+                    icon.className = 'w-10 h-10 bg-red-50 text-red-500 rounded-full flex items-center justify-center shrink-0';
                     icon.innerHTML = '<i class="fas fa-times"></i>';
                 } else {
-                    icon.classList.replace('bg-red-50', 'bg-brand-50');
-                    icon.classList.replace('text-red-500', 'text-brand-500');
+                    icon.className = 'w-10 h-10 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center shrink-0';
                     icon.innerHTML = '<i class="fas fa-check"></i>';
                 }
-
                 t.classList.remove('translate-y-48'); 
                 setTimeout(() => t.classList.add('translate-y-48'), 3000); 
             },
@@ -966,7 +1034,6 @@
                     sparkle.className = 'sparkle';
                     sparkle.style.left = Math.random() * 100 + '%';
                     sparkle.style.top = Math.random() * 100 + '%';
-                    // Tamanho maior para as estrelas ficarem visíveis e brilhantes
                     let size = Math.random() * 12 + 8; 
                     sparkle.style.width = size + 'px';
                     sparkle.style.height = size + 'px';
@@ -977,10 +1044,7 @@
             }
         };
 
-        // Inicialização Segura Profissional
-        document.addEventListener("DOMContentLoaded", () => {
-            app.init();
-        });
+        document.addEventListener("DOMContentLoaded", () => { app.init(); });
     </script>
 </body>
 </html>
