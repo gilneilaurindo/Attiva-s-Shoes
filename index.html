@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Attiva’s Shoes | Especialista em Calçado Feminino 2026</title>
+    <title>Attiva’s Shoes | Especialista em Calçado Feminino</title>
     
-    <!-- Favicon Personalizado -->
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23b67b7e%22 d=%22M80,30h-10c0-11-9-20-20-20s-20,9-20,20H20c-2.8,0-5,2.2-5,5v50c0,5.5,4.5,10,10,10h50c5.5,0,10-4.5,10-10V35C85,32.2,82.8,30,80,30z M50,18c6.6,0,12,5.4,12,12H38C38,23.4,43.4,18,50,18z%22/></svg>">
 
-    <!-- SEO & Social -->
-    <meta name="description" content="Attiva’s Shoes em São Miguel/RN. Especialista em calçado feminino premium. Coleção 2026.">
+    <!-- SEO & Theme -->
     <meta name="theme-color" content="#b67b7e">
+    <meta name="description" content="Attiva’s Shoes. Especialista em calçado feminino premium. Curadoria exclusiva para mulheres que valorizam elegância e conforto.">
 
     <!-- Bibliotecas -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     
@@ -31,15 +31,12 @@
                     },
                     colors: {
                         brand: { 
-                            50: '#fdf8f7',
-                            100: '#f9e6e7',
-                            500: '#b67b7e',
-                            600: '#a36a6d',
-                            900: '#4a3233'
+                            50: '#fdf8f7', 100: '#f9e6e7', 500: '#b67b7e', 600: '#a36a6d', 900: '#4a3233'
                         }
                     },
                     boxShadow: {
                         'premium': '0 20px 50px -12px rgba(182, 123, 126, 0.25)',
+                        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
                     }
                 }
             }
@@ -49,15 +46,31 @@
     <style>
         html { scroll-behavior: smooth; }
         body { line-height: 1.6; letter-spacing: 0.01em; -webkit-tap-highlight-color: transparent; }
-        section { content-visibility: auto; contain-intrinsic-size: 1px 400px; }
-        #hero, nav { content-visibility: visible; }
+        
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+        }
+        .glass-dark {
+            background: rgba(74, 50, 51, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Preloader */
         #preloader {
             position: fixed; inset: 0; background: #fff;
             display: flex; flex-direction: column; justify-content: center;
-            align-items: center; z-index: 9999;
+            align-items: center; z-index: 9999; transition: opacity 0.8s ease;
         }
         .loader-logo { width: 100px; animation: softPulse 2s infinite ease-in-out; }
         @keyframes softPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
+        
+        /* Shimmer & Animations */
         .shimmer { position: relative; overflow: hidden; }
         .shimmer::after {
             content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
@@ -65,23 +78,24 @@
             transform: rotate(30deg); animation: shimmerEffect 4s infinite;
         }
         @keyframes shimmerEffect { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
-        .wa-float {
-            position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white;
-            width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; font-size: 24px; z-index: 100; box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
-        }
+        
+        /* Layouts & Scrollbars */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #fdf8f7; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #b67b7e; border-radius: 10px; }
+        
         .product-card-title {
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
             overflow: hidden; min-height: 2.8em;
         }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .boutique-slider { position: relative; width: 100%; height: 100%; }
-        .boutique-slide { 
-            position: absolute; inset: 0; opacity: 0; transition: opacity 1.5s ease-in-out; 
-            object-fit: cover; width: 100%; height: 100%; 
-        }
-        .boutique-slide.active { opacity: 1; }
+
+        /* Botões de Tamanho */
+        .size-btn.selected { background-color: #b67b7e; color: white; border-color: #b67b7e; }
+        .size-btn:disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+        /* Animações Premium (Sparkles) */
         .sparkles-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 5; }
         .sparkle {
             position: absolute; background-color: #f9e6e7;
@@ -95,366 +109,437 @@
             50% { opacity: 0.8; transform: translateY(-30px) scale(1.2); }
             100% { transform: translateY(-60px) scale(0); opacity: 0; }
         }
-        
-        input[type=file]::file-selector-button {
-            border: none; background: #b67b7e; padding: 8px 16px; border-radius: 8px;
-            color: #fff; cursor: pointer; transition: background .2s ease-in-out;
-            font-size: 10px; font-weight: bold; text-transform: uppercase;
-            letter-spacing: 0.1em; margin-right: 12px;
+
+        /* Animação Assertiva das Pílulas de Categoria */
+        @keyframes slideInPill {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
         }
-        input[type=file]::file-selector-button:hover { background: #a36a6d; }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #fdf8f7; border-radius: 10px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #b67b7e; border-radius: 10px; }
-        
-        .size-btn.selected { background-color: #b67b7e; color: white; border-color: #b67b7e; }
-        .size-btn:disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+        .animate-pill {
+            opacity: 0;
+            animation: slideInPill 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        /* Ajuste Mobile para Menu Inferior */
+        @media (max-width: 768px) {
+            body { padding-bottom: 80px; } /* Espaço para o menu inferior */
+        }
     </style>
 </head>
 <body class="bg-[#fafafa] text-slate-900 overflow-x-hidden font-sans">
 
-    <!-- Preloader animado -->
+    <!-- Preloader -->
     <div id="preloader">
-        <div id="preloader-sparkles" class="sparkles-container"></div>
         <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo relative z-10" alt="Attiva's Shoes">
         <div class="mt-8 w-32 h-[1px] bg-slate-100 relative overflow-hidden rounded-full z-10">
-            <div class="absolute inset-0 bg-brand-500 w-0 animate-[load_1.5s_ease-in-out_forwards]"></div>
+            <div class="absolute inset-0 bg-brand-500 w-full animate-pulse"></div>
         </div>
     </div>
-    <style>@keyframes load { to { width: 100%; } }</style>
 
     <!-- Barra Superior -->
-    <div class="bg-brand-500 text-white text-[8px] md:text-[11px] font-bold py-2.5 text-center uppercase tracking-[0.2em] shimmer z-[60] px-4">
-        Coleção 2026 • São Miguel/RN • Entregas no Centro e Sítios
+    <div class="bg-brand-900 text-white text-[9px] md:text-[11px] font-bold py-2.5 text-center uppercase tracking-[0.2em] shimmer z-[60] px-4 relative">
+        <span id="top-bar-text">Coleção Exclusiva • São Miguel/RN • Entregas Rápidas</span>
     </div>
 
-    <!-- Navegação principal -->
-    <nav class="sticky top-0 bg-white/95 backdrop-blur-md z-50 border-b border-brand-100 shadow-sm h-16 md:h-24 flex items-center">
+    <!-- Navegação Desktop (Top) -->
+    <nav class="sticky top-0 glass-panel z-50 border-b border-white/50 shadow-sm h-16 md:h-24 flex items-center transition-all">
         <div class="max-w-7xl mx-auto px-4 w-full flex justify-between items-center">
             <div class="flex items-center cursor-pointer" onclick="app.showPage('home')">
-                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-8 md:h-16 object-contain" alt="Logo">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-8 md:h-12 object-contain" alt="Logo">
             </div>
             
-            <div class="flex items-center gap-4 md:gap-10">
-                <div class="flex items-center gap-3 md:gap-6">
-                    <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-4 md:px-8 py-2 md:py-3.5 rounded-full text-[9px] md:text-[11px] font-bold uppercase tracking-widest hover:bg-brand-600 transition shadow-md">
-                        Loja
+            <div class="flex items-center gap-4 md:gap-8">
+                <!-- Botões de Gestão (Ocultos por padrão) -->
+                <div id="admin-controls" class="hidden items-center gap-3">
+                    <button onclick="app.admin.openSettingsModal()" class="bg-slate-800 text-white px-4 py-2 rounded-full text-[9px] font-bold uppercase tracking-widest hover:bg-slate-700 transition shadow-md flex items-center gap-2">
+                        <i class="fas fa-cog"></i> <span class="hidden md:inline">Configurar</span>
                     </button>
-                    <!-- Botão de Sair do modo Gestão -->
-                    <button id="btn-logout" onclick="app.auth.logout()" class="hidden text-brand-900 hover:text-brand-500 text-sm font-bold uppercase tracking-widest transition">
+                    <button id="btn-add-product" onclick="app.admin.openForm()" class="bg-green-500 text-white w-9 h-9 md:w-auto md:px-4 md:py-2 rounded-full flex items-center justify-center hover:bg-green-600 transition shadow-md">
+                        <i class="fas fa-plus"></i> <span class="hidden md:inline ml-2 text-[9px] font-bold uppercase tracking-widest">Produto</span>
+                    </button>
+                </div>
+
+                <!-- Navbar Desktop Padrão -->
+                <div class="hidden md:flex items-center gap-6">
+                    <button onclick="app.scrollToSection('products')" class="text-slate-600 hover:text-brand-500 text-[11px] font-bold uppercase tracking-widest transition">Catálogo</button>
+                    <button onclick="app.scrollToSection('about')" class="text-slate-600 hover:text-brand-500 text-[11px] font-bold uppercase tracking-widest transition">A Boutique</button>
+                    
+                    <button id="btn-logout" onclick="app.auth.logout()" class="hidden text-brand-900 hover:text-red-500 text-[11px] font-bold uppercase tracking-widest transition">
                         <i class="fas fa-sign-out-alt"></i> Sair
                     </button>
-                    <!-- Cesto de Compras -->
-                    <div class="relative cursor-pointer p-2" onclick="app.toggleCart()" id="cart-icon-container">
-                        <i class="fas fa-shopping-bag text-xl md:text-2xl text-slate-700"></i>
-                        <span id="cart-count" class="absolute top-0 right-0 bg-brand-500 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full hidden border border-white">0</span>
+                    
+                    <div class="relative cursor-pointer p-2 bg-brand-50 rounded-full w-12 h-12 flex items-center justify-center transition hover:bg-brand-100" onclick="app.toggleCart()" id="cart-icon-container">
+                        <i class="fas fa-shopping-bag text-xl text-brand-500"></i>
+                        <span id="cart-count-desktop" class="absolute -top-1 -right-1 bg-brand-900 text-white text-[10px] font-bold w-5 h-5 flex items-center justify-center rounded-full hidden border-2 border-white shadow-sm">0</span>
+                    </div>
+                </div>
+                
+                <!-- Cart Ícone Mobile (Opcional no topo) -->
+                <div class="md:hidden flex items-center gap-4">
+                    <div class="relative cursor-pointer p-2 text-brand-500" onclick="app.toggleCart()">
+                        <i class="fas fa-shopping-bag text-xl"></i>
+                        <span id="cart-count-mobile-top" class="absolute top-0 right-0 bg-brand-900 text-white text-[8px] font-bold w-4 h-4 flex items-center justify-center rounded-full hidden">0</span>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
+    <!-- App Bottom Menu (Mobile Only) -->
+    <div class="md:hidden fixed bottom-0 left-0 w-full glass-panel border-t border-white/50 z-[60] flex justify-around items-center py-3 pb-safe shadow-[0_-10px_40px_rgba(0,0,0,0.05)] rounded-t-3xl">
+        <button onclick="app.scrollToSection('hero')" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-500 transition w-16">
+            <i class="fas fa-home text-lg"></i>
+            <span class="text-[8px] font-bold uppercase">Início</span>
+        </button>
+        <button onclick="app.scrollToSection('products')" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-500 transition w-16">
+            <i class="fas fa-search text-lg"></i>
+            <span class="text-[8px] font-bold uppercase">Loja</span>
+        </button>
+        <button onclick="app.toggleCart()" class="flex flex-col items-center gap-1 text-brand-500 transition w-16 relative -mt-5">
+            <div class="bg-brand-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg shadow-brand-500/30 border-4 border-white">
+                <i class="fas fa-shopping-bag text-lg"></i>
+            </div>
+        </button>
+        <a href="https://wa.me/5584921626352" target="_blank" class="flex flex-col items-center gap-1 text-slate-400 hover:text-green-500 transition w-16">
+            <i class="fab fa-whatsapp text-lg"></i>
+            <span class="text-[8px] font-bold uppercase">Whats</span>
+        </a>
+        <button onclick="app.auth.toggleLoginModal()" class="flex flex-col items-center gap-1 text-slate-400 hover:text-brand-500 transition w-16">
+            <i class="fas fa-user text-lg"></i>
+            <span class="text-[8px] font-bold uppercase">Admin</span>
+        </button>
+    </div>
+
     <main>
         <div id="page-home" class="fade-in">
             
-            <!-- Destaque Principal -->
-            <section id="hero" class="max-w-7xl mx-auto px-2 py-2 md:px-4 md:py-8">
-                <div class="relative rounded-[2rem] md:rounded-[4rem] overflow-hidden bg-brand-900 h-[300px] md:h-[550px] flex items-center shadow-premium">
-                    <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-70" 
-                         alt="Coleção 2026" fetchpriority="high" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=1200&q=80'">
-                    <div class="absolute inset-0 bg-gradient-to-t from-brand-900/80 via-brand-900/30 to-transparent"></div>
+            <!-- Destaque Principal (Editável) -->
+            <section id="hero" class="max-w-7xl mx-auto px-3 py-4 md:px-4 md:py-8" data-aos="fade-up">
+                <div class="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-brand-900 h-[400px] md:h-[600px] flex items-center shadow-premium group">
+                    <img id="dynamic-hero-img" src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" 
+                         class="absolute inset-0 w-full h-full object-cover opacity-80 transition duration-1000 group-hover:scale-105" 
+                         alt="Coleção 2026" fetchpriority="high">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
                     <div id="hero-sparkles" class="sparkles-container"></div>
                     
-                    <div class="relative z-10 p-6 md:p-24 text-white w-full">
-                        <span class="text-[8px] md:text-[10px] font-bold uppercase tracking-[0.4em] bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full mb-4 inline-block border border-white/10">Trend 2026</span>
-                        <h1 class="font-serif text-3xl md:text-8xl mb-6 md:mb-8 leading-tight italic">A elegância<br>muda tudo.</h1>
-                        <button onclick="app.scrollToSection('products')" class="bg-brand-500 text-white px-8 py-3.5 rounded-full font-bold uppercase text-[9px] md:text-[11px] tracking-widest hover:bg-brand-600 transition shadow-2xl">
-                            Explorar
+                    <div class="relative z-10 p-8 md:p-24 text-white w-full max-w-3xl">
+                        <span class="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] glass-dark px-4 py-2 rounded-full mb-6 inline-block shadow-lg">Nova Coleção</span>
+                        <h1 id="dynamic-hero-title" class="font-serif text-4xl md:text-7xl lg:text-8xl mb-6 md:mb-8 leading-[1.1] italic drop-shadow-lg">
+                            A elegância<br>muda tudo.
+                        </h1>
+                        <button onclick="app.scrollToSection('products')" class="bg-white text-brand-900 px-8 py-4 rounded-full font-bold uppercase text-[10px] md:text-[12px] tracking-widest hover:bg-brand-50 hover:scale-105 transition-all shadow-xl">
+                            Explorar Catálogo
                         </button>
                     </div>
                 </div>
             </section>
 
             <!-- Vitrine Dinâmica -->
-            <section id="products" class="max-w-7xl mx-auto px-3 py-10 md:py-24 relative">
-                <div class="flex flex-col md:flex-row justify-between items-center mb-10 md:mb-12 gap-6">
-                    <div class="text-center md:text-left flex items-center gap-4">
-                        <h2 class="font-serif text-3xl md:text-7xl text-slate-900 italic tracking-tighter uppercase leading-none">Coleção</h2>
-                        
-                        <!-- Botão Adicionar Novo Produto (Exclusivo da Administração) -->
-                        <button id="btn-add-product" onclick="app.admin.openForm()" class="hidden bg-green-500 text-white w-10 h-10 md:w-12 md:h-12 rounded-full items-center justify-center hover:bg-green-600 transition shadow-lg shrink-0" title="Adicionar Novo Produto">
-                            <i class="fas fa-plus"></i>
-                        </button>
-                    </div>
+            <section id="products" class="max-w-7xl mx-auto px-3 py-12 md:py-24 relative">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8 gap-6" data-aos="fade-up">
+                    <h2 class="font-serif text-3xl md:text-5xl text-slate-900 italic tracking-tight leading-none">Descubra.</h2>
                 </div>
                 
-                <!-- Filtros Dinâmicos -->
-                <div class="w-full overflow-x-auto no-scrollbar pb-6 mb-6 border-b border-brand-100">
-                    <div id="category-filters" class="flex gap-2 w-max">
+                <!-- Filtros em Pílulas (Pills) com Snap Scrolling -->
+                <div class="w-full overflow-x-auto no-scrollbar pb-6 pt-2 mb-6 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0" data-aos="fade-up" data-aos-delay="100">
+                    <div id="category-filters" class="flex gap-3 w-max px-4 md:px-1">
                         <!-- Gerado via JS -->
                     </div>
                 </div>
                 
-                <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-x-10 md:gap-y-20">
-                    <div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">
-                        A carregar coleção... <i class="fas fa-spinner fa-spin ml-2"></i>
+                <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-x-8 md:gap-y-12">
+                    <div class="col-span-2 lg:col-span-4 text-center py-20 text-brand-500 text-xs font-bold uppercase tracking-widest flex items-center justify-center gap-3">
+                        <i class="fas fa-circle-notch fa-spin text-2xl"></i> A preparar vitrine...
                     </div>
                 </div>
             </section>
 
-            <!-- Canais de Conversão -->
-            <section class="max-w-7xl mx-auto px-4 py-8 md:py-20">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-10">
-                    <a href="https://wa.me/5584921626352" target="_blank" class="bg-green-50 p-6 md:p-10 rounded-[2.5rem] border border-green-100 flex items-center gap-4 md:gap-8 group">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-white text-green-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-sm shrink-0"><i class="fab fa-whatsapp"></i></div>
-                        <div class="min-w-0">
-                            <p class="text-[8px] font-bold text-green-600 uppercase tracking-widest mb-1">WhatsApp</p>
-                            <p class="font-bold text-sm md:text-xl text-green-700 truncate">(84) 92162-6352</p>
-                        </div>
-                    </a>
-                    <a href="https://www.instagram.com/attivasshoes/" target="_blank" class="bg-white p-6 md:p-10 rounded-[2.5rem] border border-brand-50 flex items-center gap-4 md:gap-8 group shadow-sm">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0"><i class="fab fa-instagram"></i></div>
-                        <div class="min-w-0">
-                            <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Instagram</p>
-                            <p class="font-serif italic font-bold text-sm md:text-xl truncate text-slate-800">@attivasshoes</p>
-                        </div>
-                    </a>
-                    <a href="https://www.facebook.com/attivasshoes/" target="_blank" class="bg-white p-6 md:p-10 rounded-[2.5rem] border border-brand-50 flex items-center gap-4 md:gap-8 group shadow-sm">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-brand-50 text-brand-500 rounded-2xl flex items-center justify-center text-xl md:text-2xl shadow-inner shrink-0"><i class="fab fa-facebook-f"></i></div>
-                        <div class="min-w-0">
-                            <p class="text-[8px] font-bold text-slate-400 uppercase tracking-widest mb-1">Facebook</p>
-                            <p class="font-serif italic font-bold text-sm md:text-xl truncate text-slate-800">attivasshoes</p>
-                        </div>
-                    </a>
-                </div>
-            </section>
-
-            <!-- QUEM SOMOS -->
-            <section id="about" class="max-w-7xl mx-auto px-4 py-10 md:py-24">
-                <div class="bg-white rounded-[3rem] p-6 md:p-20 border border-brand-100 flex flex-col lg:flex-row gap-10 md:gap-20 items-center shadow-premium">
-                    <div class="lg:w-1/2 w-full">
-                        <span class="text-brand-500 text-[8px] md:text-[10px] font-bold uppercase tracking-widest mb-4 block">A Nossa Boutique</span>
-                        <h2 class="text-3xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight italic font-serif">
+            <!-- QUEM SOMOS (Editável) -->
+            <section id="about" class="max-w-7xl mx-auto px-3 py-12 md:py-24" data-aos="fade-up">
+                <div class="glass-panel rounded-[2.5rem] md:rounded-[3rem] p-8 md:p-20 shadow-glass flex flex-col lg:flex-row gap-12 items-center relative overflow-hidden">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-brand-100 rounded-full blur-3xl opacity-50 pointer-events-none"></div>
+                    
+                    <div class="lg:w-1/2 w-full relative z-10">
+                        <span class="text-brand-500 text-[10px] font-bold uppercase tracking-widest mb-4 block">A Nossa História</span>
+                        <h2 id="dynamic-about-title" class="text-3xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight italic font-serif">
                             Sofisticação em cada passo.
                         </h2>
-                        <p class="text-slate-500 text-sm md:text-xl leading-relaxed mb-8 font-light">
-                            Referência premium em calçados femininos em São Miguel/RN. Curadoria exclusiva para mulheres que valorizam elegância e conforto.
+                        <p id="dynamic-about-text" class="text-slate-600 text-sm md:text-lg leading-relaxed mb-8 font-light">
+                            Referência premium em calçados femininos em São Miguel/RN. Curadoria exclusiva para mulheres que valorizam elegância, conforto e um design atemporal.
                         </p>
                         <div class="flex gap-4">
-                            <div class="bg-brand-50 p-6 rounded-3xl flex-1 text-center">
-                                <p class="text-2xl md:text-4xl font-bold text-brand-500">50k+</p>
-                                <p class="text-[8px] font-bold text-slate-400 uppercase mt-1">Clientes</p>
+                            <div class="glass-panel border border-brand-100 p-6 rounded-3xl flex-1 text-center shadow-sm">
+                                <p class="text-2xl md:text-3xl font-bold text-brand-500">Premium</p>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-2 tracking-widest">Qualidade</p>
                             </div>
-                            <div class="bg-brand-50 p-6 rounded-3xl flex-1 text-center">
-                                <p class="text-2xl md:text-4xl font-bold text-brand-500">24h</p>
-                                <p class="text-[8px] font-bold text-slate-400 uppercase mt-1">Suporte</p>
+                            <div class="glass-panel border border-brand-100 p-6 rounded-3xl flex-1 text-center shadow-sm">
+                                <p class="text-2xl md:text-3xl font-bold text-brand-500">Local</p>
+                                <p class="text-[9px] font-bold text-slate-400 uppercase mt-2 tracking-widest">São Miguel</p>
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full h-64 md:h-[450px] rounded-[2.5rem] overflow-hidden border-2 border-brand-50 relative">
-                        <div class="boutique-slider" id="boutique-slider">
-                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="boutique-slide active" alt="Attiva's Shoes Boutique">
-                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
-                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
-                            <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6035.jpg.jpeg" class="boutique-slide" alt="Attiva's Shoes Boutique">
-                        </div>
+                    <div class="lg:w-1/2 w-full h-72 md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
+                        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover hover:scale-105 transition duration-700" alt="Attiva's Shoes Boutique">
                     </div>
                 </div>
             </section>
 
-            <!-- Rodapé e Acesso Secreto -->
-            <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100 text-center flex flex-col items-center justify-center gap-4">
+            <!-- DEPOIMENTOS (Animados e Premium) -->
+            <section id="testimonials" class="max-w-7xl mx-auto px-3 py-12 md:py-24 relative" data-aos="fade-up">
+                <div id="testi-sparkles" class="sparkles-container"></div>
+                <div class="text-center mb-12 relative z-10">
+                    <span class="text-brand-500 text-[10px] font-bold uppercase tracking-widest mb-4 block">Experiências</span>
+                    <h2 id="dynamic-testi-title" class="font-serif text-3xl md:text-5xl text-slate-900 italic">O que dizem de nós.</h2>
+                </div>
+                
+                <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
+                    <!-- Gerado via JS -->
+                </div>
+            </section>
+
+            <!-- Rodapé -->
+            <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100/50 text-center flex flex-col items-center gap-4">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-6 opacity-50 grayscale" alt="Logo">
                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                    &copy; 2026 Attiva's. Todos os direitos reservados.
+                    &copy; 2026 Attiva's Shoes Boutique. Todos os direitos reservados.
                 </p>
-                <button onclick="app.auth.toggleLoginModal()" class="text-slate-300 hover:text-brand-500 transition opacity-50 hover:opacity-100 p-2" title="Acesso à Gestão">
-                    <i class="fas fa-lock text-sm"></i>
-                </button>
             </footer>
         </div>
 
-        <!-- Ecrã de Finalização da Compra (Checkout) -->
-        <div id="page-checkout" class="hidden max-w-6xl mx-auto px-4 py-10 md:py-24 fade-in">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-20 items-start">
-                <div class="space-y-8">
-                    <button onclick="app.showPage('home')" class="text-slate-400 font-bold text-[10px] uppercase tracking-widest hover:text-brand-500 flex items-center gap-3">
-                        <i class="fas fa-arrow-left"></i> Voltar à Loja
+        <!-- Ecrã de Checkout -->
+        <div id="page-checkout" class="hidden max-w-6xl mx-auto px-3 py-10 md:py-24 fade-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start">
+                <div class="space-y-6" data-aos="fade-right">
+                    <button onclick="app.showPage('home')" class="text-brand-500 font-bold text-[10px] uppercase tracking-widest flex items-center gap-2 hover:bg-brand-50 px-4 py-2 rounded-full transition w-max">
+                        <i class="fas fa-arrow-left"></i> Voltar à Vitrine
                     </button>
-                    <div class="bg-white p-6 md:p-12 rounded-[2.5rem] border border-brand-100 shadow-sm">
-                        <h3 class="font-serif text-2xl md:text-4xl mb-8 italic">Os seus Dados.</h3>
-                        <form id="checkout-form" class="space-y-6">
-                            <input type="text" id="cust-name" placeholder="Nome Completo" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium" required>
-                            <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium">
-                                <option value="4">Centro São Miguel (R$ 4,00)</option>
-                                <option value="10">Sítio Região (R$ 10,00)</option>
+                    <div class="glass-panel p-6 md:p-10 rounded-[2.5rem] shadow-sm">
+                        <h3 class="font-serif text-2xl md:text-4xl mb-6 italic text-slate-800">Para onde enviamos?</h3>
+                        <form id="checkout-form" class="space-y-5">
+                            <input type="text" id="cust-name" placeholder="Seu Nome Completo" class="w-full bg-white border border-slate-200 rounded-2xl p-4 outline-none text-sm font-medium focus:border-brand-500 transition shadow-sm" required>
+                            <select id="delivery-type" onchange="app.updateDelivery()" class="w-full bg-white border border-slate-200 rounded-2xl p-4 outline-none text-sm font-medium focus:border-brand-500 transition shadow-sm">
+                                <option value="4">Entrega - Centro São Miguel (R$ 4,00)</option>
+                                <option value="10">Entrega - Sítio/Região (R$ 10,00)</option>
                                 <option value="0">Retirar na Boutique (Grátis)</option>
                             </select>
-                            <textarea id="cust-address" placeholder="Morada ou Ponto de Referência" class="w-full bg-brand-50 border-0 rounded-2xl p-4 md:p-5 outline-none text-sm font-medium h-32 md:h-40" required></textarea>
+                            <textarea id="cust-address" placeholder="Endereço Completo ou Ponto de Referência" class="w-full bg-white border border-slate-200 rounded-2xl p-4 outline-none text-sm font-medium h-32 focus:border-brand-500 transition shadow-sm" required></textarea>
                         </form>
                     </div>
                 </div>
-                <div class="bg-brand-900 text-white p-8 md:p-12 rounded-[2.5rem] shadow-xl sticky top-24">
-                    <h3 class="font-serif text-2xl md:text-3xl mb-8 italic text-brand-50">Resumo.</h3>
-                    <div id="summary-items" class="space-y-4 mb-8 max-h-48 overflow-y-auto pr-2 custom-scrollbar"></div>
-                    <div class="space-y-4 border-t border-white/10 pt-8 mb-8">
-                        <div class="flex justify-between text-[10px] uppercase tracking-widest opacity-50"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
-                        <div class="flex justify-between text-[10px] uppercase tracking-widest opacity-50"><span>Entrega</span><span id="sum-delivery">R$ 4,00</span></div>
-                        <div class="flex justify-between text-3xl font-serif italic pt-4"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
+                
+                <div class="bg-slate-900 text-white p-6 md:p-10 rounded-[2.5rem] shadow-2xl sticky top-24" data-aos="fade-left">
+                    <h3 class="font-serif text-2xl mb-6 italic text-brand-100">Resumo do Pedido</h3>
+                    <div id="summary-items" class="space-y-4 mb-6 max-h-48 overflow-y-auto pr-2 custom-scrollbar"></div>
+                    <div class="space-y-3 border-t border-white/20 pt-6 mb-8">
+                        <div class="flex justify-between text-[10px] uppercase tracking-widest text-slate-400"><span>Subtotal</span><span id="sum-subtotal">R$ 0,00</span></div>
+                        <div class="flex justify-between text-[10px] uppercase tracking-widest text-slate-400"><span>Frete</span><span id="sum-delivery">R$ 4,00</span></div>
+                        <div class="flex justify-between text-2xl md:text-3xl font-serif italic pt-4 text-white"><span>Total</span><span id="sum-total">R$ 0,00</span></div>
                     </div>
-                    <button onclick="app.sendToWhatsApp()" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-5 rounded-2xl transition shadow-lg text-[10px] uppercase tracking-widest flex items-center justify-center gap-3">
-                        <i class="fab fa-whatsapp text-2xl"></i> Finalizar no WhatsApp
+                    <button onclick="app.sendToWhatsApp()" class="w-full bg-[#25d366] hover:bg-[#1ebd5a] text-white font-bold py-4 rounded-2xl transition shadow-[0_10px_20px_rgba(37,211,102,0.3)] text-[11px] uppercase tracking-widest flex items-center justify-center gap-3">
+                        <i class="fab fa-whatsapp text-xl"></i> Enviar Pedido
                     </button>
+                    <p class="text-center text-[9px] text-slate-400 mt-4 uppercase tracking-widest">Pagamento combinado via WhatsApp</p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Barra lateral do Cesto -->
-    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[450px] bg-white shadow-2xl z-[1000] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
-        <div class="p-6 md:p-8 border-b border-brand-50 flex justify-between items-center bg-brand-50/50">
-            <h3 class="font-serif text-xl md:text-2xl italic tracking-tighter uppercase">A Minha Sacola.</h3>
-            <button onclick="app.toggleCart()" class="text-3xl p-2">&times;</button>
+    <!-- Sidebar do Carrinho -->
+    <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-[420px] bg-white shadow-2xl z-[1000] transform translate-x-full transition-transform duration-500 ease-in-out flex flex-col">
+        <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-brand-50/30">
+            <h3 class="font-serif text-2xl italic tracking-tight">Sua Sacola.</h3>
+            <button onclick="app.toggleCart()" class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-slate-200 transition"><i class="fas fa-times"></i></button>
         </div>
-        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar"></div>
-        <div class="p-6 md:p-8 bg-white border-t border-brand-100">
-            <div class="flex justify-between items-center mb-6">
-                <span class="text-slate-400 uppercase text-[10px] tracking-widest">Subtotal</span>
-                <span id="cart-total-val" class="text-brand-500 text-2xl font-serif italic">R$ 0,00</span>
+        <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar bg-[#fafafa]"></div>
+        <div class="p-6 bg-white border-t border-slate-100 shadow-[0_-10px_20px_rgba(0,0,0,0.02)]">
+            <div class="flex justify-between items-end mb-6">
+                <span class="text-slate-400 uppercase text-[10px] font-bold tracking-widest mb-1">Total Previsto</span>
+                <span id="cart-total-val" class="text-slate-900 text-3xl font-serif italic">R$ 0,00</span>
             </div>
-            <button onclick="app.showPage('checkout')" id="checkout-btn" class="w-full bg-brand-500 text-white font-bold py-5 rounded-2xl shadow-lg disabled:opacity-50 text-[10px] uppercase tracking-widest" disabled>Finalizar Pedido</button>
+            <button onclick="app.showPage('checkout')" id="checkout-btn" class="w-full bg-brand-900 text-white font-bold py-4 rounded-2xl shadow-xl hover:bg-slate-800 transition disabled:opacity-50 text-[11px] uppercase tracking-widest flex items-center justify-center gap-2" disabled>
+                Avançar <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
     </div>
-    <div id="cart-overlay" class="fixed inset-0 bg-brand-900/20 backdrop-blur-sm z-[900] hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
+    <div id="cart-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[900] hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
 
-    <!-- MODAL SELEÇÃO DE TAMANHO (Para Cliente) -->
-    <div id="modal-size" class="fixed inset-0 bg-brand-900/60 backdrop-blur-md z-[1500] hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-sm rounded-[2.5rem] p-8 shadow-premium border border-brand-100 text-center relative">
-            <button onclick="app.closeSizeModal()" class="absolute top-4 right-6 text-2xl text-slate-400 hover:text-slate-800">&times;</button>
-            <h3 class="font-serif text-2xl italic mb-2" id="modal-size-title">Escolha o Tamanho</h3>
-            <p class="text-[10px] text-slate-400 uppercase tracking-widest mb-6" id="modal-size-subtitle">Disponibilidade em tempo real</p>
+    <!-- Modais omitidos temporariamente para encurtar. Mas aqui estão todos os modais perfeitamente estilizados -->
+    
+    <!-- MODAL SELEÇÃO DE TAMANHO -->
+    <div id="modal-size" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[1500] hidden flex items-end md:items-center justify-center pb-0 md:p-4">
+        <div class="bg-white w-full max-w-md rounded-t-[2.5rem] md:rounded-[2.5rem] p-8 shadow-2xl relative transition-transform transform translate-y-full md:translate-y-0" id="modal-size-box">
+            <button onclick="app.closeSizeModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fas fa-times"></i></button>
+            <h3 class="font-serif text-2xl md:text-3xl italic mb-1 text-slate-900 pr-10" id="modal-size-title">Produto</h3>
+            <p class="text-[10px] text-brand-500 font-bold uppercase tracking-widest mb-6" id="modal-size-subtitle">Disponibilidade Imediata</p>
             
             <div id="size-options-container" class="grid grid-cols-4 gap-3 mb-8">
-                <!-- Tamanhos gerados via JS -->
+                <!-- Gerado via JS -->
             </div>
             
-            <button id="btn-confirm-size" class="w-full bg-brand-500 text-white font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition disabled:opacity-50" disabled>
-                Adicionar à Sacola
+            <button id="btn-confirm-size" class="w-full bg-brand-500 text-white font-bold py-4 rounded-2xl uppercase text-[11px] tracking-widest shadow-lg hover:bg-brand-600 transition disabled:opacity-50 flex items-center justify-center gap-2" disabled>
+                <i class="fas fa-shopping-bag"></i> Adicionar à Sacola
             </button>
         </div>
     </div>
 
-    <!-- MODAL DE LOGIN SECRETO (Para a Cliente) -->
-    <div id="modal-login" class="fixed inset-0 bg-brand-900/40 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-md rounded-[3rem] p-8 shadow-premium border border-brand-100">
+    <!-- MODAL DE LOGIN SECRETO -->
+    <div id="modal-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="glass-panel w-full max-w-sm rounded-[2.5rem] p-8 shadow-2xl border border-white relative">
+            <button onclick="app.auth.toggleLoginModal()" class="absolute top-4 right-4 text-slate-400 p-2"><i class="fas fa-times"></i></button>
             <div class="text-center mb-8">
-                <h3 class="font-serif text-2xl italic">Painel da Boutique</h3>
-                <p class="text-xs text-slate-400 mt-2">Área reservada à gerência.</p>
+                <h3 class="font-serif text-2xl italic text-slate-800">Acesso Restrito</h3>
             </div>
             <div class="space-y-4">
-                <input type="email" id="adm-email" placeholder="E-mail" class="w-full bg-brand-50 border-0 rounded-2xl p-4 outline-none text-sm">
-                <input type="password" id="adm-password" placeholder="Palavra-passe" class="w-full bg-brand-50 border-0 rounded-2xl p-4 outline-none text-sm">
+                <input type="email" id="adm-email" placeholder="E-mail" class="w-full bg-white/80 border border-slate-200 rounded-xl p-4 outline-none text-sm">
+                <input type="password" id="adm-password" placeholder="Senha" class="w-full bg-white/80 border border-slate-200 rounded-xl p-4 outline-none text-sm">
                 
-                <button id="btn-login-submit" onclick="app.auth.login()" class="w-full bg-brand-500 text-white font-bold py-4 rounded-2xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">
-                    Iniciar Sessão
+                <button id="btn-login-submit" onclick="app.auth.login()" class="w-full bg-slate-900 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-slate-800 transition">
+                    Entrar no Painel
                 </button>
-                <button onclick="app.auth.toggleLoginModal()" class="w-full text-slate-400 text-[9px] uppercase font-bold tracking-widest pt-2">Cancelar</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DE ADICIONAR/EDITAR PRODUTOS (Painel Pro) -->
-    <div id="modal-product" class="fixed inset-0 bg-brand-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
-        <div class="bg-white w-full max-w-2xl rounded-[2.5rem] p-6 md:p-10 shadow-premium border border-brand-100 max-h-[90vh] overflow-y-auto custom-scrollbar relative">
-            <button onclick="app.admin.closeForm()" class="absolute top-6 right-6 text-2xl text-slate-400 hover:text-slate-800">&times;</button>
-            <h3 id="modal-product-title" class="font-serif text-2xl md:text-3xl italic mb-2">Novo Produto</h3>
-            <p class="text-[10px] uppercase tracking-widest text-brand-500 mb-6 font-bold">Gestão Profissional</p>
+    <!-- MODAL CONFIGURAÇÕES GERAIS (NOVO) -->
+    <div id="modal-settings" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-[2rem] p-6 md:p-10 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+            <button onclick="app.admin.closeSettingsModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fas fa-times"></i></button>
+            <h3 class="font-serif text-2xl italic mb-6">Configurar Aparência da Loja</h3>
+            
+            <form id="form-settings" class="space-y-6" onsubmit="event.preventDefault(); app.admin.saveSettings();">
+                <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Banner Principal</h4>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">URL da Imagem do Banner</label>
+                        <input type="text" id="set-hero-img" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Título sobre o Banner (Permite HTML como &lt;br&gt;)</label>
+                        <input type="text" id="set-hero-title" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1">
+                    </div>
+                </div>
+
+                <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Secção: A Nossa História</h4>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Título Principal</label>
+                        <input type="text" id="set-about-title" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1">
+                    </div>
+                    <div>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Texto Descritivo</label>
+                        <textarea id="set-about-text" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1 h-20"></textarea>
+                    </div>
+                </div>
+
+                <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Categorias Dinâmicas</h4>
+                    <p class="text-xs text-slate-500">Adicione novas categorias separadas por vírgula para exibir nos filtros e formulários.</p>
+                    <input type="text" id="set-custom-cats" placeholder="Ex: Roupas, Acessórios Extras" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1">
+                </div>
+
+                <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Depoimentos dos Clientes</h4>
+                    <p class="text-[9px] text-slate-500">Deixe em branco as que não quiser usar.</p>
+                    
+                    <div class="border-b border-brand-100/50 pb-4">
+                        <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 1</span>
+                        <input type="text" id="set-t1-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t1-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t1-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <textarea id="set-t1-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
+                    </div>
+
+                    <div class="border-b border-brand-100/50 pb-4">
+                        <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 2</span>
+                        <input type="text" id="set-t2-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t2-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t2-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <textarea id="set-t2-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
+                    </div>
+
+                    <div>
+                        <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 3</span>
+                        <input type="text" id="set-t3-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t3-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="text" id="set-t3-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <textarea id="set-t3-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">
+                    Salvar Alterações Visuais
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL DE PRODUTOS (IGUAL COM MELHORIAS VISUAIS) -->
+    <div id="modal-product" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-2xl rounded-[2rem] p-6 md:p-8 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
+            <button onclick="app.admin.closeForm()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fas fa-times"></i></button>
+            <h3 id="modal-product-title" class="font-serif text-2xl italic mb-6 text-slate-800">Novo Produto</h3>
             
             <form id="form-product" onsubmit="event.preventDefault(); app.admin.saveProduct();" class="space-y-6">
                 <input type="hidden" id="prod-id">
                 <input type="hidden" id="prod-img-url-old">
                 
-                <div class="bg-brand-50/50 p-6 rounded-3xl border border-brand-50 space-y-4">
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800 mb-2 border-b border-brand-100 pb-2">Informações Básicas</h4>
+                <div class="space-y-4">
                     <div>
-                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Nome do Produto</label>
-                        <input type="text" id="prod-name" placeholder="Ex: Sandália Luxe" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Nome do Produto</label>
+                        <input type="text" id="prod-name" class="w-full bg-slate-50 border border-slate-100 rounded-xl p-3 outline-none text-sm font-medium focus:bg-white focus:border-brand-500 transition" required>
                     </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Preço (R$)</label>
-                            <input type="number" id="prod-price" step="0.01" placeholder="0.00" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
+                            <label class="text-[9px] font-bold uppercase text-slate-500">Preço (R$)</label>
+                            <input type="number" id="prod-price" step="0.01" class="w-full bg-slate-50 border border-slate-100 rounded-xl p-3 outline-none text-sm font-medium focus:bg-white focus:border-brand-500 transition" required>
                         </div>
                         <div>
-                            <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Categoria</label>
-                            <select id="prod-category" class="w-full bg-white border border-brand-50 rounded-xl p-3 outline-none text-sm font-medium mt-1" required>
-                                <!-- Gerado via JS -->
-                            </select>
+                            <label class="text-[9px] font-bold uppercase text-slate-500">Categoria</label>
+                            <select id="prod-category" class="w-full bg-slate-50 border border-slate-100 rounded-xl p-3 outline-none text-sm font-medium focus:bg-white focus:border-brand-500 transition" required></select>
                         </div>
                     </div>
-
                     <div>
-                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Foto do Produto</label>
-                        <div class="mt-1 relative bg-white border border-brand-50 rounded-xl p-2">
-                            <input type="file" id="prod-img-file" accept="image/*" class="w-full outline-none text-sm font-medium text-slate-600">
-                        </div>
-                        <p id="foto-aviso" class="text-[8px] text-brand-500 font-bold mt-1 ml-2">Tire uma foto ou escolha da galeria.</p>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Fotografia</label>
+                        <input type="file" id="prod-img-file" accept="image/*" class="w-full bg-slate-50 border border-slate-100 rounded-xl p-2 outline-none text-sm">
                     </div>
                 </div>
 
-                <!-- CONTROLE DE ESTOQUE PROFISSIONAL -->
-                <div class="bg-white p-6 rounded-3xl border border-brand-100 shadow-sm space-y-4">
-                    <div class="flex justify-between items-center border-b border-brand-50 pb-2 mb-4">
-                        <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Controlo de Estoque</h4>
-                        <span class="text-[8px] text-slate-400 uppercase">Preencha com as quantidades disponíveis</span>
-                    </div>
-                    
-                    <!-- Aba para calçados (tamanhos) -->
-                    <div id="stock-grid-shoes" class="grid grid-cols-4 gap-3">
-                        <!-- Inputs gerados via JS (33 ao 40) -->
-                    </div>
-                    
-                    <!-- Aba para tamanho único (bolsas, cintos) -->
+                <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800 mb-4 border-b border-slate-200 pb-2">Controlo de Estoque</h4>
+                    <div id="stock-grid-shoes" class="grid grid-cols-4 gap-2"></div>
                     <div id="stock-grid-unique" class="hidden">
-                        <label class="text-[9px] font-bold uppercase tracking-widest text-slate-400 ml-2">Quantidade Total (Tamanho Único)</label>
-                        <input type="number" id="stock-unique" min="0" placeholder="Qtd" class="w-full bg-brand-50 border-0 rounded-xl p-3 outline-none text-sm font-bold mt-1 text-center">
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Quantidade Única</label>
+                        <input type="number" id="stock-unique" min="0" class="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm text-center font-bold">
                     </div>
                 </div>
 
-                <div class="pt-4 flex gap-3 sticky bottom-0 bg-white pb-2">
-                    <button type="button" onclick="app.admin.closeForm()" class="flex-1 bg-slate-100 text-slate-500 font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest hover:bg-slate-200 transition">Cancelar</button>
-                    <button type="submit" id="btn-save-prod" class="flex-[2] bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Salvar Alterações</button>
+                <div class="pt-2">
+                    <button type="submit" id="btn-save-prod" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Guardar Produto no Catálogo</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <!-- Notificações Visuais no Ecrã -->
-    <div id="toast" class="fixed bottom-24 left-1/2 -translate-x-1/2 bg-white border border-brand-100 shadow-xl rounded-full p-4 flex items-center gap-4 transform translate-y-48 transition-transform duration-500 z-[3000] w-[90%] max-w-sm">
-        <div id="toast-icon" class="w-10 h-10 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center shrink-0">
-            <i class="fas fa-check"></i>
+    <!-- TOAST DE NOTIFICAÇÃO -->
+    <div id="toast" class="fixed top-5 left-1/2 -translate-x-1/2 bg-slate-900 text-white border border-slate-800 shadow-2xl rounded-full p-3 pr-6 flex items-center gap-3 transform -translate-y-24 transition-transform duration-500 z-[3000] max-w-[90%] w-max">
+        <div id="toast-icon" class="w-8 h-8 bg-brand-500 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner">
+            <i class="fas fa-check text-xs"></i>
         </div>
-        <span id="toast-message" class="font-bold text-[10px] uppercase tracking-widest text-slate-700">Mensagem</span>
+        <span id="toast-message" class="font-bold text-[10px] uppercase tracking-wider text-slate-100">Atualizado com sucesso!</span>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ==========================================
-        // CONFIGURAÇÃO DO SEU BANCO DE DADOS
-        // ==========================================
+        // Configuração do Supabase
         const SUPABASE_URL = 'https://lcarpfdljhuyzzmzaxzm.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjYXJwZmRsamh1eXp6bXpheHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzI1MDIsImV4cCI6MjA4Nzk0ODUwMn0.15QaKN5REbQis_xygysDzMNKVlZbcnbRZzP8IIC6ry0'; 
-
         const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // LISTA PROFISSIONAL DE CATEGORIAS
-        const CATEGORIAS = [
+        const BASE_CATEGORIAS = [
             'Rasteira', 'Birken/Papete', 'Salto Alto', 'Voices', 'Meia Pata', 
             'Plataforma', 'Anabela', 'Bolsas', 'Carteiras', 'Cintos', 
             'Scarpin', 'Slingback', 'Dolmen', 'Salto Bloco', 'Sapatilha'
         ];
-        // Categorias que não precisam de tamanho (33, 34...), apenas Tamanho Único
         const CAT_TAMANHO_UNICO = ['Bolsas', 'Carteiras', 'Cintos'];
 
         const app = {
@@ -462,87 +547,138 @@
             cart: [],
             currentCat: 'all',
             isAdmin: false,
-            boutiqueSlideIdx: 0,
             selectedProductForCart: null,
             selectedSizeForCart: null,
+            
+            // Definições visuais guardadas localmente
+            settings: {
+                heroImg: 'https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg',
+                heroTitle: 'A elegância<br>muda tudo.',
+                aboutTitle: 'Sofisticação em cada passo.',
+                aboutText: 'Referência premium em calçados femininos em São Miguel/RN. Curadoria exclusiva para mulheres que valorizam elegância, conforto e um design atemporal.',
+                customCats: '',
+                testimonials: [
+                    { name: "Maria Silva", role: "Cliente Fiel", text: "O atendimento é impecável e a qualidade dos calçados me surpreendeu. Encontrei exatamente o salto elegante que procurava!", img: "https://i.pravatar.cc/150?img=5" },
+                    { name: "Camila Oliveira", role: "São Miguel / RN", text: "A experiência de comprar na Attiva's é única. A curadoria das peças é maravilhosa. Sou apaixonada pelas bolsas!", img: "https://i.pravatar.cc/150?img=9" },
+                    { name: "Ana Paula", role: "Cliente Verificada", text: "Sapatos super confortáveis. Consigo passar o dia todo de salto sem dor. Entrega super rápida e embalagem linda.", img: "https://i.pravatar.cc/150?img=1" }
+                ]
+            },
 
             async init() {
-                const isMobile = window.innerWidth < 768;
-                this.createSparkles('preloader-sparkles', isMobile ? 20 : 40);
-                this.createSparkles('hero-sparkles', isMobile ? 25 : 50);
-
+                this.loadSettings();
                 this.renderCategories();
                 this.admin.setupStockInputs();
+                
+                // Restaura as animações premium
+                const isMobile = window.innerWidth < 768;
+                this.createSparkles('hero-sparkles', isMobile ? 20 : 40);
+                this.createSparkles('testi-sparkles', isMobile ? 10 : 25);
 
                 try {
                     await this.auth.checkSession();
                     await this.fetchProducts();
-                } catch (error) {
-                    console.error("Erro na inicialização:", error);
-                    document.getElementById('product-grid').innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-red-400 text-xs font-bold uppercase tracking-widest">Erro ao ligar ao catálogo. Verifique a sua ligação.</div>`;
+                } catch (e) {
+                    console.error("Erro Init:", e);
                 } finally {
-                    window.onload = () => { setTimeout(() => this.hidePreloader(), 800); };
-                    if (document.readyState === "complete") {
-                        setTimeout(() => this.hidePreloader(), 800);
-                    }
-                }
-            },
-
-            // RENDERIZA OS FILTROS E OPÇÕES DE CATEGORIA
-            renderCategories() {
-                // Filtros na Home
-                const filterContainer = document.getElementById('category-filters');
-                let htmlFilters = `<button onclick="app.filter('all')" class="filter-btn active text-[9px] font-bold uppercase tracking-widest bg-white text-brand-500 px-6 py-3 rounded-xl transition shadow-sm shrink-0 border border-brand-100">Tudo</button>`;
-                CATEGORIAS.forEach(cat => {
-                    htmlFilters += `<button onclick="app.filter('${cat}')" class="filter-btn text-[9px] font-bold uppercase tracking-widest text-slate-400 px-6 py-3 rounded-xl transition shrink-0 border border-transparent hover:border-brand-50">${cat}</button>`;
-                });
-                filterContainer.innerHTML = htmlFilters;
-
-                // Select no Admin
-                const selectCat = document.getElementById('prod-category');
-                selectCat.innerHTML = CATEGORIAS.map(cat => `<option value="${cat}">${cat}</option>`).join('');
-                
-                // Evento para alternar tipo de estoque dependendo da categoria no admin
-                selectCat.addEventListener('change', (e) => this.admin.toggleStockType(e.target.value));
-            },
-
-            hidePreloader() {
-                const loader = document.getElementById('preloader');
-                if (loader) {
-                    loader.style.opacity = '0';
+                    AOS.init({ duration: 800, once: true, offset: 50 });
                     setTimeout(() => {
-                        loader.style.visibility = 'hidden';
-                        loader.style.display = 'none';
-                        AOS.init({ duration: 800, once: true });
-                        this.startBoutiqueSlider();
+                        const loader = document.getElementById('preloader');
+                        loader.style.opacity = '0';
+                        setTimeout(() => loader.style.display = 'none', 800);
                     }, 500);
                 }
             },
 
-            startBoutiqueSlider() {
-                setInterval(() => {
-                    const slides = document.querySelectorAll('.boutique-slide');
-                    if(!slides.length) return;
-                    slides[this.boutiqueSlideIdx].classList.remove('active');
-                    this.boutiqueSlideIdx = (this.boutiqueSlideIdx + 1) % slides.length;
-                    slides[this.boutiqueSlideIdx].classList.add('active');
-                }, 3500);
+            // --- SISTEMA DE DEFINIÇÕES HÍBRIDO (LOCALSTORAGE) ---
+            loadSettings() {
+                const saved = localStorage.getItem('attiva_settings');
+                if (saved) {
+                    this.settings = { ...this.settings, ...JSON.parse(saved) };
+                }
+                this.applySettings();
+            },
+            applySettings() {
+                document.getElementById('dynamic-hero-img').src = this.settings.heroImg;
+                document.getElementById('dynamic-hero-title').innerHTML = this.settings.heroTitle;
+                document.getElementById('dynamic-about-title').innerText = this.settings.aboutTitle;
+                document.getElementById('dynamic-about-text').innerText = this.settings.aboutText;
+                this.renderTestimonials();
+            },
+
+            renderTestimonials() {
+                const container = document.getElementById('testimonials-grid');
+                if(!container) return;
+                
+                const tests = this.settings.testimonials || [];
+                container.innerHTML = tests.map((t, idx) => {
+                    if (!t.name && !t.text) return ''; // Ignora se estiver vazio
+                    
+                    const initial = t.name ? t.name.charAt(0).toUpperCase() : 'C';
+                    const avatarHtml = t.img && t.img.trim() !== '' 
+                        ? `<img src="${t.img}" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100 shadow-sm" alt="${t.name}">`
+                        : `<div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-bold font-serif text-lg shadow-sm shrink-0">${initial}</div>`;
+
+                    return `
+                    <div class="glass-panel p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group flex flex-col" data-aos="fade-up" data-aos-delay="${idx * 150}">
+                        <div class="text-brand-500 mb-5 flex gap-1 text-sm opacity-80 group-hover:opacity-100 transition">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p class="text-slate-600 text-sm md:text-base italic mb-8 leading-relaxed flex-1">"${t.text}"</p>
+                        <div class="flex items-center gap-4 mt-auto border-t border-slate-100 pt-4">
+                            ${avatarHtml}
+                            <div class="min-w-0">
+                                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide truncate">${t.name}</h4>
+                                <span class="text-[10px] text-slate-400 font-medium truncate block">${t.role}</span>
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            },
+
+            getCategories() {
+                let cats = [...BASE_CATEGORIAS];
+                if (this.settings.customCats) {
+                    const custom = this.settings.customCats.split(',').map(c => c.trim()).filter(c => c);
+                    cats = [...new Set([...cats, ...custom])];
+                }
+                return cats;
+            },
+
+            renderCategories() {
+                const allCats = this.getCategories();
+                const filterContainer = document.getElementById('category-filters');
+                
+                // Pílulas com animação de entrada (animate-pill) e scroll snap (snap-start)
+                let htmlFilters = `<button onclick="app.filter('all')" style="animation-delay: 0ms;" class="animate-pill filter-btn active snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shrink-0 border border-slate-900 transform scale-105">Todas</button>`;
+                
+                allCats.forEach((cat, index) => {
+                    const delay = (index + 1) * 50; // Cascata de delay para animação
+                    htmlFilters += `<button onclick="app.filter('${cat}')" style="animation-delay: ${delay}ms;" class="animate-pill filter-btn snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 bg-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-sm shrink-0 border border-slate-200 hover:border-brand-500 hover:text-brand-500 hover:-translate-y-0.5 hover:shadow-md">${cat}</button>`;
+                });
+                filterContainer.innerHTML = htmlFilters;
+
+                const selectCat = document.getElementById('prod-category');
+                selectCat.innerHTML = allCats.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+                selectCat.addEventListener('change', (e) => this.admin.toggleStockType(e.target.value));
             },
 
             auth: {
                 toggleLoginModal() { document.getElementById('modal-login').classList.toggle('hidden'); },
                 async login() {
-                    const email = document.getElementById('adm-email').value;
-                    const password = document.getElementById('adm-password').value;
-                    const btn = document.getElementById('btn-login-submit');
-                    if(!email || !password) return app.showToast("Preencha todos os campos!", true);
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-                    const { error } = await supabaseClient.auth.signInWithPassword({ email, password });
+                    const e = document.getElementById('adm-email').value;
+                    const p = document.getElementById('adm-password').value;
+                    const b = document.getElementById('btn-login-submit');
+                    if(!e || !p) return app.showToast("Preencha e-mail e senha", true);
+                    
+                    b.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+                    const { error } = await supabaseClient.auth.signInWithPassword({ email: e, password: p });
+                    
                     if (error) {
-                        app.showToast("Erro: " + error.message, true);
-                        btn.innerHTML = 'Iniciar Sessão';
+                        app.showToast("Credenciais inválidas", true);
+                        b.innerHTML = 'Entrar no Painel';
                     } else {
-                        app.showToast("Sessão iniciada com sucesso!");
+                        app.showToast("Acesso Autorizado!");
                         setTimeout(() => location.reload(), 1000); 
                     }
                 },
@@ -551,49 +687,83 @@
                     const { data: { session } } = await supabaseClient.auth.getSession();
                     if (session) {
                         app.isAdmin = true;
+                        document.getElementById('admin-controls').classList.remove('hidden');
+                        document.getElementById('admin-controls').classList.add('flex');
                         document.getElementById('btn-logout').classList.remove('hidden');
-                        document.getElementById('btn-add-product').classList.remove('hidden');
-                        document.getElementById('btn-add-product').classList.add('flex');
                     }
                 }
             },
 
             admin: {
-                setupStockInputs() {
-                    const container = document.getElementById('stock-grid-shoes');
-                    let html = '';
-                    for(let i = 33; i <= 40; i++) {
-                        html += `
-                        <div class="bg-brand-50 p-2 rounded-xl text-center border border-brand-100/50">
-                            <label class="block text-[8px] font-bold text-brand-500 mb-1">Tam ${i}</label>
-                            <input type="number" id="stock-size-${i}" min="0" placeholder="0" class="w-full text-center bg-white border-0 rounded-lg p-1.5 text-xs font-bold text-slate-700 outline-none">
-                        </div>`;
-                    }
-                    container.innerHTML = html;
-                },
-
-                toggleStockType(category) {
-                    const isUnique = CAT_TAMANHO_UNICO.includes(category);
-                    document.getElementById('stock-grid-shoes').classList.toggle('hidden', isUnique);
-                    document.getElementById('stock-grid-unique').classList.toggle('hidden', !isUnique);
-                },
-
-                openForm(id = null) {
-                    const modal = document.getElementById('modal-product');
-                    const form = document.getElementById('form-product');
-                    const title = document.getElementById('modal-product-title');
+                openSettingsModal() {
+                    document.getElementById('set-hero-img').value = app.settings.heroImg;
+                    document.getElementById('set-hero-title').value = app.settings.heroTitle;
+                    document.getElementById('set-about-title').value = app.settings.aboutTitle;
+                    document.getElementById('set-about-text').value = app.settings.aboutText;
+                    document.getElementById('set-custom-cats').value = app.settings.customCats;
                     
+                    const tests = app.settings.testimonials || [];
+                    for(let i=0; i<3; i++) {
+                        const t = tests[i] || {name: '', role: '', text: '', img: ''};
+                        document.getElementById(`set-t${i+1}-name`).value = t.name;
+                        document.getElementById(`set-t${i+1}-role`).value = t.role;
+                        document.getElementById(`set-t${i+1}-text`).value = t.text;
+                        document.getElementById(`set-t${i+1}-img`).value = t.img || '';
+                    }
+
+                    document.getElementById('modal-settings').classList.remove('hidden');
+                },
+                closeSettingsModal() {
+                    document.getElementById('modal-settings').classList.add('hidden');
+                },
+                saveSettings() {
+                    app.settings.heroImg = document.getElementById('set-hero-img').value;
+                    app.settings.heroTitle = document.getElementById('set-hero-title').value;
+                    app.settings.aboutTitle = document.getElementById('set-about-title').value;
+                    app.settings.aboutText = document.getElementById('set-about-text').value;
+                    app.settings.customCats = document.getElementById('set-custom-cats').value;
+                    
+                    const newTests = [];
+                    for(let i=1; i<=3; i++) {
+                        newTests.push({
+                            name: document.getElementById(`set-t${i}-name`).value,
+                            role: document.getElementById(`set-t${i}-role`).value,
+                            text: document.getElementById(`set-t${i}-text`).value,
+                            img: document.getElementById(`set-t${i}-img`).value
+                        });
+                    }
+                    app.settings.testimonials = newTests;
+                    
+                    localStorage.setItem('attiva_settings', JSON.stringify(app.settings));
+                    app.applySettings();
+                    app.renderCategories();
+                    this.closeSettingsModal();
+                    app.showToast("Visual atualizado!");
+                },
+
+                setupStockInputs() {
+                    const c = document.getElementById('stock-grid-shoes');
+                    let h = '';
+                    for(let i=33; i<=40; i++) {
+                        h += `<div class="bg-white p-2 rounded-lg border border-slate-100 text-center"><label class="block text-[8px] font-bold text-slate-400 mb-1">Tam ${i}</label><input type="number" id="stock-size-${i}" min="0" placeholder="0" class="w-full text-center bg-slate-50 border-0 rounded p-1 text-xs font-bold outline-none"></div>`;
+                    }
+                    c.innerHTML = h;
+                },
+                toggleStockType(cat) {
+                    const isUnico = CAT_TAMANHO_UNICO.includes(cat);
+                    document.getElementById('stock-grid-shoes').classList.toggle('hidden', isUnico);
+                    document.getElementById('stock-grid-unique').classList.toggle('hidden', !isUnico);
+                },
+                openForm(id = null) {
+                    const form = document.getElementById('form-product');
                     form.reset();
                     document.getElementById('prod-id').value = '';
                     document.getElementById('prod-img-url-old').value = '';
-                    document.getElementById('foto-aviso').innerText = "Tire uma foto agora ou escolha da galeria.";
-                    
-                    // Resetar Estoque
                     for(let i=33; i<=40; i++) document.getElementById(`stock-size-${i}`).value = '';
                     document.getElementById('stock-unique').value = '';
 
                     if (id) {
-                        title.innerText = "Editar Produto";
+                        document.getElementById('modal-product-title').innerText = "Editar Produto";
                         const p = app.allProducts.find(x => x.id === id);
                         if(p) {
                             document.getElementById('prod-id').value = p.id;
@@ -601,29 +771,18 @@
                             document.getElementById('prod-price').value = p.price;
                             document.getElementById('prod-category').value = p.category;
                             document.getElementById('prod-img-url-old').value = p.img;
-                            document.getElementById('foto-aviso').innerText = "Deixe vazio para manter a foto atual.";
-                            
                             this.toggleStockType(p.category);
                             
-                            // Preencher estoque
-                            let stockObj = p.estoque || {};
-                            if(typeof stockObj === 'string') stockObj = JSON.parse(stockObj);
-
-                            if(CAT_TAMANHO_UNICO.includes(p.category)) {
-                                document.getElementById('stock-unique').value = stockObj['Único'] || 0;
-                            } else {
-                                for(let i=33; i<=40; i++) {
-                                    document.getElementById(`stock-size-${i}`).value = stockObj[i] || '';
-                                }
-                            }
+                            let sObj = typeof p.estoque === 'string' ? JSON.parse(p.estoque) : p.estoque;
+                            if(CAT_TAMANHO_UNICO.includes(p.category)) document.getElementById('stock-unique').value = sObj['Único'] || 0;
+                            else for(let i=33; i<=40; i++) document.getElementById(`stock-size-${i}`).value = sObj[i] || '';
                         }
                     } else {
-                        title.innerText = "Novo Produto";
+                        document.getElementById('modal-product-title').innerText = "Adicionar Produto";
                         this.toggleStockType(document.getElementById('prod-category').value);
                     }
-                    modal.classList.remove('hidden');
+                    document.getElementById('modal-product').classList.remove('hidden');
                 },
-
                 closeForm() { document.getElementById('modal-product').classList.add('hidden'); },
                 
                 async saveProduct() {
@@ -632,398 +791,292 @@
 
                     const id = document.getElementById('prod-id').value;
                     const fileInput = document.getElementById('prod-img-file');
-                    let finalImageUrl = document.getElementById('prod-img-url-old').value;
+                    let finalUrl = document.getElementById('prod-img-url-old').value;
 
-                    // UPLOAD DA FOTO
                     if (fileInput.files.length > 0) {
                         const file = fileInput.files[0];
                         const fileName = `${Date.now()}.${file.name.split('.').pop()}`;
-                        app.showToast("A enviar fotografia...");
-                        
-                        const { data: uploadData, error: uploadError } = await supabaseClient.storage
-                            .from('fotos').upload(fileName, file);
-                            
-                        if (uploadError) {
-                            app.showToast("Erro ao enviar foto: " + uploadError.message, true);
-                            btn.innerHTML = 'Salvar Alterações';
-                            return;
-                        }
-                        const { data: publicUrlData } = supabaseClient.storage.from('fotos').getPublicUrl(fileName);
-                        finalImageUrl = publicUrlData.publicUrl;
+                        app.showToast("A enviar foto...");
+                        const { error: upErr } = await supabaseClient.storage.from('fotos').upload(fileName, file);
+                        if (upErr) { app.showToast("Erro ao enviar foto", true); btn.innerHTML = 'Guardar'; return; }
+                        finalUrl = supabaseClient.storage.from('fotos').getPublicUrl(fileName).data.publicUrl;
                     }
 
-                    if (!id && !finalImageUrl) {
-                        app.showToast("Por favor, adicione uma foto do produto!", true);
-                        btn.innerHTML = 'Salvar Alterações';
-                        return;
-                    }
+                    if (!id && !finalUrl) { app.showToast("Adicione uma foto!", true); btn.innerHTML = 'Guardar'; return; }
 
-                    // CONSTRUIR OBJETO DE ESTOQUE
                     const cat = document.getElementById('prod-category').value;
                     let estoque = {};
-                    
                     if (CAT_TAMANHO_UNICO.includes(cat)) {
-                        const val = parseInt(document.getElementById('stock-unique').value) || 0;
-                        if(val > 0) estoque['Único'] = val;
+                        const v = parseInt(document.getElementById('stock-unique').value) || 0;
+                        if(v > 0) estoque['Único'] = v;
                     } else {
                         for(let i=33; i<=40; i++) {
-                            const val = parseInt(document.getElementById(`stock-size-${i}`).value);
-                            if(val > 0) estoque[i.toString()] = val;
+                            const v = parseInt(document.getElementById(`stock-size-${i}`).value);
+                            if(v > 0) estoque[i.toString()] = v;
                         }
                     }
 
-                    const productData = {
+                    const data = {
                         name: document.getElementById('prod-name').value,
                         price: parseFloat(document.getElementById('prod-price').value),
                         category: cat,
-                        img: finalImageUrl,
-                        estoque: estoque // O Supabase vai salvar isso como JSON na nova coluna
+                        img: finalUrl,
+                        estoque: estoque
                     };
 
-                    let errorInfo = null;
-                    if (id) {
-                        const { error } = await supabaseClient.from('produtos').update(productData).eq('id', id);
-                        errorInfo = error;
-                    } else {
-                        const { error } = await supabaseClient.from('produtos').insert([productData]);
-                        errorInfo = error;
-                    }
+                    let err;
+                    if (id) { const res = await supabaseClient.from('produtos').update(data).eq('id', id); err = res.error; }
+                    else { const res = await supabaseClient.from('produtos').insert([data]); err = res.error; }
 
-                    if (errorInfo) {
-                        app.showToast("Erro ao guardar: " + errorInfo.message, true);
-                    } else {
-                        app.showToast("Produto guardado com sucesso!");
-                        this.closeForm();
-                        app.fetchProducts(); 
-                    }
-                    btn.innerHTML = 'Salvar Alterações';
+                    if (err) app.showToast("Erro: " + err.message, true);
+                    else { app.showToast("Produto Guardado!"); this.closeForm(); app.fetchProducts(); }
+                    btn.innerHTML = 'Guardar Produto no Catálogo';
                 },
-
                 async deleteProduct(id) {
-                    if(!confirm("Tem a certeza que deseja eliminar este produto?")) return;
-                    app.showToast("A eliminar...");
-                    const { error } = await supabaseClient.from('produtos').delete().eq('id', id);
-                    if(error) app.showToast("Erro ao eliminar.", true);
-                    else { app.showToast("Eliminado!"); app.fetchProducts(); }
+                    if(!confirm("Remover este produto do catálogo?")) return;
+                    await supabaseClient.from('produtos').delete().eq('id', id);
+                    app.showToast("Removido!");
+                    app.fetchProducts();
                 }
             },
 
             async fetchProducts() {
-                const { data, error } = await supabaseClient
-                    .from('produtos').select('*').order('id', { ascending: false });
-
-                if (error) {
-                    console.error("Erro a carregar:", error.message);
-                    return;
-                }
-                this.allProducts = data;
-                this.render();
+                const { data, error } = await supabaseClient.from('produtos').select('*').order('id', { ascending: false });
+                if(!error) { this.allProducts = data; this.render(); }
             },
 
-            // FUNÇÃO AUXILIAR PARA CALCULAR ESTOQUE TOTAL DE UM PRODUTO
-            getTotalStock(estoque) {
-                if(!estoque) return 0;
-                let stockObj = typeof estoque === 'string' ? JSON.parse(estoque) : estoque;
-                return Object.values(stockObj).reduce((sum, val) => sum + parseInt(val), 0);
+            getTotalStock(est) {
+                if(!est) return 0;
+                let o = typeof est === 'string' ? JSON.parse(est) : est;
+                return Object.values(o).reduce((s, v) => s + parseInt(v), 0);
             },
 
             render() {
                 const grid = document.getElementById('product-grid');
-                const filtered = this.currentCat === 'all' 
-                    ? this.allProducts 
-                    : this.allProducts.filter(p => p.category === this.currentCat);
+                const filtered = this.currentCat === 'all' ? this.allProducts : this.allProducts.filter(p => p.category === this.currentCat);
 
                 if(filtered.length === 0) {
-                    grid.innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-xs font-bold uppercase tracking-widest">Nenhum produto nesta categoria.</div>`;
+                    grid.innerHTML = `<div class="col-span-2 lg:col-span-4 text-center py-20 text-slate-400 text-[10px] font-bold uppercase tracking-widest">Nenhum item nesta secção.</div>`;
                     return;
                 }
 
                 grid.innerHTML = filtered.map((p, i) => {
-                    const totalStock = this.getTotalStock(p.estoque);
-                    const isEsgotado = totalStock <= 0;
+                    const totalSt = this.getTotalStock(p.estoque);
+                    const esg = totalSt <= 0;
                     
-                    let sizesBadge = '';
-                    if(!isEsgotado && p.estoque) {
-                        let stockObj = typeof p.estoque === 'string' ? JSON.parse(p.estoque) : p.estoque;
-                        const availableSizes = Object.keys(stockObj).filter(k => stockObj[k] > 0);
-                        if(availableSizes.length > 0 && !CAT_TAMANHO_UNICO.includes(p.category)) {
-                            sizesBadge = `<p class="text-[8px] md:text-[10px] text-slate-400 mt-1 truncate">Tam: ${availableSizes.join(', ')}</p>`;
+                    let sBadge = '';
+                    if(!esg && p.estoque) {
+                        let o = typeof p.estoque === 'string' ? JSON.parse(p.estoque) : p.estoque;
+                        const av = Object.keys(o).filter(k => o[k] > 0);
+                        if(av.length > 0 && !CAT_TAMANHO_UNICO.includes(p.category)) {
+                            sBadge = `<p class="text-[9px] text-slate-400 mt-1 uppercase tracking-wider">Tam: ${av.join(', ')}</p>`;
                         } else if(CAT_TAMANHO_UNICO.includes(p.category)) {
-                            sizesBadge = `<p class="text-[8px] md:text-[10px] text-slate-400 mt-1">Tamanho Único</p>`;
+                            sBadge = `<p class="text-[9px] text-slate-400 mt-1 uppercase tracking-wider">Tamanho Único</p>`;
                         }
                     }
 
                     return `
-                    <div class="reveal bg-white rounded-3xl border border-brand-50 shadow-sm transition-all duration-300 group overflow-hidden flex flex-col h-full relative ${isEsgotado ? 'opacity-70' : ''}" data-aos="fade-up" data-aos-delay="${i * 30}">
+                    <div class="bg-white rounded-[1.5rem] md:rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 group flex flex-col relative overflow-hidden cursor-pointer ${esg ? 'opacity-60 grayscale-[30%]' : ''}" data-aos="fade-up" data-aos-delay="${(i%4)*50}">
                         
                         ${this.isAdmin ? `
-                            <div class="absolute top-2 right-2 z-20 flex flex-col gap-2">
-                                <button onclick="app.admin.openForm(${p.id})" class="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-blue-600 transition">
-                                    <i class="fas fa-pen text-xs"></i>
-                                </button>
-                                <button onclick="app.admin.deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-md hover:bg-red-600 transition">
-                                    <i class="fas fa-trash text-xs"></i>
-                                </button>
-                            </div>
-                        ` : ''}
+                        <div class="absolute top-3 right-3 z-20 flex flex-col gap-2">
+                            <button onclick="event.stopPropagation(); app.admin.openForm(${p.id})" class="bg-slate-800 text-white w-8 h-8 rounded-full shadow-lg"><i class="fas fa-pen text-xs"></i></button>
+                            <button onclick="event.stopPropagation(); app.admin.deleteProduct(${p.id})" class="bg-red-500 text-white w-8 h-8 rounded-full shadow-lg"><i class="fas fa-trash text-xs"></i></button>
+                        </div>` : ''}
 
-                        <div class="product-card-img relative overflow-hidden h-44 md:h-[400px] bg-brand-50 cursor-pointer" onclick="app.openSizeModal(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80'" loading="lazy">
-                            
-                            ${isEsgotado ? `
-                                <div class="absolute inset-0 bg-white/50 backdrop-blur-[2px] flex items-center justify-center">
-                                    <span class="bg-slate-900 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-2 rounded-full">Esgotado</span>
-                                </div>
-                            ` : `
-                                <div class="absolute inset-0 bg-brand-900/10 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center pointer-events-none">
-                                    <div class="bg-white/95 backdrop-blur px-4 py-2 rounded-full text-[8px] font-bold text-brand-500 uppercase tracking-widest shadow-xl">Comprar</div>
-                                </div>
-                            `}
+                        <!-- Hover Overlay (Comprar) -->
+                        ${!esg ? `
+                        <div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center pointer-events-none" onclick="app.openSizeModal(${p.id})">
+                            <div class="glass-panel text-slate-900 font-bold text-[10px] uppercase tracking-widest px-6 py-3 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                                Ver Opções
+                            </div>
+                        </div>` : ''}
+
+                        <div class="relative h-48 md:h-64 bg-slate-50 overflow-hidden" onclick="app.openSizeModal(${p.id})">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="lazy">
+                            ${esg ? `<div class="absolute inset-0 bg-white/40 backdrop-blur-sm flex items-center justify-center"><span class="bg-slate-900 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full">Esgotado</span></div>` : ''}
                         </div>
-                        <div class="p-4 md:p-8 flex flex-col flex-1">
-                            <h3 class="product-card-title font-medium text-slate-800 text-[10px] md:text-[13px] uppercase tracking-tight">${p.name}</h3>
-                            ${sizesBadge}
-                            
-                            <div class="flex items-center justify-between mt-auto pt-4 md:pt-6 md:border-t border-brand-50">
-                                <span class="font-serif italic text-sm md:text-3xl text-slate-900">R$ ${parseFloat(p.price).toFixed(2).replace('.', ',')}</span>
-                                ${!isEsgotado ? `
-                                    <button onclick="app.openSizeModal(${p.id})" class="bg-brand-500 text-white w-8 h-8 md:w-14 md:h-14 rounded-full flex items-center justify-center hover:bg-brand-600 transition shadow-md">
-                                        <i class="fas fa-plus text-[10px] md:text-base"></i>
-                                    </button>
-                                ` : ''}
+                        
+                        <div class="p-5 md:p-6 flex flex-col flex-1" onclick="app.openSizeModal(${p.id})">
+                            <h3 class="product-card-title font-medium text-slate-800 text-[11px] md:text-xs uppercase tracking-tight">${p.name}</h3>
+                            ${sBadge}
+                            <div class="mt-auto pt-4 flex justify-between items-end">
+                                <span class="font-serif italic text-lg md:text-2xl text-slate-900 leading-none">R$ ${parseFloat(p.price).toFixed(2).replace('.', ',')}</span>
+                                <!-- Add icon for mobile visually since hover is tough -->
+                                ${!esg ? `<div class="w-8 h-8 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center md:hidden"><i class="fas fa-shopping-bag text-xs"></i></div>` : ''}
                             </div>
                         </div>
-                    </div>
-                `}).join('');
+                    </div>`;
+                }).join('');
             },
 
             filter(cat) {
                 this.currentCat = cat;
                 document.querySelectorAll('.filter-btn').forEach(btn => {
-                    const isCat = btn.innerText === cat;
-                    btn.classList.toggle('active', isCat);
-                    btn.classList.toggle('bg-white', isCat);
-                    btn.classList.toggle('text-brand-500', isCat);
-                    btn.classList.toggle('shadow-sm', isCat);
-                    btn.classList.toggle('border-brand-100', isCat);
-                    
-                    btn.classList.toggle('text-slate-400', !isCat);
-                    btn.classList.toggle('border-transparent', !isCat);
+                    const isM = btn.innerText.toUpperCase() === cat.toUpperCase() || (cat === 'all' && btn.innerText === 'TODAS');
+                    // Remove animação de entrada ao clicar (para evitar flicker)
+                    btn.style.animation = 'none'; 
+                    btn.className = isM ? 'filter-btn active snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shrink-0 border border-slate-900 transform scale-105' 
+                                      : 'filter-btn snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 bg-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-sm shrink-0 border border-slate-200 hover:border-brand-500 hover:text-brand-500 hover:-translate-y-0.5 hover:shadow-md';
                 });
                 this.render();
             },
 
-            // ==========================================
-            // LÓGICA DE TAMANHOS E CESTO
-            // ==========================================
             openSizeModal(id) {
-                if(this.isAdmin) return;
+                if(this.isAdmin) return; // ADM edita pelo botão do card
                 const p = this.allProducts.find(i => i.id === id);
                 if(!p) return;
 
-                let stockObj = p.estoque || {};
-                if(typeof stockObj === 'string') stockObj = JSON.parse(stockObj);
-                
-                if(this.getTotalStock(stockObj) <= 0) {
-                    this.showToast("Produto esgotado!", true);
-                    return;
-                }
+                let sObj = typeof p.estoque === 'string' ? JSON.parse(p.estoque) : p.estoque || {};
+                if(this.getTotalStock(sObj) <= 0) { this.showToast("Esgotado no momento!", true); return; }
 
                 this.selectedProductForCart = p;
                 this.selectedSizeForCart = null;
-                
                 document.getElementById('modal-size-title').innerText = p.name;
-                const container = document.getElementById('size-options-container');
-                const btnConfirm = document.getElementById('btn-confirm-size');
-                btnConfirm.disabled = true;
+                const c = document.getElementById('size-options-container');
+                const btn = document.getElementById('btn-confirm-size');
+                btn.disabled = true;
 
-                // Preparar HTML dos botões de tamanho
-                let html = '';
-                
+                let h = '';
                 if(CAT_TAMANHO_UNICO.includes(p.category)) {
-                    const qtd = stockObj['Único'] || 0;
-                    html = `<button onclick="app.selectSize('Único', ${qtd})" class="size-btn col-span-4 bg-white border border-brand-100 rounded-xl py-4 font-bold text-sm text-slate-700 hover:bg-brand-50 transition ${qtd <= 0 ? 'opacity-30' : ''}" ${qtd <= 0 ? 'disabled' : ''}>Tamanho Único (Disponível)</button>`;
+                    const q = sObj['Único'] || 0;
+                    h = `<button onclick="app.selectSize('Único', ${q})" class="size-btn col-span-4 bg-white border border-slate-200 rounded-xl py-4 font-bold text-sm hover:border-brand-500 transition ${q<=0?'opacity-30':''}" ${q<=0?'disabled':''}>Tamanho Único</button>`;
                 } else {
                     for(let i=33; i<=40; i++) {
-                        const qtd = stockObj[i.toString()] || 0;
-                        html += `
-                        <button onclick="app.selectSize('${i}', ${qtd})" class="size-btn bg-white border border-brand-100 rounded-xl py-3 font-bold text-sm text-slate-700 hover:border-brand-500 transition relative ${qtd <= 0 ? 'opacity-30 line-through' : ''}" ${qtd <= 0 ? 'disabled' : ''}>
-                            ${i}
-                        </button>`;
+                        const q = sObj[i.toString()] || 0;
+                        h += `<button onclick="app.selectSize('${i}', ${q})" class="size-btn bg-white border border-slate-200 rounded-xl py-3 font-bold text-sm hover:border-brand-500 transition ${q<=0?'opacity-30 line-through':''}" ${q<=0?'disabled':''}>${i}</button>`;
                     }
                 }
+                c.innerHTML = h;
+                btn.onclick = () => this.addToCart();
                 
-                container.innerHTML = html;
-                btnConfirm.onclick = () => this.addToCart();
-                document.getElementById('modal-size').classList.remove('hidden');
+                const m = document.getElementById('modal-size');
+                m.classList.remove('hidden');
+                setTimeout(() => document.getElementById('modal-size-box').classList.remove('translate-y-full'), 10);
             },
-
-            selectSize(size, stockAvailable) {
-                this.selectedSizeForCart = { size, stockAvailable };
-                document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('selected'));
+            selectSize(s, q) {
+                this.selectedSizeForCart = { size: s, stockAvailable: q };
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('selected'));
                 event.currentTarget.classList.add('selected');
                 document.getElementById('btn-confirm-size').disabled = false;
             },
-
             closeSizeModal() {
-                document.getElementById('modal-size').classList.add('hidden');
-                this.selectedProductForCart = null;
-                this.selectedSizeForCart = null;
+                document.getElementById('modal-size-box').classList.add('translate-y-full');
+                setTimeout(() => document.getElementById('modal-size').classList.add('hidden'), 300);
             },
 
             addToCart() {
                 if(!this.selectedProductForCart || !this.selectedSizeForCart) return;
+                const p = this.selectedProductForCart, s = this.selectedSizeForCart.size, ms = this.selectedSizeForCart.stockAvailable;
                 
-                const p = this.selectedProductForCart;
-                const s = this.selectedSizeForCart.size;
-                const maxStock = this.selectedSizeForCart.stockAvailable;
-
-                // Verifica se já tem no carrinho para controlar o estoque máximo
-                const exist = this.cart.find(item => item.id === p.id && item.size === s);
-                if (exist) {
-                    if (exist.qty >= maxStock) {
-                        this.showToast(`Desculpe, só temos ${maxStock} unidade(s) do tamanho ${s}!`, true);
-                        return;
-                    }
-                    exist.qty++;
-                } else {
-                    this.cart.push({ ...p, qty: 1, size: s, maxStock: maxStock });
-                }
+                const ex = this.cart.find(i => i.id === p.id && i.size === s);
+                if(ex) {
+                    if(ex.qty >= ms) { this.showToast(`Só ${ms} em stock!`, true); return; }
+                    ex.qty++;
+                } else this.cart.push({...p, qty: 1, size: s, maxStock: ms});
                 
                 this.updateUI();
                 this.closeSizeModal();
-                this.showToast(`${p.name} (Tam ${s}) adicionado!`);
-                if (navigator.vibrate) navigator.vibrate(50);
+                this.showToast("Adicionado à sacola!");
                 
-                const icon = document.getElementById('cart-icon-container');
-                icon.classList.add('animate-bounce');
-                setTimeout(() => icon.classList.remove('animate-bounce'), 500);
+                if(navigator.vibrate) navigator.vibrate(50);
+                ['cart-icon-container'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) { el.classList.add('scale-125'); setTimeout(() => el.classList.remove('scale-125'), 300); }
+                });
             },
 
             updateUI() {
-                const count = this.cart.reduce((s, i) => s + i.qty, 0);
+                const c = this.cart.reduce((s, i) => s + i.qty, 0);
                 const sub = this.cart.reduce((s, i) => s + (i.price * i.qty), 0);
-                document.getElementById('cart-count').innerText = count;
-                document.getElementById('cart-count').classList.toggle('hidden', count === 0);
-                document.getElementById('cart-total-val').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
-                document.getElementById('checkout-btn').disabled = count === 0;
                 
-                const list = document.getElementById('cart-items');
-                if(this.cart.length === 0) {
-                    list.innerHTML = `<div class="text-center py-10 text-slate-300 text-[10px] font-bold uppercase tracking-widest">A sua sacola está vazia</div>`;
-                } else {
-                    list.innerHTML = this.cart.map((item, idx) => `
-                        <div class="flex gap-4 items-center bg-brand-50 p-4 rounded-3xl border border-brand-100 relative">
-                            <button onclick="app.qty(${idx}, -${item.qty})" class="absolute -top-2 -right-2 bg-white text-slate-400 hover:text-red-500 rounded-full w-6 h-6 flex items-center justify-center shadow-sm text-xs border border-brand-100">&times;</button>
-                            <img src="${item.img}" class="w-16 h-16 object-cover rounded-xl border border-white" onerror="this.src='https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=150&q=80'" loading="lazy">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="font-bold text-slate-800 text-[10px] uppercase truncate">${item.name}</h4>
-                                <p class="text-[9px] text-slate-500 uppercase tracking-widest">Tam: <strong class="text-brand-500">${item.size}</strong></p>
-                                <p class="text-brand-500 font-serif italic text-sm mt-1">R$ ${parseFloat(item.price).toFixed(2).replace('.', ',')}</p>
-                                <div class="flex items-center gap-3 mt-2">
-                                    <button onclick="app.qty(${idx}, -1)" class="w-6 h-6 rounded-lg bg-white border border-brand-100 flex items-center justify-center text-[8px] text-slate-400">-</button>
-                                    <span class="font-bold text-slate-700 text-[10px] w-4 text-center">${item.qty}</span>
-                                    <button onclick="app.qty(${idx}, 1)" class="w-6 h-6 rounded-lg bg-white border border-brand-100 flex items-center justify-center text-[8px] text-brand-500">+</button>
+                ['cart-count-desktop', 'cart-count-mobile-top'].forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) { el.innerText = c; el.classList.toggle('hidden', c===0); }
+                });
+                
+                document.getElementById('cart-total-val').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
+                document.getElementById('checkout-btn').disabled = c === 0;
+
+                const lst = document.getElementById('cart-items');
+                if(c === 0) lst.innerHTML = `<div class="text-center py-10 text-slate-400 text-[10px] font-bold uppercase tracking-widest">Sua sacola está vazia</div>`;
+                else {
+                    lst.innerHTML = this.cart.map((i, idx) => `
+                        <div class="flex gap-4 items-center bg-white p-3 rounded-2xl border border-slate-100 shadow-sm relative">
+                            <button onclick="app.qty(${idx}, -${i.qty})" class="absolute top-2 right-2 text-slate-300 hover:text-red-500 w-6 h-6"><i class="fas fa-times"></i></button>
+                            <img src="${i.img}" class="w-16 h-20 object-cover rounded-xl bg-slate-50">
+                            <div class="flex-1 min-w-0 pr-4">
+                                <h4 class="font-bold text-slate-800 text-[10px] uppercase truncate">${i.name}</h4>
+                                <p class="text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Tam: <strong class="text-brand-500">${i.size}</strong></p>
+                                <p class="text-slate-900 font-serif italic text-sm mt-1">R$ ${parseFloat(i.price).toFixed(2).replace('.', ',')}</p>
+                                <div class="flex items-center gap-2 mt-2 bg-slate-50 w-max rounded-lg border border-slate-200">
+                                    <button onclick="app.qty(${idx}, -1)" class="w-6 h-6 flex items-center justify-center text-[10px] font-bold text-slate-500">-</button>
+                                    <span class="text-[10px] font-bold text-slate-900 w-4 text-center">${i.qty}</span>
+                                    <button onclick="app.qty(${idx}, 1)" class="w-6 h-6 flex items-center justify-center text-[10px] font-bold text-brand-500">+</button>
                                 </div>
                             </div>
                         </div>
                     `).join('');
                 }
             },
-
-            qty(idx, d) { 
-                const item = this.cart[idx];
-                if(item.qty + d <= 0) {
-                    this.cart.splice(idx, 1); 
-                } else if (item.qty + d > item.maxStock) {
-                    this.showToast(`Limite de estoque atingido! (${item.maxStock} unid.)`, true);
-                } else {
-                    item.qty += d; 
-                }
-                this.updateUI(); 
+            qty(idx, d) {
+                const i = this.cart[idx];
+                if(i.qty + d <= 0) this.cart.splice(idx, 1);
+                else if(i.qty + d > i.maxStock) this.showToast(`Estoque limite atingido!`, true);
+                else i.qty += d;
+                this.updateUI();
             },
-
             toggleCart() {
-                const side = document.getElementById('cart-sidebar');
-                const over = document.getElementById('cart-overlay');
-                const open = !side.classList.contains('translate-x-full');
-                side.classList.toggle('translate-x-full', open);
-                over.classList.toggle('hidden', open);
-                setTimeout(() => over.classList.toggle('opacity-0', open), 10);
-                document.body.style.overflow = open ? '' : 'hidden';
+                const s = document.getElementById('cart-sidebar'), o = document.getElementById('cart-overlay');
+                const op = !s.classList.contains('translate-x-full');
+                s.classList.toggle('translate-x-full', op);
+                o.classList.toggle('hidden', op);
+                setTimeout(() => o.classList.toggle('opacity-0', op), 10);
             },
-
             showPage(p) {
                 ['home', 'checkout'].forEach(id => document.getElementById(`page-${id}`).classList.add('hidden'));
                 document.getElementById(`page-${p}`).classList.remove('hidden');
-                if (p === 'checkout' && !document.getElementById('cart-sidebar').classList.contains('translate-x-full')) {
-                    this.toggleCart();
-                }
+                if (p === 'checkout' && !document.getElementById('cart-sidebar').classList.contains('translate-x-full')) this.toggleCart();
                 this.updateSummary();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             },
-
             scrollToSection(id) { 
-                const target = document.getElementById(id); 
-                if (target) window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' }); 
+                if(document.getElementById('page-home').classList.contains('hidden')) this.showPage('home');
+                const t = document.getElementById(id); 
+                if(t) setTimeout(() => window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' }), 100); 
             },
-
             updateDelivery() { this.updateSummary(); },
-
             updateSummary() {
-                const del = parseFloat(document.getElementById('delivery-type').value);
-                const sub = this.cart.reduce((s, i) => s + (i.price * i.qty), 0);
-                const summaryList = document.getElementById('summary-items');
-                if (summaryList) {
-                    document.getElementById('sum-subtotal').innerText = `R$ ${sub.toFixed(2).replace('.', ',')}`;
-                    document.getElementById('sum-delivery').innerText = `R$ ${del.toFixed(2).replace('.', ',')}`;
-                    document.getElementById('sum-total').innerText = `R$ ${(sub + del).toFixed(2).replace('.', ',')}`;
-                    summaryList.innerHTML = this.cart.map(i => `
-                        <div class="flex justify-between text-[9px] uppercase tracking-wider text-white/50">
-                            <span class="truncate pr-2">${i.qty}x ${i.name} (Tam ${i.size})</span>
-                            <span class="text-white shrink-0">R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}</span>
-                        </div>
-                    `).join('');
-                }
+                const d = parseFloat(document.getElementById('delivery-type').value);
+                const s = this.cart.reduce((a, i) => a + (i.price * i.qty), 0);
+                document.getElementById('sum-subtotal').innerText = `R$ ${s.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-delivery').innerText = `R$ ${d.toFixed(2).replace('.', ',')}`;
+                document.getElementById('sum-total').innerText = `R$ ${(s+d).toFixed(2).replace('.', ',')}`;
+                document.getElementById('summary-items').innerHTML = this.cart.map(i => `<div class="flex justify-between text-[10px] uppercase tracking-wider text-white/70 mb-2 border-b border-white/5 pb-2"><span class="truncate pr-2">${i.qty}x ${i.name} (T: ${i.size})</span><span class="text-white shrink-0">R$ ${(i.price*i.qty).toFixed(2).replace('.', ',')}</span></div>`).join('');
             },
 
             sendToWhatsApp() {
-                const n = document.getElementById('cust-name').value;
-                const a = document.getElementById('cust-address').value;
-                const dSelect = document.getElementById('delivery-type');
-                const dText = dSelect.options[dSelect.selectedIndex].text;
+                const n = document.getElementById('cust-name').value, a = document.getElementById('cust-address').value;
+                if(!n || !a) { this.showToast("Preencha Nome e Endereço", true); return; }
                 
-                if(!n || !a) {
-                    this.showToast("Por favor, preencha o seu nome e morada/endereço.", true);
-                    return;
-                }
-
-                if (navigator.vibrate) navigator.vibrate([100, 50, 100]);
-
-                let msg = `*📋 PEDIDO - ATTIVA’S SHOES*%0A%0A`;
-                msg += `*CLIENTE:*%0A• Nome: ${n.toUpperCase()}%0A• Entrega: ${dText}%0A• Endereço: ${a}%0A%0A`;
-                msg += `*ITENS:*%0A`;
+                const dSelect = document.getElementById('delivery-type');
+                let msg = `*🛍️ NOVO PEDIDO - ATTIVA’S SHOES*%0A%0A*CLIENTE:*%0A• ${n.toUpperCase()}%0A• ${dSelect.options[dSelect.selectedIndex].text}%0A• ${a}%0A%0A*ITENS:*%0A`;
                 this.cart.forEach(i => {
-                    msg += `• ${i.qty}x ${i.name.toUpperCase()} (Tam: ${i.size}) - R$ ${(i.price * i.qty).toFixed(2).replace('.', ',')}%0A`;
+                    // Adicionando Link da Imagem no WhatsApp de forma limpa
+                    msg += `▪ ${i.qty}x ${i.name.toUpperCase()} (Tam: ${i.size}) - R$ ${(i.price*i.qty).toFixed(2).replace('.',',')}%0A`;
+                    msg += `  📸 Imagem: ${i.img}%0A`;
                 });
-                msg += `%0A*TOTAL: ${document.getElementById('sum-total').innerText}*%0A`;
+                msg += `%0A*TOTAL A PAGAR: ${document.getElementById('sum-total').innerText}*`;
                 
                 window.open(`https://wa.me/5584921626352?text=${msg}`);
             },
 
-            showToast(msg, isError = false) { 
-                const t = document.getElementById('toast'); 
-                const icon = document.getElementById('toast-icon');
+            showToast(msg, isErr = false) {
+                const t = document.getElementById('toast'), i = document.getElementById('toast-icon');
                 document.getElementById('toast-message').innerText = msg;
-                if(isError) {
-                    icon.className = 'w-10 h-10 bg-red-50 text-red-500 rounded-full flex items-center justify-center shrink-0';
-                    icon.innerHTML = '<i class="fas fa-times"></i>';
-                } else {
-                    icon.className = 'w-10 h-10 bg-brand-50 text-brand-500 rounded-full flex items-center justify-center shrink-0';
-                    icon.innerHTML = '<i class="fas fa-check"></i>';
-                }
-                t.classList.remove('translate-y-48'); 
-                setTimeout(() => t.classList.add('translate-y-48'), 3000); 
+                i.className = isErr ? 'w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner' : 'w-8 h-8 bg-brand-500 text-white rounded-full flex items-center justify-center shrink-0 shadow-inner';
+                i.innerHTML = isErr ? '<i class="fas fa-times text-xs"></i>' : '<i class="fas fa-check text-xs"></i>';
+                t.classList.remove('-translate-y-24'); setTimeout(() => t.classList.add('-translate-y-24'), 3000);
             },
 
             createSparkles(containerId, particleCount) {
@@ -1034,7 +1087,7 @@
                     sparkle.className = 'sparkle';
                     sparkle.style.left = Math.random() * 100 + '%';
                     sparkle.style.top = Math.random() * 100 + '%';
-                    let size = Math.random() * 12 + 8; 
+                    let size = Math.random() * 10 + 5; 
                     sparkle.style.width = size + 'px';
                     sparkle.style.height = size + 'px';
                     sparkle.style.animationDuration = (Math.random() * 3 + 2) + 's';
@@ -1044,7 +1097,7 @@
             }
         };
 
-        document.addEventListener("DOMContentLoaded", () => { app.init(); });
+        document.addEventListener("DOMContentLoaded", () => app.init());
     </script>
 </body>
 </html>
