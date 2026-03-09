@@ -120,6 +120,21 @@
             animation: slideInPill 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
+        /* Slider & Carousel Styles */
+        .slider-container { position: relative; width: 100%; height: 100%; }
+        .slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .slide-img.active { opacity: 1; z-index: 1; }
+        
+        .carousel-btn {
+            position: absolute; top: 50%; transform: translateY(-50%); z-index: 20;
+            background: rgba(255, 255, 255, 0.95); color: #b67b7e; width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer; transition: all 0.3s; border: 1px solid #f9e6e7;
+        }
+        .carousel-btn:hover { background: #b67b7e; color: white; transform: translateY(-50%) scale(1.1); }
+        .carousel-btn.left { left: 0px; }
+        .carousel-btn.right { right: 0px; }
+
         /* Ajuste Mobile para Menu Inferior */
         @media (max-width: 768px) {
             body { padding-bottom: 80px; } /* Espaço para o menu inferior */
@@ -213,21 +228,22 @@
     <main>
         <div id="page-home" class="fade-in">
             
-            <!-- Destaque Principal (Editável) -->
-            <section id="hero" class="max-w-7xl mx-auto px-3 py-4 md:px-4 md:py-8" data-aos="fade-up">
-                <div class="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-brand-900 h-[400px] md:h-[600px] flex items-center shadow-premium group">
+            <!-- Destaque Principal (Estreito e Centralizado) -->
+            <section id="hero" class="max-w-7xl mx-auto px-4 py-6 md:py-10" data-aos="fade-up">
+                <!-- O Formato 4:5 (ou max-w-md no mobile) torna-o assertivo e centrado -->
+                <div class="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-slate-900 aspect-[4/5] sm:aspect-[3/4] md:aspect-[21/9] max-w-[420px] sm:max-w-md md:max-w-full mx-auto flex items-center shadow-premium group">
                     <img id="dynamic-hero-img" src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/compartilhar.jpg" 
-                         class="absolute inset-0 w-full h-full object-cover opacity-80 transition duration-1000 group-hover:scale-105" 
+                         class="absolute inset-0 w-full h-full object-cover object-center opacity-80 transition duration-1000 group-hover:scale-105" 
                          alt="Coleção 2026" fetchpriority="high">
                     <div class="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/20 to-transparent"></div>
                     <div id="hero-sparkles" class="sparkles-container"></div>
                     
-                    <div class="relative z-10 p-8 md:p-24 text-white w-full max-w-3xl">
+                    <div class="relative z-10 p-8 md:p-24 text-white w-full text-center md:text-left">
                         <span class="text-[9px] md:text-[11px] font-bold uppercase tracking-[0.4em] glass-dark px-4 py-2 rounded-full mb-6 inline-block shadow-lg">Nova Coleção</span>
-                        <h1 id="dynamic-hero-title" class="font-serif text-4xl md:text-7xl lg:text-8xl mb-6 md:mb-8 leading-[1.1] italic drop-shadow-lg">
+                        <h1 id="dynamic-hero-title" class="font-serif text-4xl md:text-7xl lg:text-8xl mb-6 md:mb-8 leading-[1.1] italic drop-shadow-lg mx-auto md:mx-0">
                             A elegância<br>muda tudo.
                         </h1>
-                        <button onclick="app.scrollToSection('products')" class="bg-white text-brand-900 px-8 py-4 rounded-full font-bold uppercase text-[10px] md:text-[12px] tracking-widest hover:bg-brand-50 hover:scale-105 transition-all shadow-xl">
+                        <button onclick="app.scrollToSection('products')" class="bg-white text-brand-900 px-8 py-4 rounded-full font-bold uppercase text-[10px] md:text-[12px] tracking-widest hover:bg-brand-50 hover:scale-105 transition-all shadow-xl mx-auto md:mx-0 block md:inline-block">
                             Explorar Catálogo
                         </button>
                     </div>
@@ -240,11 +256,15 @@
                     <h2 class="font-serif text-3xl md:text-5xl text-slate-900 italic tracking-tight leading-none">Descubra.</h2>
                 </div>
                 
-                <!-- Filtros em Pílulas (Pills) com Snap Scrolling -->
-                <div class="w-full overflow-x-auto no-scrollbar pb-6 pt-2 mb-6 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0" data-aos="fade-up" data-aos-delay="100">
-                    <div id="category-filters" class="flex gap-3 w-max px-4 md:px-1">
-                        <!-- Gerado via JS -->
+                <!-- Filtros em Pílulas (Pills) com Carousel Desktop -->
+                <div class="relative group" data-aos="fade-up" data-aos-delay="100">
+                    <button onclick="app.scrollSlider('category-scroll-wrapper', -250)" class="carousel-btn left hidden md:flex opacity-0 group-hover:opacity-100 -ml-4"><i class="fas fa-chevron-left text-xs"></i></button>
+                    <div id="category-scroll-wrapper" class="w-full overflow-x-auto no-scrollbar pb-6 pt-2 mb-6 snap-x snap-mandatory scroll-pl-4 md:scroll-pl-0 scroll-smooth">
+                        <div id="category-filters" class="flex gap-3 w-max px-4 md:px-1">
+                            <!-- Gerado via JS -->
+                        </div>
                     </div>
+                    <button onclick="app.scrollSlider('category-scroll-wrapper', 250)" class="carousel-btn right hidden md:flex opacity-0 group-hover:opacity-100 -mr-4"><i class="fas fa-chevron-right text-xs"></i></button>
                 </div>
                 
                 <div id="product-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-x-8 md:gap-y-12">
@@ -278,8 +298,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="lg:w-1/2 w-full h-72 md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10">
-                        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="w-full h-full object-cover hover:scale-105 transition duration-700" alt="Attiva's Shoes Boutique">
+                    
+                    <!-- Slider Automático da História -->
+                    <div class="lg:w-1/2 w-full h-72 md:h-[500px] rounded-[2rem] overflow-hidden shadow-2xl relative z-10 slider-container" id="about-slider">
+                        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6040.jpg.jpeg" class="slide-img active" alt="Boutique 1">
+                        <img src="https://images.unsplash.com/photo-1560934653-6119155998a4?auto=format&fit=crop&w=800&q=80" class="slide-img" alt="Boutique 2">
+                        <img src="https://images.unsplash.com/photo-1567401893414-76b7b1e5a7a5?auto=format&fit=crop&w=800&q=80" class="slide-img" alt="Boutique 3">
+                        <img src="https://images.unsplash.com/photo-1600857062241-98e5dba7f214?auto=format&fit=crop&w=800&q=80" class="slide-img" alt="Boutique 4">
                     </div>
                 </div>
             </section>
@@ -292,8 +317,15 @@
                     <h2 id="dynamic-testi-title" class="font-serif text-3xl md:text-5xl text-slate-900 italic">O que dizem de nós.</h2>
                 </div>
                 
-                <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 relative z-10">
-                    <!-- Gerado via JS -->
+                <!-- Carrossel de Depoimentos -->
+                <div class="relative group px-0 md:px-8 z-10">
+                    <button onclick="app.scrollSlider('testimonials-grid', -380)" class="carousel-btn left hidden md:flex opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-left"></i></button>
+                    
+                    <div id="testimonials-grid" class="flex gap-6 overflow-x-auto snap-x snap-mandatory no-scrollbar pb-8 pt-4 scroll-smooth scroll-pl-4">
+                        <!-- Gerado via JS -->
+                    </div>
+                    
+                    <button onclick="app.scrollSlider('testimonials-grid', 380)" class="carousel-btn right hidden md:flex opacity-0 group-hover:opacity-100"><i class="fas fa-chevron-right"></i></button>
                 </div>
             </section>
 
@@ -363,8 +395,6 @@
     </div>
     <div id="cart-overlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[900] hidden opacity-0 transition-opacity duration-500" onclick="app.toggleCart()"></div>
 
-    <!-- Modais omitidos temporariamente para encurtar. Mas aqui estão todos os modais perfeitamente estilizados -->
-    
     <!-- MODAL SELEÇÃO DE TAMANHO -->
     <div id="modal-size" class="fixed inset-0 bg-slate-900/50 backdrop-blur-md z-[1500] hidden flex items-end md:items-center justify-center pb-0 md:p-4">
         <div class="bg-white w-full max-w-md rounded-t-[2.5rem] md:rounded-[2.5rem] p-8 shadow-2xl relative transition-transform transform translate-y-full md:translate-y-0" id="modal-size-box">
@@ -400,7 +430,7 @@
         </div>
     </div>
 
-    <!-- MODAL CONFIGURAÇÕES GERAIS (NOVO) -->
+    <!-- MODAL CONFIGURAÇÕES GERAIS (OTIMIZADO PARA ARQUIVOS DA GALERIA) -->
     <div id="modal-settings" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-2xl rounded-[2rem] p-6 md:p-10 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
             <button onclick="app.admin.closeSettingsModal()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fas fa-times"></i></button>
@@ -408,10 +438,12 @@
             
             <form id="form-settings" class="space-y-6" onsubmit="event.preventDefault(); app.admin.saveSettings();">
                 <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
-                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Banner Principal</h4>
+                    <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Banner Principal (Otimizado)</h4>
                     <div>
-                        <label class="text-[9px] font-bold uppercase text-slate-500">URL da Imagem do Banner</label>
-                        <input type="text" id="set-hero-img" class="w-full bg-white border border-slate-200 rounded-lg p-3 text-sm mt-1">
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Foto da Galeria (Será recortada para 4:5)</label>
+                        <input type="file" id="set-hero-img-file" accept="image/*" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mt-1">
+                        <input type="hidden" id="set-hero-img-old">
+                        <p class="text-[8px] text-brand-500 mt-1 font-bold">Deixe vazio para manter a foto atual.</p>
                     </div>
                     <div>
                         <label class="text-[9px] font-bold uppercase text-slate-500">Título sobre o Banner (Permite HTML como &lt;br&gt;)</label>
@@ -439,41 +471,47 @@
 
                 <div class="space-y-4 bg-brand-50/50 p-5 rounded-2xl border border-brand-50">
                     <h4 class="text-[10px] font-bold uppercase tracking-widest text-slate-800">Depoimentos dos Clientes</h4>
-                    <p class="text-[9px] text-slate-500">Deixe em branco as que não quiser usar.</p>
+                    <p class="text-[9px] text-slate-500">Deixe em branco as que não quiser usar. As fotos serão redimensionadas para Avatar.</p>
                     
+                    <!-- Depoimento 1 -->
                     <div class="border-b border-brand-100/50 pb-4">
                         <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 1</span>
                         <input type="text" id="set-t1-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
                         <input type="text" id="set-t1-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
-                        <input type="text" id="set-t1-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="file" id="set-t1-img-file" accept="image/*" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="hidden" id="set-t1-img-old">
                         <textarea id="set-t1-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
                     </div>
 
+                    <!-- Depoimento 2 -->
                     <div class="border-b border-brand-100/50 pb-4">
                         <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 2</span>
                         <input type="text" id="set-t2-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
                         <input type="text" id="set-t2-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
-                        <input type="text" id="set-t2-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="file" id="set-t2-img-file" accept="image/*" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="hidden" id="set-t2-img-old">
                         <textarea id="set-t2-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
                     </div>
 
+                    <!-- Depoimento 3 -->
                     <div>
                         <span class="text-[9px] font-bold text-brand-500 uppercase tracking-widest mb-2 block">Depoimento 3</span>
                         <input type="text" id="set-t3-name" placeholder="Nome da Cliente" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
                         <input type="text" id="set-t3-role" placeholder="De onde ela é (ex: São Miguel)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
-                        <input type="text" id="set-t3-img" placeholder="Link da foto (opcional)" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="file" id="set-t3-img-file" accept="image/*" class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm mb-2 outline-none">
+                        <input type="hidden" id="set-t3-img-old">
                         <textarea id="set-t3-text" placeholder="O que ela disse..." class="w-full bg-white border border-slate-200 rounded-lg p-2 text-sm h-16 outline-none custom-scrollbar"></textarea>
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">
-                    Salvar Alterações Visuais
+                <button type="submit" id="btn-save-settings" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-save"></i> Salvar Alterações Visuais
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- MODAL DE PRODUTOS (IGUAL COM MELHORIAS VISUAIS) -->
+    <!-- MODAL DE PRODUTOS -->
     <div id="modal-product" class="fixed inset-0 bg-slate-900/80 backdrop-blur-md z-[2000] hidden flex items-center justify-center p-4">
         <div class="bg-white w-full max-w-2xl rounded-[2rem] p-6 md:p-8 shadow-2xl max-h-[90vh] overflow-y-auto custom-scrollbar relative">
             <button onclick="app.admin.closeForm()" class="absolute top-6 right-6 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-500"><i class="fas fa-times"></i></button>
@@ -499,8 +537,9 @@
                         </div>
                     </div>
                     <div>
-                        <label class="text-[9px] font-bold uppercase text-slate-500">Fotografia</label>
+                        <label class="text-[9px] font-bold uppercase text-slate-500">Fotografia da Galeria (Será centralizada em 4:5)</label>
                         <input type="file" id="prod-img-file" accept="image/*" class="w-full bg-slate-50 border border-slate-100 rounded-xl p-2 outline-none text-sm">
+                        <p class="text-[8px] text-brand-500 mt-1 font-bold">Deixe vazio para manter a foto atual.</p>
                     </div>
                 </div>
 
@@ -514,7 +553,9 @@
                 </div>
 
                 <div class="pt-2">
-                    <button type="submit" id="btn-save-prod" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition">Guardar Produto no Catálogo</button>
+                    <button type="submit" id="btn-save-prod" class="w-full bg-brand-500 text-white font-bold py-4 rounded-xl uppercase text-[10px] tracking-widest shadow-lg hover:bg-brand-600 transition flex items-center justify-center gap-2">
+                        <i class="fas fa-save"></i> Guardar Produto no Catálogo
+                    </button>
                 </div>
             </form>
         </div>
@@ -564,6 +605,61 @@
                 ]
             },
 
+            // --- INTELIGÊNCIA ASSERTIVA PARA FOTOS (Recorte e Compressão JS) ---
+            utils: {
+                async processAndUpload(file, path, targetWidth, targetHeight, forceCrop = true) {
+                    return new Promise((resolve, reject) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = (event) => {
+                            const img = new Image();
+                            img.src = event.target.result;
+                            img.onload = async () => {
+                                const canvas = document.createElement('canvas');
+                                let width = img.width;
+                                let height = img.height;
+
+                                if (forceCrop) {
+                                    canvas.width = targetWidth;
+                                    canvas.height = targetHeight;
+                                    const ctx = canvas.getContext('2d');
+                                    // Cálculo exato para centralizar e focar a foto assertivamente (object-cover lógico)
+                                    const scale = Math.max(targetWidth / width, targetHeight / height);
+                                    const w = width * scale;
+                                    const h = height * scale;
+                                    const x = (targetWidth - w) / 2;
+                                    const y = (targetHeight - h) / 2;
+                                    ctx.drawImage(img, x, y, w, h);
+                                } else {
+                                    // Mantém aspecto original só encolhendo o excesso
+                                    if (width > height) { if (width > targetWidth) { height *= targetWidth / width; width = targetWidth; } } 
+                                    else { if (height > targetHeight) { width *= targetHeight / height; height = targetHeight; } }
+                                    canvas.width = width;
+                                    canvas.height = height;
+                                    const ctx = canvas.getContext('2d');
+                                    ctx.drawImage(img, 0, 0, width, height);
+                                }
+
+                                canvas.toBlob(async (blob) => {
+                                    try {
+                                        const fileName = `${Date.now()}_${Math.random().toString(36).substring(7)}.jpg`;
+                                        const newFile = new File([blob], fileName, { type: 'image/jpeg' });
+                                        
+                                        const { error } = await supabaseClient.storage.from(path).upload(fileName, newFile);
+                                        if (error) return reject(error);
+                                        
+                                        const { data } = supabaseClient.storage.from(path).getPublicUrl(fileName);
+                                        resolve(data.publicUrl);
+                                    } catch (err) { reject(err); }
+                                }, 'image/jpeg', 0.85); // 85% Qualidade (Excelente web)
+                            };
+                            img.onerror = reject;
+                        };
+                        reader.onerror = reject;
+                    });
+                }
+            },
+
             async init() {
                 this.loadSettings();
                 this.renderCategories();
@@ -573,6 +669,9 @@
                 const isMobile = window.innerWidth < 768;
                 this.createSparkles('hero-sparkles', isMobile ? 20 : 40);
                 this.createSparkles('testi-sparkles', isMobile ? 10 : 25);
+                
+                // Inicia o Slider Animado da secção "Sobre"
+                this.startAboutSlider();
 
                 try {
                     await this.auth.checkSession();
@@ -589,7 +688,6 @@
                 }
             },
 
-            // --- SISTEMA DE DEFINIÇÕES HÍBRIDO (LOCALSTORAGE) ---
             loadSettings() {
                 const saved = localStorage.getItem('attiva_settings');
                 if (saved) {
@@ -611,7 +709,7 @@
                 
                 const tests = this.settings.testimonials || [];
                 container.innerHTML = tests.map((t, idx) => {
-                    if (!t.name && !t.text) return ''; // Ignora se estiver vazio
+                    if (!t.name && !t.text) return ''; 
                     
                     const initial = t.name ? t.name.charAt(0).toUpperCase() : 'C';
                     const avatarHtml = t.img && t.img.trim() !== '' 
@@ -619,7 +717,7 @@
                         : `<div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-bold font-serif text-lg shadow-sm shrink-0">${initial}</div>`;
 
                     return `
-                    <div class="glass-panel p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group flex flex-col" data-aos="fade-up" data-aos-delay="${idx * 150}">
+                    <div class="glass-panel p-8 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-2 group flex flex-col shrink-0 w-[85%] sm:w-[350px] lg:w-[400px] snap-center" data-aos="fade-up" data-aos-delay="${idx * 150}">
                         <div class="text-brand-500 mb-5 flex gap-1 text-sm opacity-80 group-hover:opacity-100 transition">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
@@ -636,6 +734,23 @@
                 }).join('');
             },
 
+            // --- Lógica de Sliders / Carrosseis ---
+            scrollSlider(id, amount) {
+                const container = document.getElementById(id);
+                if(container) container.scrollBy({ left: amount, behavior: 'smooth' });
+            },
+
+            startAboutSlider() {
+                const slides = document.querySelectorAll('#about-slider .slide-img');
+                if(slides.length <= 1) return;
+                let current = 0;
+                setInterval(() => {
+                    slides[current].classList.remove('active');
+                    current = (current + 1) % slides.length;
+                    slides[current].classList.add('active');
+                }, 3500); // Troca a imagem a cada 3,5s
+            },
+
             getCategories() {
                 let cats = [...BASE_CATEGORIAS];
                 if (this.settings.customCats) {
@@ -649,11 +764,10 @@
                 const allCats = this.getCategories();
                 const filterContainer = document.getElementById('category-filters');
                 
-                // Pílulas com animação de entrada (animate-pill) e scroll snap (snap-start)
                 let htmlFilters = `<button onclick="app.filter('all')" style="animation-delay: 0ms;" class="animate-pill filter-btn active snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest bg-slate-900 text-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-md shrink-0 border border-slate-900 transform scale-105">Todas</button>`;
                 
                 allCats.forEach((cat, index) => {
-                    const delay = (index + 1) * 50; // Cascata de delay para animação
+                    const delay = (index + 1) * 50; 
                     htmlFilters += `<button onclick="app.filter('${cat}')" style="animation-delay: ${delay}ms;" class="animate-pill filter-btn snap-start text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 bg-white px-6 py-2.5 rounded-full transition-all duration-300 shadow-sm shrink-0 border border-slate-200 hover:border-brand-500 hover:text-brand-500 hover:-translate-y-0.5 hover:shadow-md">${cat}</button>`;
                 });
                 filterContainer.innerHTML = htmlFilters;
@@ -696,7 +810,7 @@
 
             admin: {
                 openSettingsModal() {
-                    document.getElementById('set-hero-img').value = app.settings.heroImg;
+                    document.getElementById('set-hero-img-old').value = app.settings.heroImg;
                     document.getElementById('set-hero-title').value = app.settings.heroTitle;
                     document.getElementById('set-about-title').value = app.settings.aboutTitle;
                     document.getElementById('set-about-text').value = app.settings.aboutText;
@@ -708,7 +822,7 @@
                         document.getElementById(`set-t${i+1}-name`).value = t.name;
                         document.getElementById(`set-t${i+1}-role`).value = t.role;
                         document.getElementById(`set-t${i+1}-text`).value = t.text;
-                        document.getElementById(`set-t${i+1}-img`).value = t.img || '';
+                        document.getElementById(`set-t${i+1}-img-old`).value = t.img || '';
                     }
 
                     document.getElementById('modal-settings').classList.remove('hidden');
@@ -716,29 +830,57 @@
                 closeSettingsModal() {
                     document.getElementById('modal-settings').classList.add('hidden');
                 },
-                saveSettings() {
-                    app.settings.heroImg = document.getElementById('set-hero-img').value;
-                    app.settings.heroTitle = document.getElementById('set-hero-title').value;
-                    app.settings.aboutTitle = document.getElementById('set-about-title').value;
-                    app.settings.aboutText = document.getElementById('set-about-text').value;
-                    app.settings.customCats = document.getElementById('set-custom-cats').value;
-                    
-                    const newTests = [];
-                    for(let i=1; i<=3; i++) {
-                        newTests.push({
-                            name: document.getElementById(`set-t${i}-name`).value,
-                            role: document.getElementById(`set-t${i}-role`).value,
-                            text: document.getElementById(`set-t${i}-text`).value,
-                            img: document.getElementById(`set-t${i}-img`).value
-                        });
+                async saveSettings() {
+                    const btn = document.getElementById('btn-save-settings');
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Otimizando imagens e salvando...';
+                    btn.disabled = true;
+
+                    try {
+                        // Faz o corte 4:5 do Banner Principal e Envia
+                        const heroFile = document.getElementById('set-hero-img-file').files[0];
+                        if (heroFile) {
+                            app.settings.heroImg = await app.utils.processAndUpload(heroFile, 'fotos', 1080, 1350, true);
+                        } else {
+                            app.settings.heroImg = document.getElementById('set-hero-img-old').value;
+                        }
+
+                        app.settings.heroTitle = document.getElementById('set-hero-title').value;
+                        app.settings.aboutTitle = document.getElementById('set-about-title').value;
+                        app.settings.aboutText = document.getElementById('set-about-text').value;
+                        app.settings.customCats = document.getElementById('set-custom-cats').value;
+                        
+                        // Faz o corte 1:1 Quadrado dos Depoimentos (Avatar)
+                        const newTests = [];
+                        for(let i=1; i<=3; i++) {
+                            let finalAvatar = document.getElementById(`set-t${i}-img-old`).value;
+                            const tFile = document.getElementById(`set-t${i}-img-file`).files[0];
+                            
+                            if (tFile) {
+                                finalAvatar = await app.utils.processAndUpload(tFile, 'fotos', 200, 200, true);
+                            }
+
+                            newTests.push({
+                                name: document.getElementById(`set-t${i}-name`).value,
+                                role: document.getElementById(`set-t${i}-role`).value,
+                                text: document.getElementById(`set-t${i}-text`).value,
+                                img: finalAvatar
+                            });
+                        }
+                        app.settings.testimonials = newTests;
+                        
+                        localStorage.setItem('attiva_settings', JSON.stringify(app.settings));
+                        app.applySettings();
+                        app.renderCategories();
+                        this.closeSettingsModal();
+                        app.showToast("Visual Atualizado!");
+                    } catch (error) {
+                        app.showToast("Erro ao processar as fotos", true);
+                        console.error(error);
+                    } finally {
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
                     }
-                    app.settings.testimonials = newTests;
-                    
-                    localStorage.setItem('attiva_settings', JSON.stringify(app.settings));
-                    app.applySettings();
-                    app.renderCategories();
-                    this.closeSettingsModal();
-                    app.showToast("Visual atualizado!");
                 },
 
                 setupStockInputs() {
@@ -787,50 +929,57 @@
                 
                 async saveProduct() {
                     const btn = document.getElementById('btn-save-prod');
-                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> A guardar...';
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Otimizando foto...';
+                    btn.disabled = true;
 
-                    const id = document.getElementById('prod-id').value;
-                    const fileInput = document.getElementById('prod-img-file');
-                    let finalUrl = document.getElementById('prod-img-url-old').value;
+                    try {
+                        const id = document.getElementById('prod-id').value;
+                        const fileInput = document.getElementById('prod-img-file');
+                        let finalUrl = document.getElementById('prod-img-url-old').value;
 
-                    if (fileInput.files.length > 0) {
-                        const file = fileInput.files[0];
-                        const fileName = `${Date.now()}.${file.name.split('.').pop()}`;
-                        app.showToast("A enviar foto...");
-                        const { error: upErr } = await supabaseClient.storage.from('fotos').upload(fileName, file);
-                        if (upErr) { app.showToast("Erro ao enviar foto", true); btn.innerHTML = 'Guardar'; return; }
-                        finalUrl = supabaseClient.storage.from('fotos').getPublicUrl(fileName).data.publicUrl;
-                    }
-
-                    if (!id && !finalUrl) { app.showToast("Adicione uma foto!", true); btn.innerHTML = 'Guardar'; return; }
-
-                    const cat = document.getElementById('prod-category').value;
-                    let estoque = {};
-                    if (CAT_TAMANHO_UNICO.includes(cat)) {
-                        const v = parseInt(document.getElementById('stock-unique').value) || 0;
-                        if(v > 0) estoque['Único'] = v;
-                    } else {
-                        for(let i=33; i<=40; i++) {
-                            const v = parseInt(document.getElementById(`stock-size-${i}`).value);
-                            if(v > 0) estoque[i.toString()] = v;
+                        // Corte Inteligente 4:5 (Padrão de Produto Assertivo)
+                        if (fileInput.files.length > 0) {
+                            finalUrl = await app.utils.processAndUpload(fileInput.files[0], 'fotos', 800, 1000, true);
                         }
+
+                        if (!id && !finalUrl) { 
+                            app.showToast("Adicione uma foto da sua galeria!", true); 
+                            return; 
+                        }
+
+                        const cat = document.getElementById('prod-category').value;
+                        let estoque = {};
+                        if (CAT_TAMANHO_UNICO.includes(cat)) {
+                            const v = parseInt(document.getElementById('stock-unique').value) || 0;
+                            if(v > 0) estoque['Único'] = v;
+                        } else {
+                            for(let i=33; i<=40; i++) {
+                                const v = parseInt(document.getElementById(`stock-size-${i}`).value);
+                                if(v > 0) estoque[i.toString()] = v;
+                            }
+                        }
+
+                        const data = {
+                            name: document.getElementById('prod-name').value,
+                            price: parseFloat(document.getElementById('prod-price').value),
+                            category: cat,
+                            img: finalUrl,
+                            estoque: estoque
+                        };
+
+                        let err;
+                        if (id) { const res = await supabaseClient.from('produtos').update(data).eq('id', id); err = res.error; }
+                        else { const res = await supabaseClient.from('produtos').insert([data]); err = res.error; }
+
+                        if (err) throw err;
+                        else { app.showToast("Produto Guardado!"); this.closeForm(); app.fetchProducts(); }
+                    } catch (error) {
+                        app.showToast("Erro: " + error.message, true);
+                    } finally {
+                        btn.innerHTML = originalHTML;
+                        btn.disabled = false;
                     }
-
-                    const data = {
-                        name: document.getElementById('prod-name').value,
-                        price: parseFloat(document.getElementById('prod-price').value),
-                        category: cat,
-                        img: finalUrl,
-                        estoque: estoque
-                    };
-
-                    let err;
-                    if (id) { const res = await supabaseClient.from('produtos').update(data).eq('id', id); err = res.error; }
-                    else { const res = await supabaseClient.from('produtos').insert([data]); err = res.error; }
-
-                    if (err) app.showToast("Erro: " + err.message, true);
-                    else { app.showToast("Produto Guardado!"); this.closeForm(); app.fetchProducts(); }
-                    btn.innerHTML = 'Guardar Produto no Catálogo';
                 },
                 async deleteProduct(id) {
                     if(!confirm("Remover este produto do catálogo?")) return;
