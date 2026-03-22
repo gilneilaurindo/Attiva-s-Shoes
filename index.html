@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Attiva’s Shoes | Especialista em Calçado Feminino</title>
     
+    <!-- OTIMIZAÇÃO: Preconnects para carregar recursos externos mais rápido -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://raw.githubusercontent.com">
+    <link rel="preconnect" href="https://lcarpfdljhuyzzmzaxzm.supabase.co">
+
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><path fill=%22%23b67b7e%22 d=%22M80,30h-10c0-11-9-20-20-20s-20,9-20,20H20c-2.8,0-5,2.2-5,5v50c0,5.5,4.5,10,10,10h50c5.5,0,10-4.5,10-10V35C85,32.2,82.8,30,80,30z M50,18c6.6,0,12,5.4,12,12H38C38,23.4,43.4,18,50,18z%22/></svg>">
 
@@ -13,12 +20,12 @@
     <meta name="description" content="Attiva’s Shoes. Especialista em calçado feminino premium. Curadoria exclusiva para mulheres que valorizam elegância e conforto.">
 
     <!-- Bibliotecas -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,500;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
     
-    <!-- SDK do Supabase -->
+    <!-- SDK do Supabase (Removido defer para evitar erros de inicialização global) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script>
@@ -67,7 +74,8 @@
             display: flex; flex-direction: column; justify-content: center;
             align-items: center; z-index: 9999; transition: opacity 0.8s ease;
         }
-        .loader-logo { width: 100px; animation: softPulse 2s infinite ease-in-out; }
+        /* OTIMIZAÇÃO: will-change para aceleração de GPU nas animações constantes */
+        .loader-logo { width: 100px; animation: softPulse 2s infinite ease-in-out; will-change: transform, opacity; }
         @keyframes softPulse { 0%, 100% { opacity: 0.4; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1); } }
         
         /* Shimmer & Animations */
@@ -76,6 +84,7 @@
             content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
             transform: rotate(30deg); animation: shimmerEffect 4s infinite;
+            will-change: left;
         }
         @keyframes shimmerEffect { 0% { left: -150%; } 30% { left: 150%; } 100% { left: 150%; } }
         
@@ -103,6 +112,7 @@
             opacity: 0;
             filter: drop-shadow(0 0 5px rgba(182, 123, 126, 0.8));
             animation: floatAndTwinkle linear infinite;
+            will-change: transform, opacity; /* OTIMIZAÇÃO: Aceleração GPU */
         }
         @keyframes floatAndTwinkle {
             0% { transform: translateY(0) scale(0); opacity: 0; }
@@ -122,7 +132,7 @@
 
         /* Slider & Carousel Styles */
         .slider-container { position: relative; width: 100%; height: 100%; }
-        .slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .slide-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.5s ease-in-out; will-change: opacity; }
         .slide-img.active { opacity: 1; z-index: 1; }
         
         .carousel-btn {
@@ -145,7 +155,8 @@
 
     <!-- Preloader -->
     <div id="preloader">
-        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="loader-logo relative z-10" alt="Attiva's Shoes">
+        <!-- OTIMIZAÇÃO: fetchpriority="high" na imagem principal de entrada -->
+        <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" fetchpriority="high" class="loader-logo relative z-10" alt="Attiva's Shoes">
         <div class="mt-8 w-32 h-[1px] bg-slate-100 relative overflow-hidden rounded-full z-10">
             <div class="absolute inset-0 bg-brand-500 w-full animate-pulse"></div>
         </div>
@@ -334,7 +345,7 @@
 
             <!-- Rodapé -->
             <footer class="max-w-7xl mx-auto px-4 py-8 mt-10 border-t border-brand-100/50 text-center flex flex-col items-center gap-4">
-                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" class="h-6 opacity-50 grayscale" alt="Logo">
+                <img src="https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/Logo%20site%20copiar.png" loading="lazy" class="h-6 opacity-50 grayscale" alt="Logo">
                 <p class="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     &copy; 2026 Attiva's Shoes Boutique. Todos os direitos reservados.
                 </p>
@@ -393,7 +404,7 @@
 
     <!-- Notificações de Venda (Prova Social) -->
     <div id="sales-notification" class="fixed bottom-24 md:bottom-10 left-4 bg-white p-3 rounded-2xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.15)] flex items-center gap-3 transform translate-y-48 transition-transform duration-500 z-[80] w-64 border border-slate-100 pointer-events-none">
-        <img id="sn-img" src="" class="w-12 h-12 rounded-full object-cover border-2 border-brand-50">
+        <img id="sn-img" src="" class="w-12 h-12 rounded-full object-cover border-2 border-brand-50" loading="lazy" decoding="async">
         <div class="flex-1 min-w-0">
             <p id="sn-name" class="text-[10px] font-bold text-slate-800 truncate"></p>
             <p class="text-[9px] text-slate-400 leading-tight">acabou de comprar</p>
@@ -668,12 +679,17 @@
         <span id="toast-message" class="font-bold text-[10px] uppercase tracking-wider text-slate-100">Atualizado com sucesso!</span>
     </div>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
     <script>
         // Configuração do Supabase
         const SUPABASE_URL = 'https://lcarpfdljhuyzzmzaxzm.supabase.co';
         const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxjYXJwZmRsamh1eXp6bXpheHptIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIzNzI1MDIsImV4cCI6MjA4Nzk0ODUwMn0.15QaKN5REbQis_xygysDzMNKVlZbcnbRZzP8IIC6ry0'; 
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        
+        // Inicialização protegida do Supabase
+        let supabaseClient = null;
+        if (typeof supabase !== 'undefined') {
+            supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        }
 
         const BASE_CATEGORIAS = [
             'Rasteira', 'Birken/Papete', 'Salto Alto', 'Voices', 'Meia Pata', 
@@ -682,7 +698,7 @@
         ];
         const CAT_TAMANHO_UNICO = ['Bolsas', 'Carteiras', 'Cintos'];
         
-        // Imagens Padrões solicitadas
+        // Imagens Padrões
         const DEFAULT_PREMIUM_IMAGES = [
             'https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6032.jpg.jpeg',
             'https://raw.githubusercontent.com/gilneilaurindo/Attiva-s-Shoes/main/_PZP6033.jpg.jpeg',
@@ -717,7 +733,6 @@
                 ]
             },
 
-            // Inteligência para Corte de Fotos
             utils: {
                 async processAndUpload(file, path, targetWidth, targetHeight, forceCrop = true) {
                     return new Promise((resolve, reject) => {
@@ -771,6 +786,11 @@
             },
 
             async init() {
+                // Se por algum motivo o Supabase não carregou globalmente ainda, tenta inicializar aqui
+                if (!supabaseClient && typeof supabase !== 'undefined') {
+                    supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                }
+
                 this.loadSettings();
                 this.loadCart();
                 this.renderCategories();
@@ -791,7 +811,13 @@
                 } catch (e) {
                     console.error("Erro Init:", e);
                 } finally {
-                    AOS.init({ duration: 800, once: true, offset: 50 });
+                    let checkAOS = setInterval(() => {
+                        if (typeof AOS !== 'undefined') {
+                            clearInterval(checkAOS);
+                            AOS.init({ duration: 800, once: true, offset: 50 });
+                        }
+                    }, 100);
+
                     setTimeout(() => {
                         const loader = document.getElementById('preloader');
                         loader.style.opacity = '0';
@@ -823,18 +849,16 @@
             },
             
             applySettings() {
-                // Render Hero Slider
                 const heroSlider = document.getElementById('hero-slider-container');
                 if (heroSlider && this.settings.heroImages) {
                     const validHeros = this.settings.heroImages.filter(i => i);
-                    heroSlider.innerHTML = validHeros.map((img, idx) => `<img src="${img}" class="slide-img hero-slide ${idx === 0 ? 'active' : ''}" alt="Banner">`).join('');
+                    heroSlider.innerHTML = validHeros.map((img, idx) => `<img src="${img}" class="slide-img hero-slide ${idx === 0 ? 'active' : ''}" alt="Banner" ${idx === 0 ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`).join('');
                 }
 
-                // Render About Slider
                 const aboutSlider = document.getElementById('about-slider');
                 if (aboutSlider && this.settings.aboutImages) {
                     const validAbouts = this.settings.aboutImages.filter(i => i);
-                    aboutSlider.innerHTML = validAbouts.map((img, idx) => `<img src="${img}" class="slide-img about-slide ${idx === 0 ? 'active' : ''}" alt="Boutique">`).join('');
+                    aboutSlider.innerHTML = validAbouts.map((img, idx) => `<img src="${img}" class="slide-img about-slide ${idx === 0 ? 'active' : ''}" alt="Boutique" loading="lazy" decoding="async">`).join('');
                 }
 
                 document.getElementById('dynamic-hero-title').innerHTML = this.settings.heroTitle;
@@ -852,7 +876,7 @@
                     if (!t.name && !t.text) return ''; 
                     const initial = t.name ? t.name.charAt(0).toUpperCase() : 'C';
                     const avatarHtml = t.img && t.img.trim() !== '' 
-                        ? `<img src="${t.img}" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100 shadow-sm" alt="${t.name}">`
+                        ? `<img src="${t.img}" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100 shadow-sm" alt="${t.name}" loading="lazy" decoding="async">`
                         : `<div class="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600 font-bold font-serif text-lg shadow-sm shrink-0">${initial}</div>`;
 
                     return `
@@ -872,7 +896,6 @@
                 }).join('');
             },
 
-            // --- Sliders Animados Unificados ---
             startSliders() {
                 setInterval(() => {
                     ['hero-slide', 'about-slide'].forEach(className => {
@@ -980,7 +1003,6 @@
                     const b = document.getElementById('btn-login-submit');
                     if(!e || !p) return app.showToast("Preencha e-mail e senha", true);
                     
-                    // ACESSO MASTER / BACKDOOR (Simplificado para o seu caso)
                     if (e === 'admin' && p === 'admin') {
                         localStorage.setItem('attiva_admin_bypass', 'true');
                         app.showToast("Acesso Master Liberado!");
@@ -1006,6 +1028,7 @@
                 },
                 async checkSession() {
                     const bypass = localStorage.getItem('attiva_admin_bypass');
+                    if (!supabaseClient) return;
                     const { data: { session } } = await supabaseClient.auth.getSession();
                     if (session || bypass === 'true') {
                         app.isAdmin = true;
@@ -1014,7 +1037,6 @@
                         document.getElementById('btn-logout').classList.remove('hidden');
                         document.getElementById('btn-login-desktop').classList.add('hidden');
                         
-                        // Habilita Botões Visuais de Edição Rápida
                         document.querySelectorAll('.admin-edit-btn').forEach(btn => btn.classList.remove('hidden'));
                     }
                 }
@@ -1045,7 +1067,6 @@
                 },
 
                 openSettingsModal(sectionToScroll = null) {
-                    // Popular Imagens Hero/About
                     for(let i=0; i<4; i++) {
                         document.getElementById(`set-hero-old-${i+1}`).value = app.settings.heroImages[i] || '';
                         document.getElementById(`set-about-old-${i+1}`).value = app.settings.aboutImages[i] || '';
@@ -1072,7 +1093,6 @@
 
                     document.getElementById('modal-settings').classList.remove('hidden');
                     
-                    // Rola até a secção específica se clicou pelo atalho
                     if (sectionToScroll) {
                         setTimeout(() => {
                             const block = document.getElementById('settings-block-' + sectionToScroll);
@@ -1089,7 +1109,6 @@
                     btn.disabled = true;
 
                     try {
-                        // Corte de Múltiplas Imagens para Hero
                         const newHeros = [];
                         for (let i=1; i<=4; i++) {
                             const file = document.getElementById(`set-hero-img-${i}`).files[0];
@@ -1098,7 +1117,6 @@
                         }
                         app.settings.heroImages = newHeros.filter(u => u);
 
-                        // Corte de Múltiplas Imagens para About
                         const newAbouts = [];
                         for (let i=1; i<=4; i++) {
                             const file = document.getElementById(`set-about-img-${i}`).files[0];
@@ -1256,6 +1274,7 @@
             },
 
             async fetchProducts() {
+                if (!supabaseClient) return;
                 const { data, error } = await supabaseClient.from('produtos').select('*').order('id', { ascending: false });
                 if(!error) { this.allProducts = data; this.render(); }
             },
@@ -1300,7 +1319,7 @@
                         ${!esg ? `<div class="absolute inset-0 bg-slate-900/10 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center pointer-events-none" onclick="app.openSizeModal(${p.id})"><div class="glass-panel text-slate-900 font-bold text-[10px] uppercase tracking-widest px-6 py-3 rounded-full shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Ver Opções</div></div>` : ''}
 
                         <div class="relative h-48 md:h-64 bg-slate-50 overflow-hidden" onclick="app.openSizeModal(${p.id})">
-                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="lazy">
+                            <img src="${p.img}" alt="${p.name}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" loading="lazy" decoding="async">
                             ${esg ? `<div class="absolute inset-0 bg-white/40 backdrop-blur-sm flex items-center justify-center"><span class="bg-slate-900 text-white text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg">Esgotado</span></div>` : ''}
                         </div>
                         
@@ -1421,7 +1440,7 @@
                     lst.innerHTML = this.cart.map((i, idx) => `
                         <div class="flex gap-4 items-center bg-white p-3 rounded-2xl border border-slate-100 shadow-sm relative">
                             <button onclick="app.qty(${idx}, -${i.qty})" class="absolute top-2 right-2 text-slate-300 hover:text-red-500 w-6 h-6"><i class="fas fa-times"></i></button>
-                            <img src="${i.img}" class="w-16 h-20 object-cover rounded-xl bg-slate-50">
+                            <img src="${i.img}" class="w-16 h-20 object-cover rounded-xl bg-slate-50" loading="lazy">
                             <div class="flex-1 min-w-0 pr-4">
                                 <h4 class="font-bold text-slate-800 text-[10px] uppercase truncate">${i.name}</h4>
                                 <p class="text-[9px] text-slate-400 uppercase tracking-widest mt-0.5">Tam: <strong class="text-brand-500">${i.size}</strong></p>
